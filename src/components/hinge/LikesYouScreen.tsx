@@ -40,7 +40,7 @@ export function LikesYouScreen({ likes, profiles, onMatch, onDismiss }: LikesYou
             >
               <div className="flex">
                 <img
-                  src={profile.photos[0]}
+                  src={profile.photos[0]?.url || profile.photos[0]}
                   alt={profile.name}
                   className="w-28 h-36 object-cover"
                 />
