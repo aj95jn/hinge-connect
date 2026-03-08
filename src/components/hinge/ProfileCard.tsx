@@ -92,8 +92,11 @@ export function ProfileCard({
         <div className="space-y-3 px-4">
           {profile.photos.map((photo, i) => (
             <div key={`photo-${i}`}>
-              {/* Photo with optional glow */}
-              <div className={isPhotoGlowing(i) ? 'rose-glow-shimmer' : ''}>
+              {/* Photo with optional glow — click to drag glow here */}
+              <div
+                className={isPhotoGlowing(i) ? 'rose-glow-shimmer cursor-pointer' : 'cursor-pointer'}
+                onClick={() => handleDragGlow(`photo:${i}`)}
+              >
                 <div className="relative rounded-2xl overflow-hidden">
                   <img
                     src={photo.url}
