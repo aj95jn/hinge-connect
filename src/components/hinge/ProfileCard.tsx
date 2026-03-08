@@ -163,7 +163,7 @@ export function ProfileCard({
                 )}
                 <button onClick={(e) => { e.stopPropagation(); setSelectedTarget({ type: 'photo', index: 0 }); }}
                   className="absolute bottom-3 right-3 bg-card/90 backdrop-blur-sm rounded-full p-2.5 shadow-lg hover:bg-card transition-colors">
-                  <Heart size={20} className="text-primary" />
+                  <Heart size={20} strokeWidth={2.5} className="text-foreground" />
                 </button>
               </div>
             </div>
@@ -222,7 +222,7 @@ export function ProfileCard({
                       )}
                       <button onClick={(e) => { e.stopPropagation(); setSelectedTarget({ type: 'photo', index: pi }); }}
                         className="absolute bottom-3 right-3 bg-card/90 backdrop-blur-sm rounded-full p-2.5 shadow-lg hover:bg-card transition-colors">
-                        <Heart size={20} className="text-primary" />
+                        <Heart size={20} strokeWidth={2.5} className="text-foreground" />
                       </button>
                     </div>
                   </div>
@@ -241,7 +241,7 @@ export function ProfileCard({
               onClick={onSkip}
               className="w-11 h-11 rounded-full border-2 border-border bg-background shadow-lg flex items-center justify-center hover:bg-muted transition-colors"
             >
-              <X size={22} className="text-muted-foreground" />
+              <X size={22} strokeWidth={3} className="text-foreground" />
             </button>
           </div>
         </div>
@@ -304,7 +304,7 @@ function PromptCard({
           }}
           className="absolute bottom-3 right-3 bg-muted rounded-full p-2 hover:bg-accent transition-colors"
         >
-          <Heart size={18} className="text-primary" />
+          <Heart size={18} strokeWidth={2.5} className="text-foreground" />
         </button>
       </div>
     </div>
