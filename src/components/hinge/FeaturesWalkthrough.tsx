@@ -229,6 +229,7 @@ const BANDWIDTH_OPTIONS: { value: BandwidthStatus; label: string; desc: string }
 export function FeaturesWalkthrough({ isPaid, bandwidthVisible = false, bandwidthStatus, onToggleBandwidthVisible, onUpdateBandwidth }: FeaturesWalkthroughProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
+  const [showUpgradeModal, setShowUpgradeModal] = useState(false);
   const feature = FEATURES[currentIndex];
 
   const goTo = (next: number) => {
@@ -328,7 +329,10 @@ export function FeaturesWalkthrough({ isPaid, bandwidthVisible = false, bandwidt
 
             {/* Upgrade CTA for free */}
             {!isPaid && feature.id !== 'bandwidth' && (
-              <button className="mt-4 inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-foreground text-background text-xs font-semibold hover:opacity-90 transition-opacity">
+              <button
+                onClick={() => setShowUpgradeModal(true)}
+                className="mt-4 inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-foreground text-background text-xs font-semibold hover:opacity-90 transition-opacity"
+              >
                 <Crown size={13} />
                 {feature.id === 'effort-insurance' ? 'Upgrade for unlimited likes' : feature.id === 'bridge-builder' ? 'Upgrade to get more' : 'Upgrade to unlock'}
               </button>
@@ -363,6 +367,45 @@ export function FeaturesWalkthrough({ isPaid, bandwidthVisible = false, bandwidt
           />
         ))}
       </div>
+
+      {/* Hinge+/HingeX Upgrade Modal */}
+      <AnimatePresence>
+        {showUpgradeModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
+            onClick={() => setShowUpgradeModal(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-card rounded-2xl p-6 mx-6 max-w-sm w-full shadow-xl border border-border"
+            >
+              <h3 className="font-hinge-serif text-xl font-semibold text-foreground text-center mb-2">
+                Unlock Premium Features
+              </h3>
+              <p className="text-sm text-muted-foreground text-center mb-5">
+                Get unlimited likes, advanced filters, and more with a subscription.
+              </p>
+              <div className="flex flex-col gap-2.5">
+                <button className="w-full py-3 rounded-xl bg-foreground text-background font-semibold text-sm hover:opacity-90 transition-opacity">
+                  Get HingeX
+                </button>
+                <button className="w-full py-3 rounded-xl border border-border text-foreground font-semibold text-sm hover:bg-muted transition-colors">
+                  Get Hinge+
+                </button>
+                <button onClick={() => setShowUpgradeModal(false)} className="text-sm text-muted-foreground mt-1">
+                  Not now
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
