@@ -34,7 +34,7 @@ export function ProfileInfoPane({ vitals }: ProfileInfoPaneProps) {
   if (topRow.length === 0 && detailRows.length === 0) return null;
 
   return (
-    <div className="bg-card rounded-2xl overflow-hidden">
+    <div className="bg-card rounded-2xl overflow-hidden border border-border">
       {/* Top row with dividers */}
       {topRow.length > 0 && (
         <div className="flex divide-x divide-border">
