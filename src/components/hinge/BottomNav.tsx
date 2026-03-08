@@ -21,7 +21,7 @@ function HingeLogo({ active }: { active: boolean }) {
 }
 
 export function BottomNav({ activeTab, onTabChange, likesCount, matchesUnread }: BottomNavProps) {
-  const tabs: AppTab[] = ['discover', 'standouts', 'likes', 'matches', 'chat', 'profile'];
+  const tabs: AppTab[] = ['discover', 'standouts', 'matches', 'chat', 'profile'];
 
   const hasNotification = (key: AppTab) => {
     return (key === 'likes' && likesCount > 0) || (key === 'chat' && matchesUnread > 0);
