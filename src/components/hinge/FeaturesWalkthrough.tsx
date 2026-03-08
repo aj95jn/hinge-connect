@@ -105,56 +105,9 @@ const FEATURES = [
         <BandwidthIcon size={28} />
       </span>
     ),
-    freeTag: 'HIDDEN',
-    paidTag: 'VISIBLE',
-    visual: (isPaid: boolean) => (
-      <div className="flex flex-col items-center gap-3">
-        {/* Explanation */}
-        <p className="text-[11px] text-muted-foreground text-center max-w-[240px] mb-1">
-          Shows how available someone is to chat — set yours and see others' at a glance.
-        </p>
-
-        {/* Bandwidth badges — same alternating style as Vibe Sync */}
-        <div className="flex flex-col items-center gap-4 w-full max-w-[280px]">
-          {[
-            { label: 'Ready to Connect', desc: 'Open & active', side: 'right' as const },
-            { label: 'Focusing on Matches', desc: 'Currently busy', side: 'left' as const },
-            { label: 'Weekend Spark ✨', desc: 'Weekend only', side: 'right' as const },
-          ].map((badge, i) => (
-            <motion.div
-              key={badge.label}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.15 * i, type: 'spring' }}
-              className={`flex items-center gap-2 w-full ${badge.side === 'left' ? 'flex-row-reverse' : 'flex-row'}`}
-            >
-              {/* Badge pill — matching purple-900 style */}
-              <div className="inline-flex items-center gap-1.5 bg-purple-900 rounded-full px-3 py-1.5 shadow-[0_2px_8px_-2px_rgba(76,29,149,0.4)] flex-shrink-0">
-                <svg width="14" height="12" viewBox="0 0 18 14" fill="none" className="shrink-0">
-                  <circle cx="6" cy="5" r="2" fill="white" />
-                  <path d="M3 11C3 8.8 4.3 7.5 6 7.5C7.7 7.5 9 8.8 9 11" stroke="white" strokeWidth="1.2" strokeLinecap="round" fill="none" />
-                  <path d="M11 7C12 5.8 12 4.2 11 3" stroke="white" strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.5" />
-                  <path d="M13.5 8.5C15 6.5 15 3.5 13.5 1.5" stroke="white" strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.35" />
-                </svg>
-                <span className="text-[10px] font-bold text-white whitespace-nowrap">{badge.label}</span>
-              </div>
-              {/* Tooltip box */}
-              <div className="relative bg-foreground rounded-lg px-2.5 py-1.5 shadow-sm">
-                <p className="text-[9px] font-medium text-background leading-tight">{badge.desc}</p>
-                <div className={`absolute top-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-foreground rotate-45 ${badge.side === 'right' ? '-left-0.5' : '-right-0.5'}`} />
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Subscribe nudge */}
-        {!isPaid && (
-          <p className="text-[10px] text-muted-foreground text-center mt-1 italic">
-            Subscribe to see others' bandwidth before swiping.
-          </p>
-        )}
-      </div>
-    ),
+    freeTag: '',
+    paidTag: '',
+    visual: null, // rendered inline with props
   },
   {
     id: 'bridge-builder',
