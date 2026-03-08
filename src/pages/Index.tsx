@@ -100,11 +100,13 @@ const Index = () => {
     if (!hasSeenWhatsNew) {
       likesSincePopupRef.current += 1;
       if (likesSincePopupRef.current >= 3) {
-        flashWhatsNew();
+        likesSincePopupRef.current = 0;
+        setShowWhatsNew(true);
+        setTimeout(() => setShowWhatsNew(false), 3000);
       }
     }
     return result;
-  }, [state, hasSeenWhatsNew, flashWhatsNew]);
+  }, [state, hasSeenWhatsNew]);
 
   const matchesUnread = state.matches.filter((m) => m.unread).length;
 
