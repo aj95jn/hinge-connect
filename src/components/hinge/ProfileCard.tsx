@@ -69,21 +69,77 @@ export function ProfileCard({
         transition={{ duration: 0.4, ease: 'easeOut' }}
         className="pb-24 relative"
       >
-        {/* Name, gender, and badges — above the image */}
+        {/* Name, gender, badges, and actions — above the image */}
         <div className="px-4 pt-4 pb-2">
-          <div className="flex items-start justify-between gap-2">
-            <div>
-              <h1 className="font-hinge-serif text-2xl font-semibold text-foreground">{profile.name}</h1>
-              <span className="text-sm text-muted-foreground">
-                {profile.gender?.toLowerCase() === 'female' ? 'she/her' : profile.gender?.toLowerCase() === 'male' ? 'he/him' : profile.gender}
-              </span>
+          <div className="flex items-center justify-between gap-2">
+            {/* Left: name + gender + badges */}
+            <div className="flex items-center gap-3 min-w-0">
+              <div className="min-w-0">
+                <h1 className="font-hinge-serif text-2xl font-semibold text-foreground">{profile.name}</h1>
+                <span className="text-sm text-muted-foreground">
+                  {profile.gender?.toLowerCase() === 'female' ? 'she/her' : profile.gender?.toLowerCase() === 'male' ? 'he/him' : profile.gender}
+                </span>
+              </div>
+              <div className="flex flex-col gap-1">
+                {profile.bandwidthStatus && <BandwidthStatusPill status={profile.bandwidthStatus} />}
+                {profile.showVibeSync && vibeSync.hasSync && <VibeSync result={vibeSync} />}
+              </div>
             </div>
-            <div className="flex flex-col items-end gap-1.5">
-              {profile.bandwidthStatus && <BandwidthStatusPill status={profile.bandwidthStatus} />}
-              {profile.showVibeSync && vibeSync.hasSync && <VibeSync result={vibeSync} />}
+            {/* Right: back arrow + dots */}
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => {
+                  if (isPaid) {
+                    onGoBack();
+                  } else {
+                    setShowUpgradeModal(true);
+                  }
+                }}
+                className="w-9 h-9 rounded-full flex items-center justify-center hover:bg-muted transition-colors"
+              >
+                <Undo2 size={20} className="text-muted-foreground" />
+              </button>
+              <button className="w-9 h-9 rounded-full flex items-center justify-center hover:bg-muted transition-colors">
+                <MoreHorizontal size={20} className="text-muted-foreground" />
+              </button>
             </div>
           </div>
         </div>
+
+        {/* Upgrade Modal */}
+        <AnimatePresence>
+          {showUpgradeModal && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
+              onClick={() => setShowUpgradeModal(false)}
+            >
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                className="bg-card rounded-2xl p-6 mx-6 max-w-sm w-full shadow-xl"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <h2 className="font-hinge-serif text-xl font-semibold text-foreground mb-2">Go back to a profile?</h2>
+                <p className="text-sm text-muted-foreground mb-5">Upgrade to revisit profiles you've already seen.</p>
+                <div className="flex flex-col gap-2.5">
+                  <button className="w-full py-3 rounded-xl bg-foreground text-background font-semibold text-sm hover:opacity-90 transition-opacity">
+                    Get HingeX
+                  </button>
+                  <button className="w-full py-3 rounded-xl border border-border text-foreground font-semibold text-sm hover:bg-muted transition-colors">
+                    Get Hinge+
+                  </button>
+                  <button onClick={() => setShowUpgradeModal(false)} className="text-sm text-muted-foreground mt-1">
+                    Not now
+                  </button>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Profile Photo - Hero */}
         {profile.photos.length > 0 && (
