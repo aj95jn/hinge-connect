@@ -304,7 +304,7 @@ function PromptCard({
           }}
           className="absolute bottom-3 right-3 bg-muted rounded-full p-2 hover:bg-accent transition-colors"
         >
-          <Heart size={18} className="text-primary" />
+          <Heart size={18} strokeWidth={2.5} className="text-foreground" />
         </button>
       </div>
     </div>
