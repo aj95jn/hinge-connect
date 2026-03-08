@@ -63,14 +63,8 @@ export function LikePanel({ ghostText, rosesRemaining, onSend, onCancel }: LikeP
           </button>
         </div>
 
-        {/* Send regular / Cancel */}
-        <div className="flex items-center gap-3">
-          <button
-            onClick={() => onSend(message, false, false)}
-            className="flex-1 bg-secondary text-secondary-foreground rounded-full py-2.5 text-sm font-semibold hover:bg-accent transition-colors"
-          >
-            Send Like ❤️
-          </button>
+        {/* Cancel */}
+        <div className="flex justify-end">
           <button
             onClick={onCancel}
             className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-muted transition-colors"
