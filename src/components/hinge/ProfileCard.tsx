@@ -5,6 +5,7 @@ import { Profile, VibeSyncResult, GlowResult } from '@/types';
 import { VibeSync } from './VibeSync';
 import { BandwidthStatusPill } from './BandwidthStatus';
 import { LikePanel } from './LikePanel';
+import { AnimatedProfileHeader, AnimatedAvatar } from './AnimatedAvatar';
 import { toast } from 'sonner';
 
 interface ProfileCardProps {
