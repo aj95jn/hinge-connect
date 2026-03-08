@@ -53,7 +53,7 @@ export const discoverProfiles: Profile[] = [
     vitals: { age: 27, gender: 'Woman', orientation: 'Straight', religion: 'Hindu', politics: 'Not Political', ethnicity: 'South Asian', datingGoals: 'Figuring out my dating goals', relationshipType: 'Monogamy' },
   },
   {
-    id: 'maya', name: 'Maya', gender: 'Female', location: 'Manhattan, NY',
+    id: 'maya', name: 'Maya', gender: 'Female', location: 'Manhattan, NY', activityTag: 'new_user' as const,
     photos: [
       { url: mayaProfile, tags: ['books', 'intellectual'] },
       { url: maya2, tags: ['books', 'deep-conversations'] },
