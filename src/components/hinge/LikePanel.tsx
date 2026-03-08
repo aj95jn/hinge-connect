@@ -21,7 +21,7 @@ export function LikePanel({ ghostText, rosesRemaining, onSend, onCancel }: LikeP
       animate={{ y: 0 }}
       exit={{ y: '100%' }}
       transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-      className="fixed inset-x-0 bottom-0 bg-card border-t border-border rounded-t-3xl p-5 pb-8 z-50 max-w-md mx-auto shadow-xl"
+      className="fixed inset-x-0 bottom-0 bg-card border-t border-border rounded-t-3xl p-5 pb-24 z-50 max-w-md mx-auto shadow-xl"
     >
       <div className="space-y-4">
         {/* Message Input */}
