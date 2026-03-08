@@ -61,7 +61,10 @@ export function RefundPopup({ profileName, likeTimestamp, onClose }: RefundPopup
       >
         <div className="w-8 h-1 bg-border rounded-full mx-auto mb-3" />
         <p className="text-sm text-muted-foreground leading-relaxed text-center">
-          {profileName} stayed busy, so we've returned your Like so you can find a new connection
+          {profileName} stayed busy, so we've returned your Like
+          <span className="block text-xs text-muted-foreground/70 mt-1">
+            sent {new Date(likeTimestamp).toLocaleDateString([], { month: 'short', day: 'numeric' })} at {new Date(likeTimestamp).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}
+          </span>
         </p>
       </motion.div>
     </motion.div>

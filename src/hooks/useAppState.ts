@@ -26,7 +26,7 @@ export function useAppState() {
   const [rosesRemaining, setRosesRemaining] = useState(1);
   const [isPaid] = useState(false);
   const [userBandwidth, setUserBandwidth] = useState<BandwidthStatus>('ready');
-  const [showRefundPopup, setShowRefundPopup] = useState<{ profileName: string } | null>(null);
+  const [showRefundPopup, setShowRefundPopup] = useState<{ profileName: string; likeTimestamp: number } | null>(null);
   const [activeChatMatchId, setActiveChatMatchId] = useState<string | null>(null);
   const [userProfile, setUserProfile] = useState<Profile>(initialUserProfile);
   const [glowProfilesSeen, setGlowProfilesSeen] = useState<Set<string>>(new Set());
