@@ -214,10 +214,10 @@ export function ProfileCard({
                     <div className="relative rounded-2xl overflow-hidden">
                       <img src={remainingPhotos[photoIdx].url} alt={`${profile.name} photo ${pi + 1}`}
                         className="w-full aspect-[3/4] object-cover" loading="lazy" />
-                      {isPhotoGlowing(pi) && (
-                        <div className="absolute top-3 left-3 flex items-center gap-1 bg-card/90 backdrop-blur-sm rounded-full px-2.5 py-1">
-                          <Sparkles size={12} className="text-hinge-gold" />
-                          <span className="text-[10px] font-medium text-foreground">{glowResults.photoGlows[pi]?.sharedTags.join(', ')}</span>
+                      {isPhotoGlowing(pi) && glowResults.photoGlows[pi]?.sharedTags.length > 0 && (
+                        <div className="absolute top-3 left-3 flex items-center gap-1.5 bg-card/90 backdrop-blur-sm rounded-full px-3 py-1.5">
+                          <Sparkles size={14} className="text-hinge-gold" />
+                          <span className="text-[11px] font-medium text-hinge-orange">You both love: {glowResults.photoGlows[pi]?.sharedTags.join(', ')}</span>
                         </div>
                       )}
                       <button onClick={(e) => { e.stopPropagation(); setSelectedTarget({ type: 'photo', index: pi }); }}
