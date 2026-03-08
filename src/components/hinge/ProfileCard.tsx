@@ -234,11 +234,11 @@ export function ProfileCard({
           })()}
         </div>
 
-        {/* Skip button */}
-        <div className="flex justify-center py-6">
+        {/* Skip button - sticky at bottom */}
+        <div className="sticky bottom-20 z-30 flex justify-center py-4">
           <button
             onClick={onSkip}
-            className="w-12 h-12 rounded-full border-2 border-border flex items-center justify-center hover:bg-muted transition-colors"
+            className="w-12 h-12 rounded-full border-2 border-border bg-background shadow-lg flex items-center justify-center hover:bg-muted transition-colors"
           >
             <X size={24} className="text-muted-foreground" />
           </button>

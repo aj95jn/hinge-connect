@@ -16,7 +16,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background max-w-md mx-auto relative">
       {/* Top bar */}
-      <div className="sticky top-0 z-40 bg-background/80 backdrop-blur-md border-b border-border px-4 py-3 flex items-center gap-3 overflow-hidden">
+      <div className="bg-background/80 backdrop-blur-md border-b border-border px-4 py-3 flex items-center gap-3 overflow-hidden">
         <SlidersHorizontal size={20} className="text-foreground shrink-0" />
         <div className="flex items-center gap-2 min-w-0">
           <FilterPill label="Age" filled />
