@@ -282,7 +282,7 @@ function PromptCard({
 }) {
   return (
     <div className="mt-3">
-      <div className={`bg-card rounded-2xl p-5 relative ${isGlowing ? 'rose-glow-prompt' : ''}`}>
+      <div className={`bg-card rounded-2xl p-5 relative border border-border shadow-sm ${isGlowing ? 'rose-glow-prompt' : ''}`}>
         {isGlowing && sharedInterests.length > 0 && (
           <div className="flex items-center gap-1.5 mb-3">
             <Sparkles size={14} className="text-hinge-gold" />
