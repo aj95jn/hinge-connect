@@ -80,8 +80,14 @@ const Index = () => {
   }, [state.activeTab, hasSeenWhatsNew, flashWhatsNew]);
 
   // Track likes — show popup every 3 likes
-  const handleLikeWithPopup = useCallback((params: any) => {
-    state.sendLike({
+  const handleLikeWithPopup = useCallback((params: {
+    targetType: 'photo' | 'prompt';
+    targetIndex: number;
+    message?: string;
+    isRose?: boolean;
+    isPriority?: boolean;
+  }) => {
+    const result = state.sendLike({
       profileId: state.currentProfile!.id,
       ...params,
     });
@@ -91,6 +97,7 @@ const Index = () => {
         flashWhatsNew();
       }
     }
+    return result;
   }, [state, hasSeenWhatsNew, flashWhatsNew]);
 
   const matchesUnread = state.matches.filter((m) => m.unread).length;

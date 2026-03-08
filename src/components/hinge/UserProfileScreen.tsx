@@ -20,9 +20,10 @@ interface UserProfileScreenProps {
   onUpdateProfile: (updates: Partial<Profile>) => void;
   onUpdateBandwidth: (status: BandwidthStatus) => void;
   onToggleBandwidthVisible: (visible: boolean) => void;
+  onViewWhatsNew?: () => void;
 }
 
-export function UserProfileScreen({ profile, isPaid = false, onUpdateProfile, onUpdateBandwidth, onToggleBandwidthVisible }: UserProfileScreenProps) {
+export function UserProfileScreen({ profile, isPaid = false, onUpdateProfile, onUpdateBandwidth, onToggleBandwidthVisible, onViewWhatsNew }: UserProfileScreenProps) {
   const [editingPrompt, setEditingPrompt] = useState<string | null>(null);
   const [editText, setEditText] = useState('');
   const [showInterestPicker, setShowInterestPicker] = useState(false);
