@@ -56,7 +56,7 @@ export interface ChatMessage {
   timestamp: number;
 }
 
-export type AppTab = 'discover' | 'likes' | 'matches' | 'profile';
+export type AppTab = 'discover' | 'likes' | 'matches' | 'chat' | 'profile';
 
 export type BandwidthStatus = 'ready' | 'focusing' | 'weekend';
 
