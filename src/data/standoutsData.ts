@@ -32,7 +32,7 @@ export const standoutProfiles: Profile[] = [
     verified: false,
     photos: [{ url: olivia2, tags: ['travel', 'adventure'] }],
     prompts: [
-      { id: 'sp1', question: "We're the same type of weird if", answer: "You've ever Googled 'can you actually die from embarrassment' after a social event.", interests: ['humor', 'social'] },
+      { id: 'sp1', question: 'The key to my heart is', answer: "A spontaneous road trip with zero planning and a really good playlist.", interests: ['travel', 'music'] },
       { id: 'sp2', question: 'My comfort movie is', answer: "The Grand Budapest Hotel. I've seen it 14 times and I notice something new every single time.", interests: ['film', 'art'] },
     ],
     preferences: ['travel', 'film', 'yoga'],
