@@ -54,13 +54,14 @@ export function BandwidthStatusPill({ status, isPaid = false }: BandwidthStatusP
         onClick={(e) => { e.stopPropagation(); setShowTooltip((v) => !v); }}
         className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold ${config.color}`}
       >
-        {/* Heart with signal waves */}
-        <svg width="12" height="12" viewBox="0 0 16 16" fill="none" className="shrink-0">
-          {/* Tiny heart */}
-          <path d="M8 12.5L2.5 7.5C1.5 6.5 1.5 4.5 3 3.5C4.5 2.5 6 3 7 4L8 5L9 4C10 3 11.5 2.5 13 3.5C14.5 4.5 14.5 6.5 13.5 7.5L8 12.5Z" fill="white" />
-          {/* Signal arcs radiating from heart */}
-          <path d="M1.5 8.5C0.3 6.5 0.8 3.8 2.5 2.2" stroke="white" strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.6" />
-          <path d="M14.5 8.5C15.7 6.5 15.2 3.8 13.5 2.2" stroke="white" strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.6" />
+        {/* Person silhouette with signal waves */}
+        <svg width="14" height="12" viewBox="0 0 18 14" fill="none" className="shrink-0">
+          {/* Small person dot */}
+          <circle cx="6" cy="5" r="2" fill="white" />
+          <path d="M3 11C3 8.8 4.3 7.5 6 7.5C7.7 7.5 9 8.8 9 11" stroke="white" strokeWidth="1.2" strokeLinecap="round" fill="none" />
+          {/* Radiating arcs */}
+          <path d="M11 7C12 5.8 12 4.2 11 3" stroke="white" strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.5" />
+          <path d="M13.5 8.5C15 6.5 15 3.5 13.5 1.5" stroke="white" strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.35" />
         </svg>
         {config.label}
       </button>
