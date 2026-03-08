@@ -27,6 +27,7 @@ export function UserProfileScreen({ profile, isPaid = false, onUpdateProfile, on
   const [editText, setEditText] = useState('');
   const [showInterestPicker, setShowInterestPicker] = useState(false);
   const [activeTab, setActiveTab] = useState<'profile' | 'features'>('profile');
+  const [showBandwidthInfo, setShowBandwidthInfo] = useState(false);
 
   const handleSavePrompt = (promptId: string) => {
     const updatedPrompts = profile.prompts.map((p) =>
