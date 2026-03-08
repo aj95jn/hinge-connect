@@ -150,7 +150,7 @@ export function ProfileCard({
                 isGlowing={isPromptGlowing(prompt.id)}
                 sharedInterests={glowResults.promptGlows[prompt.id]?.sharedInterests || []}
                 onLike={() => setSelectedTarget({ type: 'prompt', index: actualIndex })}
-                onDragGlow={() => handleDragGlow(prompt.id)}
+                onDragGlow={() => handleDragGlow(`prompt:${prompt.id}`)}
               />
             );
           })}
