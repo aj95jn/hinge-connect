@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Send } from 'lucide-react';
 import { ChatMessage } from '@/types';
+import { AnimatedAvatar } from './AnimatedAvatar';
 
 interface ChatThreadProps {
   matchName: string;
@@ -32,9 +33,7 @@ export function ChatThread({ matchName, matchPhoto, messages, onSend, onBack }: 
         <button onClick={onBack} className="p-1 hover:bg-muted rounded-full transition-colors">
           <ArrowLeft size={20} className="text-foreground" />
         </button>
-        <div className="w-9 h-9 rounded-full overflow-hidden">
-          <img src={matchPhoto} alt={matchName} className="w-full h-full object-cover" />
-        </div>
+        <AnimatedAvatar name={matchName} gender="Female" size="sm" />
         <h3 className="font-hinge-serif text-lg font-semibold text-foreground">{matchName}</h3>
       </div>
 

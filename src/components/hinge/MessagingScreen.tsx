@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, ChevronUp, MessageCircle } from 'lucide-react';
+import { AnimatedAvatar } from './AnimatedAvatar';
 import { Match, Profile, ChatMessage } from '@/types';
 import { ChatThread } from './ChatThread';
 
@@ -65,8 +66,8 @@ export function MessagingScreen({
                   onClick={() => onOpenChat(match.id)}
                   className="flex flex-col items-center gap-1 min-w-[72px]"
                 >
-                  <div className="w-16 h-16 rounded-full overflow-hidden ring-2 ring-primary ring-offset-2 ring-offset-background">
-                    <img src={profile.photos[0]?.url} alt={profile.name} className="w-full h-full object-cover" />
+                  <div className="w-16 h-16 rounded-full overflow-hidden ring-2 ring-primary ring-offset-2 ring-offset-background flex items-center justify-center">
+                    <AnimatedAvatar name={profile.name} gender={profile.gender} size="md" />
                   </div>
                   <span className="text-xs font-medium text-foreground">{profile.name}</span>
                   <span className="text-[10px] text-primary font-medium">Tap to chat</span>
@@ -184,8 +185,8 @@ function MatchRow({
       onClick={onClick}
       className="flex items-center gap-3 w-full p-3 rounded-xl hover:bg-muted transition-colors text-left"
     >
-      <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
-        <img src={profile.photos[0]?.url} alt={profile.name} className="w-full h-full object-cover" />
+      <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 flex items-center justify-center">
+        <AnimatedAvatar name={profile.name} gender={profile.gender} size="sm" />
       </div>
       <div className="flex-1 min-w-0">
         <p className="text-sm font-semibold text-foreground">{profile.name}</p>
