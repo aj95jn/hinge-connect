@@ -13,7 +13,7 @@ import {
 import { toast } from 'sonner';
 
 const FREE_LIKE_LIMIT = 8;
-const REFUND_TIMEOUT_MS = 60000; // 1 minute for demo
+const REFUND_TIMEOUT_MS = 10000; // 10 seconds for demo (3-4 days in production)
 
 export function useAppState() {
   const [activeTab, setActiveTab] = useState<AppTab>('discover');
