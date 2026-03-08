@@ -43,44 +43,47 @@ const Index = () => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [hasSeenWhatsNew, setHasSeenWhatsNew] = useState(false);
   const [showWhatsNew, setShowWhatsNew] = useState(false);
-  const whatsNewTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const whatsNewIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const likesSincePopupRef = useRef(0);
+  const hasSeenRef = useRef(false);
 
   // Stop popup forever once user views "What's New" tab in profile
   const markWhatsNewSeen = useCallback(() => {
+    hasSeenRef.current = true;
     setHasSeenWhatsNew(true);
     setShowWhatsNew(false);
-    if (whatsNewTimerRef.current) clearTimeout(whatsNewTimerRef.current);
+    if (whatsNewIntervalRef.current) {
+      clearInterval(whatsNewIntervalRef.current);
+      whatsNewIntervalRef.current = null;
+    }
   }, []);
 
-  // Flash the popup briefly
-  const flashWhatsNew = useCallback(() => {
-    if (hasSeenWhatsNew) return;
-    setShowWhatsNew(true);
-    likesSincePopupRef.current = 0;
-    setTimeout(() => setShowWhatsNew(false), 3000);
-  }, [hasSeenWhatsNew]);
-
-  // Show immediately on mount, then every 15s on discover tab
+  // Show popup on discover tab: immediately + every 15s
   useEffect(() => {
-    if (hasSeenWhatsNew) {
-      setShowWhatsNew(false);
-      if (whatsNewTimerRef.current) clearInterval(whatsNewTimerRef.current);
-      return;
-    }
+    if (hasSeenWhatsNew) return;
+
     if (state.activeTab === 'discover') {
       // Show immediately
-      flashWhatsNew();
+      setShowWhatsNew(true);
+      const dismissTimer = setTimeout(() => setShowWhatsNew(false), 3000);
+
       // Then repeat every 15s
       const interval = setInterval(() => {
-        flashWhatsNew();
+        if (hasSeenRef.current) return;
+        setShowWhatsNew(true);
+        setTimeout(() => setShowWhatsNew(false), 3000);
       }, 15000);
-      whatsNewTimerRef.current = interval as unknown as ReturnType<typeof setTimeout>;
-      return () => clearInterval(interval);
+      whatsNewIntervalRef.current = interval;
+
+      return () => {
+        clearTimeout(dismissTimer);
+        clearInterval(interval);
+        whatsNewIntervalRef.current = null;
+      };
     } else {
       setShowWhatsNew(false);
     }
-  }, [state.activeTab, hasSeenWhatsNew, flashWhatsNew]);
+  }, [state.activeTab, hasSeenWhatsNew]);
 
   // Track likes — show popup every 3 likes
   const handleLikeWithPopup = useCallback((params: {
@@ -97,11 +100,13 @@ const Index = () => {
     if (!hasSeenWhatsNew) {
       likesSincePopupRef.current += 1;
       if (likesSincePopupRef.current >= 3) {
-        flashWhatsNew();
+        likesSincePopupRef.current = 0;
+        setShowWhatsNew(true);
+        setTimeout(() => setShowWhatsNew(false), 3000);
       }
     }
     return result;
-  }, [state, hasSeenWhatsNew, flashWhatsNew]);
+  }, [state, hasSeenWhatsNew]);
 
   const matchesUnread = state.matches.filter((m) => m.unread).length;
 
