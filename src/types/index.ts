@@ -37,6 +37,7 @@ export interface Profile {
   };
   vitals?: ProfileVitals;
   coreValues?: string[]; // core value tags for Deep Common Ground matching
+  activityTag?: 'active_now' | 'new_user' | 'active_today';
 }
 
 export interface Like {

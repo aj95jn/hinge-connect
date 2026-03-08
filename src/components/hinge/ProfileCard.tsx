@@ -75,7 +75,10 @@ export function ProfileCard({
           <div className="flex items-center justify-between gap-2">
             {/* Left: name + gender */}
             <div className="min-w-0 flex-shrink-0">
-              <h1 className="font-hinge-serif text-2xl font-semibold text-foreground">{profile.name}</h1>
+              <div className="flex items-center gap-2">
+                <h1 className="font-hinge-serif text-2xl font-semibold text-foreground">{profile.name}</h1>
+                {profile.activityTag && <ActivityTag tag={profile.activityTag} />}
+              </div>
               <div className="flex items-center gap-1.5">
                 <span className="text-sm text-muted-foreground">
                   {profile.gender?.toLowerCase() === 'female' ? 'she/her' : profile.gender?.toLowerCase() === 'male' ? 'he/him' : profile.gender}
