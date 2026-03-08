@@ -44,7 +44,7 @@ export function UserProfileScreen({ profile, onUpdateProfile, onUpdateBandwidth 
     { value: 'ready', label: 'Ready to Connect' },
     { value: 'focusing', label: 'Focusing on Matches' },
     { value: 'weekend', label: 'Weekend Spark ✨' },
-    { value: 'new_vibes', label: 'Opening for New Vibes' },
+    { value: 'new_vibes', label: 'Open to New Vibes' },
   ];
 
   return (
