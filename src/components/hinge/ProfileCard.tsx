@@ -35,19 +35,21 @@ export function ProfileCard({
     type: 'photo' | 'prompt';
     index: number;
   } | null>(null);
-  const [glowOverrides, setGlowOverrides] = useState<Record<string, boolean>>({});
+  // glowOverride: if set, only this item glows (key = "prompt:id" or "photo:index")
+  const [glowOverride, setGlowOverride] = useState<string | null>(null);
 
   const isPromptGlowing = (promptId: string) => {
-    if (glowOverrides[promptId] !== undefined) return glowOverrides[promptId];
+    if (glowOverride !== null) return glowOverride === `prompt:${promptId}`;
     return glowResults.promptGlows[promptId]?.glow ?? false;
   };
 
-  const handleDragGlow = (promptId: string) => {
-    const newOverrides: Record<string, boolean> = {};
-    profile.prompts.forEach((p) => {
-      newOverrides[p.id] = p.id === promptId;
-    });
-    setGlowOverrides(newOverrides);
+  const isPhotoGlowing = (index: number) => {
+    if (glowOverride !== null) return glowOverride === `photo:${index}`;
+    return glowResults.photoGlows[index]?.glow ?? false;
+  };
+
+  const handleDragGlow = (key: string) => {
+    setGlowOverride(key);
   };
 
   const getGhostText = () => {
@@ -58,10 +60,6 @@ export function ProfileCard({
       return glowResults.promptGlows[prompt.id]?.ghostText || prompt.bridgeGhostText;
     }
     return undefined;
-  };
-
-  const isPhotoGlowing = (index: number) => {
-    return glowResults.photoGlows[index]?.glow ?? false;
   };
 
   return (
