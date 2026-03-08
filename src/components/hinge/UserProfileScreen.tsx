@@ -139,10 +139,10 @@ export function UserProfileScreen({ profile, isPaid = false, onUpdateProfile, on
                   {showBandwidthInfo && (
                     <motion.div
                       ref={bandwidthInfoRef}
-                      initial={{ opacity: 0, scale: 0.9, y: 4 }}
+                      initial={{ opacity: 0, scale: 0.9, y: -4 }}
                       animate={{ opacity: 1, scale: 1, y: 0 }}
-                      exit={{ opacity: 0, scale: 0.9, y: 4 }}
-                      className="absolute top-7 left-0 z-50 w-64 bg-card rounded-xl p-3 shadow-lg border border-border"
+                      exit={{ opacity: 0, scale: 0.9, y: -4 }}
+                      className="absolute bottom-7 left-0 z-50 w-64 bg-card rounded-xl p-3 shadow-lg border border-border"
                     >
                       <button
                         onClick={() => setShowBandwidthInfo(false)}
@@ -155,7 +155,7 @@ export function UserProfileScreen({ profile, isPaid = false, onUpdateProfile, on
                         Bandwidth lets others know how available you are to chat. Choose a status and make it visible on your profile so matches can see when you're most responsive.
                       </p>
                       {/* Arrow pointing up */}
-                      <div className="absolute -top-[5px] left-[90px] w-2.5 h-2.5 bg-card border-l border-t border-border rotate-45" />
+                      <div className="absolute -bottom-[5px] left-[90px] w-2.5 h-2.5 bg-card border-r border-b border-border rotate-45" />
                     </motion.div>
                   )}
                 </AnimatePresence>
