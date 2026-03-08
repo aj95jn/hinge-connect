@@ -41,7 +41,7 @@ export function LikesYouScreen({ likes, profiles, onMatch, onDismiss }: LikesYou
             >
               <div className="flex">
                 <div className="w-28 h-36 bg-secondary flex items-center justify-center">
-                  <User size={36} className="text-muted-foreground" />
+                  <AnimatedAvatar name={profile.name} gender={profile.gender} size="md" />
                 </div>
                 <div className="flex-1 p-4 flex flex-col justify-between">
                   <div>
