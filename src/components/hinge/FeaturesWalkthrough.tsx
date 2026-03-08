@@ -330,7 +330,7 @@ export function FeaturesWalkthrough({ isPaid, bandwidthVisible = false, bandwidt
             {!isPaid && feature.id !== 'bandwidth' && (
               <button className="mt-4 inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-foreground text-background text-xs font-semibold hover:opacity-90 transition-opacity">
                 <Crown size={13} />
-                {feature.id === 'effort-insurance' ? 'Upgrade for unlimited likes' : 'Upgrade to unlock'}
+                {feature.id === 'effort-insurance' ? 'Upgrade for unlimited likes' : feature.id === 'bridge-builder' ? 'Upgrade to get more' : 'Upgrade to unlock'}
               </button>
             )}
           </motion.div>
