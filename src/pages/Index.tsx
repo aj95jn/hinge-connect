@@ -5,6 +5,8 @@ import { BottomNav } from '@/components/hinge/BottomNav';
 import { ProfileCard } from '@/components/hinge/ProfileCard';
 import { LikesYouScreen } from '@/components/hinge/LikesYouScreen';
 import { MessagingScreen } from '@/components/hinge/MessagingScreen';
+import { StandoutsScreen } from '@/components/hinge/StandoutsScreen';
+import { standoutProfiles } from '@/data/standoutsData';
 import { UserProfileScreen } from '@/components/hinge/UserProfileScreen';
 import { RefundPopup } from '@/components/hinge/RefundPopup';
 import { Heart, SlidersHorizontal, ChevronDown, X, Zap } from 'lucide-react';
