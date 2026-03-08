@@ -138,6 +138,7 @@ export function UserProfileScreen({ profile, isPaid = false, onUpdateProfile, on
                 <AnimatePresence>
                   {showBandwidthInfo && (
                     <motion.div
+                      ref={bandwidthInfoRef}
                       initial={{ opacity: 0, scale: 0.9, y: 4 }}
                       animate={{ opacity: 1, scale: 1, y: 0 }}
                       exit={{ opacity: 0, scale: 0.9, y: 4 }}
