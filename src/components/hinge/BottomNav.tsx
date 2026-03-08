@@ -1,4 +1,4 @@
-import { Heart, MessageSquare, Star, User } from 'lucide-react';
+import { Heart, MessageSquare, Star, User, Sparkles } from 'lucide-react';
 import { AppTab } from '@/types';
 
 interface BottomNavProps {
@@ -21,7 +21,7 @@ function HingeLogo({ active }: { active: boolean }) {
 }
 
 export function BottomNav({ activeTab, onTabChange, likesCount, matchesUnread }: BottomNavProps) {
-  const tabs: AppTab[] = ['discover', 'likes', 'matches', 'chat', 'profile'];
+  const tabs: AppTab[] = ['discover', 'standouts', 'likes', 'matches', 'chat', 'profile'];
 
   const hasNotification = (key: AppTab) => {
     return (key === 'likes' && likesCount > 0) || (key === 'chat' && matchesUnread > 0);
@@ -32,6 +32,8 @@ export function BottomNav({ activeTab, onTabChange, likesCount, matchesUnread }:
     switch (key) {
       case 'discover':
         return <HingeLogo active={active} />;
+      case 'standouts':
+        return <Sparkles size={24} className={cls} fill={active ? 'currentColor' : 'none'} />;
       case 'likes':
         return <Star size={24} className={cls} fill={active ? 'currentColor' : 'none'} />;
       case 'matches':
@@ -50,7 +52,7 @@ export function BottomNav({ activeTab, onTabChange, likesCount, matchesUnread }:
           <button
             key={key}
             onClick={() => onTabChange(key)}
-            className="relative flex items-center justify-center w-12 h-8"
+            className="relative flex items-center justify-center w-10 h-8"
           >
             {renderIcon(key, activeTab === key)}
             {key === 'likes' && likesCount > 0 && (
