@@ -136,6 +136,7 @@ export const discoverProfiles: Profile[] = [
       { id: 'lp3', question: 'I geek out on', answer: 'True crime podcasts, keyboard shortcuts, and perfectly organized spreadsheets.', interests: ['tech', 'podcasts', 'organization'] },
     ],
     preferences: ['food', 'music', 'tech', 'humor'],
+    vitals: { age: 24, gender: 'Woman', orientation: 'Straight' },
     bandwidthStatus: 'focusing',
     vibeData: { avgMessageLength: 3, avgReplyTimeMinutes: 2 },
   },
