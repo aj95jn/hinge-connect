@@ -12,6 +12,7 @@ interface ProfileCardProps {
   glowResults: GlowResult;
   likesRemaining: number;
   rosesRemaining: number;
+  isPaid: boolean;
   onLike: (params: {
     targetType: 'photo' | 'prompt';
     targetIndex: number;
@@ -20,6 +21,7 @@ interface ProfileCardProps {
     isPriority?: boolean;
   }) => boolean;
   onSkip: () => void;
+  onGoBack: () => void;
 }
 
 export function ProfileCard({
