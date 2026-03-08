@@ -100,7 +100,14 @@ export function useAppState() {
       if (params.isRose) setRosesRemaining((r) => r - 1);
 
       setCurrentProfileIndex((i) => i + 1);
-      toast.success(params.isRose ? 'Rose sent! 🌹' : 'Like sent! ❤️');
+
+      const profile = discoverProfiles.find((p) => p.id === params.profileId);
+      const name = profile?.name || 'Someone';
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+      const dateStr = now.toLocaleDateString([], { month: 'short', day: 'numeric' });
+      const likeType = params.isRose ? '🌹 Rose' : '❤️ Like';
+      toast.success(`${name} — ${likeType} sent · ${dateStr}, ${timeStr}`);
       return true;
     },
     [isPaid, likesRemaining]
