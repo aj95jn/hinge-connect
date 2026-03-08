@@ -190,7 +190,11 @@ function MatchRow({
       className="flex items-center gap-3 w-full p-3 rounded-xl hover:bg-muted transition-colors text-left"
     >
       <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 flex items-center justify-center">
-        <AnimatedAvatar name={profile.name} gender={profile.gender} size="sm" />
+        {profile.photos[0] ? (
+          <img src={profile.photos[0].url} alt={profile.name} className="w-full h-full object-cover" />
+        ) : (
+          <AnimatedAvatar name={profile.name} gender={profile.gender} size="sm" />
+        )}
       </div>
       <div className="flex-1 min-w-0">
         <p className="text-sm font-semibold text-foreground">{profile.name}</p>
