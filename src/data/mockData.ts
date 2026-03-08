@@ -47,7 +47,8 @@ export const discoverProfiles: Profile[] = [
     ],
     preferences: ['travel', 'philosophy', 'cooking', 'adventure'],
     bandwidthStatus: 'focusing', showVibeSync: true,
-    vibeData: { avgMessageLength: 4, avgReplyTimeMinutes: 0.5 },
+    vibeData: { avgMessageLength: 4, avgReplyTimeMinutes: 0.5, profileReadTimeSec: 25 },
+    coreValues: ['travel', 'philosophy', 'deep-conversations'],
     vitals: { age: 27, gender: 'Woman', orientation: 'Straight', religion: 'Hindu', politics: 'Not Political', ethnicity: 'South Asian', datingGoals: 'Figuring out my dating goals', relationshipType: 'Monogamy' },
   },
   {
