@@ -1,5 +1,11 @@
 import { Profile, Like, Match, ChatMessage } from '@/types';
 
+import sarahProfile from '@/assets/sarah-profile.jpg';
+import mayaProfile from '@/assets/maya-profile.jpg';
+import emmaProfile from '@/assets/emma-profile.jpg';
+import jessicaProfile from '@/assets/jessica-profile.jpg';
+import oliviaProfile from '@/assets/olivia-profile.jpg';
+
 export const userProfile: Profile = {
   id: 'aman',
   name: 'Aman',
@@ -37,16 +43,15 @@ export const userProfile: Profile = {
   },
 };
 
-// Sarah: BOTH badges (vibeSync + bandwidth)
-// Maya: Only bandwidth badge, no vibeSync
-// Emma: Only vibeSync badge, no bandwidth
 export const discoverProfiles: Profile[] = [
   {
     id: 'sarah',
     name: 'Sarah',
     gender: 'Female',
     location: 'Brooklyn, NY',
-    photos: [],
+    photos: [
+      { url: sarahProfile, tags: ['city', 'casual'] },
+    ],
     prompts: [
       {
         id: 'p1',
@@ -80,7 +85,9 @@ export const discoverProfiles: Profile[] = [
     name: 'Maya',
     gender: 'Female',
     location: 'Manhattan, NY',
-    photos: [],
+    photos: [
+      { url: mayaProfile, tags: ['books', 'intellectual'] },
+    ],
     prompts: [
       {
         id: 'p4',
@@ -114,7 +121,9 @@ export const discoverProfiles: Profile[] = [
     name: 'Emma',
     gender: 'Female',
     location: 'Williamsburg, NY',
-    photos: [],
+    photos: [
+      { url: emmaProfile, tags: ['nightlife', 'social'] },
+    ],
     prompts: [
       {
         id: 'p7',
@@ -136,7 +145,6 @@ export const discoverProfiles: Profile[] = [
       },
     ],
     preferences: ['music', 'nightlife', 'fashion', 'humor'],
-    // No bandwidth badge for Emma
     showVibeSync: true,
     vibeData: {
       avgMessageLength: 5,
@@ -165,7 +173,7 @@ export const likesReceivedProfiles: Profile[] = [
     name: 'Jessica',
     gender: 'Female',
     location: 'SoHo, NY',
-    photos: [],
+    photos: [{ url: jessicaProfile, tags: ['coffee', 'social'] }],
     prompts: [
       {
         id: 'jp1',
@@ -201,7 +209,7 @@ export const matchProfiles: Profile[] = [
     name: 'Olivia',
     gender: 'Female',
     location: 'Upper East Side, NY',
-    photos: [],
+    photos: [{ url: oliviaProfile, tags: ['outdoors', 'city'] }],
     prompts: [],
     preferences: ['hiking', 'outdoors', 'travel'],
     bandwidthStatus: 'ready',
@@ -229,7 +237,6 @@ export const initialChatMessages: ChatMessage[] = [
   },
 ];
 
-// Ghost text generator based on shared interests
 export function generateGhostText(sharedInterests: string[], promptAnswer: string): string {
   const interestGhosts: Record<string, string[]> = {
     travel: ['Ask about her favorite trip!', 'Where would she go next?', 'Share your travel bucket list!'],
