@@ -68,6 +68,7 @@ export const discoverProfiles: Profile[] = [
     preferences: ['travel', 'philosophy', 'cooking', 'adventure'],
     bandwidthStatus: 'focusing', showVibeSync: true,
     vibeData: { avgMessageLength: 4, avgReplyTimeMinutes: 0.5 },
+    vitals: { age: 27, gender: 'Woman', orientation: 'Straight', religion: 'Hindu', politics: 'Not Political', ethnicity: 'South Asian', datingGoals: 'Figuring out my dating goals', relationshipType: 'Monogamy' },
   },
   {
     id: 'maya', name: 'Maya', gender: 'Female', location: 'Manhattan, NY',
