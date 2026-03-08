@@ -1,39 +1,20 @@
 import { Profile, Like, Match, ChatMessage } from '@/types';
 
-import sarahProfile from '@/assets/sarah-profile.jpg';
-import sarah2 from '@/assets/sarah-2-new.jpg';
-import sarah3 from '@/assets/sarah-3-new.jpg';
-import sarah4 from '@/assets/sarah-4-new.jpg';
-import mayaProfile from '@/assets/maya-profile.jpg';
-import maya2 from '@/assets/maya-2-new.jpg';
-import maya3 from '@/assets/maya-3-new.jpg';
-import maya4 from '@/assets/maya-4-new.jpg';
-import emmaProfile from '@/assets/emma-profile.jpg';
-import emma2 from '@/assets/emma-2-new.jpg';
-import emma3 from '@/assets/emma-3-new.jpg';
-import emma4 from '@/assets/emma-4-new.jpg';
-import jessicaProfile from '@/assets/jessica-profile.jpg';
-import jessica2 from '@/assets/jessica-2-new.jpg';
-import jessica3 from '@/assets/jessica-3-new.jpg';
-import oliviaProfile from '@/assets/olivia-profile.jpg';
-import olivia2 from '@/assets/olivia-2-new.jpg';
-import olivia3 from '@/assets/olivia-3-new.jpg';
-import sophia1 from '@/assets/sophia-1.jpg';
-import sophia2 from '@/assets/sophia-2.jpg';
-import sophia3 from '@/assets/sophia-3.jpg';
-import lily1 from '@/assets/lily-1.jpg';
-import lily2 from '@/assets/lily-2.jpg';
-import lily3 from '@/assets/lily-3.jpg';
-import ava1 from '@/assets/ava-1.jpg';
-import ava2 from '@/assets/ava-2.jpg';
-import ava3 from '@/assets/ava-3.jpg';
-import chloe1 from '@/assets/chloe-1.jpg';
-import chloe2 from '@/assets/chloe-2.jpg';
-import chloe3 from '@/assets/chloe-3.jpg';
-import mia1 from '@/assets/mia-1.jpg';
-import mia2 from '@/assets/mia-2.jpg';
-import mia3 from '@/assets/mia-3.jpg';
-import mia4 from '@/assets/mia-4.jpg';
+// Simple profile images
+import sarahProfile from '@/assets/sarah-profile-new.jpg';
+import sarah2 from '@/assets/sarah-2-simple.jpg';
+import sarah3 from '@/assets/sarah-3-simple.jpg';
+import mayaProfile from '@/assets/maya-profile-new.jpg';
+import maya2 from '@/assets/maya-2-simple.jpg';
+import emmaProfile from '@/assets/emma-profile-new.jpg';
+import emma2 from '@/assets/emma-2-simple.jpg';
+import jessicaProfile from '@/assets/jessica-profile-new.jpg';
+import oliviaProfile from '@/assets/olivia-profile-new.jpg';
+import sophiaProfile from '@/assets/sophia-profile-new.jpg';
+import lilyProfile from '@/assets/lily-profile-new.jpg';
+import avaProfile from '@/assets/ava-profile-new.jpg';
+import chloeProfile from '@/assets/chloe-profile-new.jpg';
+import miaProfile from '@/assets/mia-profile-new.jpg';
 
 export const userProfile: Profile = {
   id: 'aman',
@@ -58,7 +39,6 @@ export const discoverProfiles: Profile[] = [
       { url: sarahProfile, tags: ['city', 'casual'] },
       { url: sarah2, tags: ['food', 'outdoors'] },
       { url: sarah3, tags: ['hiking', 'outdoors'] },
-      { url: sarah4, tags: ['cooking', 'food'] },
     ],
     prompts: [
       { id: 'p1', question: 'A life goal of mine', answer: 'To visit every continent before 30. Just got back from Tokyo and it completely changed my perspective on life.', interests: ['travel', 'adventure', 'tokyo'] },
@@ -75,8 +55,6 @@ export const discoverProfiles: Profile[] = [
     photos: [
       { url: mayaProfile, tags: ['books', 'intellectual'] },
       { url: maya2, tags: ['books', 'café'] },
-      { url: maya3, tags: ['yoga', 'wellness'] },
-      { url: maya4, tags: ['art', 'culture'] },
     ],
     prompts: [
       { id: 'p4', question: 'The way to win me over is', answer: 'Show up with a book recommendation and tell me why it matters to you.', interests: ['books', 'intellectual', 'deep-conversations'] },
@@ -93,8 +71,6 @@ export const discoverProfiles: Profile[] = [
     photos: [
       { url: emmaProfile, tags: ['nightlife', 'social'] },
       { url: emma2, tags: ['music', 'karaoke'] },
-      { url: emma3, tags: ['fashion', 'city'] },
-      { url: emma4, tags: ['social', 'nightlife'] },
     ],
     prompts: [
       { id: 'p7', question: 'I\'m convinced that', answer: 'The best conversations happen after midnight with strangers who become friends.', interests: ['deep-conversations', 'social', 'nightlife'] },
@@ -109,9 +85,7 @@ export const discoverProfiles: Profile[] = [
   {
     id: 'sophia', name: 'Sophia', gender: 'Female', location: 'West Village, NY', verified: true,
     photos: [
-      { url: sophia1, tags: ['city', 'elegant'] },
-      { url: sophia2, tags: ['wine', 'nightlife'] },
-      { url: sophia3, tags: ['art', 'creative'] },
+      { url: sophiaProfile, tags: ['city', 'elegant'] },
     ],
     prompts: [
       { id: 'sp1', question: 'A perfect date looks like', answer: 'Wine tasting followed by a walk through the village, ending at a hidden jazz bar.', interests: ['wine', 'music', 'adventure'] },
@@ -126,9 +100,7 @@ export const discoverProfiles: Profile[] = [
   {
     id: 'lily', name: 'Lily', gender: 'Female', location: 'Midtown, NY',
     photos: [
-      { url: lily1, tags: ['city', 'casual'] },
-      { url: lily2, tags: ['food', 'social'] },
-      { url: lily3, tags: ['music', 'creative'] },
+      { url: lilyProfile, tags: ['city', 'casual'] },
     ],
     prompts: [
       { id: 'lp1', question: 'The quickest way to my heart', answer: 'Take me to a hole-in-the-wall ramen spot and share your Spotify Wrapped.', interests: ['food', 'music', 'adventure'] },
@@ -143,9 +115,7 @@ export const discoverProfiles: Profile[] = [
   {
     id: 'ava', name: 'Ava', gender: 'Female', location: 'Harlem, NY', verified: true,
     photos: [
-      { url: ava1, tags: ['city', 'casual'] },
-      { url: ava2, tags: ['dancing', 'nightlife'] },
-      { url: ava3, tags: ['volunteering', 'outdoors'] },
+      { url: avaProfile, tags: ['city', 'casual'] },
     ],
     prompts: [
       { id: 'ap1', question: 'My happy place', answer: 'A live jazz session in a dim-lit bar where everyone\'s swaying and nobody\'s on their phone.', interests: ['music', 'dancing', 'nightlife'] },
@@ -160,9 +130,7 @@ export const discoverProfiles: Profile[] = [
   {
     id: 'chloe', name: 'Chloe', gender: 'Female', location: 'Chelsea, NY',
     photos: [
-      { url: chloe1, tags: ['city', 'sporty'] },
-      { url: chloe2, tags: ['fitness', 'climbing'] },
-      { url: chloe3, tags: ['outdoors', 'travel'] },
+      { url: chloeProfile, tags: ['city', 'sporty'] },
     ],
     prompts: [
       { id: 'cp1', question: 'My biggest flex', answer: 'I can boulder a V6 and still make it to brunch by 11.', interests: ['fitness', 'climbing', 'social'] },
@@ -177,10 +145,7 @@ export const discoverProfiles: Profile[] = [
   {
     id: 'mia', name: 'Mia', gender: 'Female', location: 'Greenwich Village, NY', verified: true,
     photos: [
-      { url: mia1, tags: ['books', 'city'] },
-      { url: mia2, tags: ['books', 'intellectual'] },
-      { url: mia3, tags: ['pets', 'cozy'] },
-      { url: mia4, tags: ['writing', 'café'] },
+      { url: miaProfile, tags: ['books', 'city'] },
     ],
     prompts: [
       { id: 'mp1', question: 'My love language is', answer: 'Recommending you a book and then texting you every chapter to see if you cried yet.', interests: ['books', 'deep-conversations', 'humor'] },
@@ -208,8 +173,6 @@ export const likesReceivedProfiles: Profile[] = [
     id: 'jessica', name: 'Jessica', gender: 'Female', location: 'SoHo, NY',
     photos: [
       { url: jessicaProfile, tags: ['coffee', 'social'] },
-      { url: jessica2, tags: ['coffee', 'cozy'] },
-      { url: jessica3, tags: ['pets', 'outdoors'] },
     ],
     prompts: [
       { id: 'jp1', question: 'My simple pleasures', answer: 'Coffee shop hopping and people watching.', interests: ['coffee', 'social'] },
@@ -234,8 +197,6 @@ export const matchProfiles: Profile[] = [
     id: 'olivia', name: 'Olivia', gender: 'Female', location: 'Upper East Side, NY',
     photos: [
       { url: oliviaProfile, tags: ['outdoors', 'city'] },
-      { url: olivia2, tags: ['hiking', 'outdoors'] },
-      { url: olivia3, tags: ['fitness', 'outdoors'] },
     ],
     prompts: [],
     preferences: ['hiking', 'outdoors', 'travel'],
