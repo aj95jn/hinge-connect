@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MapPin, Edit3, Plus, X, Sparkles, Zap, Info } from 'lucide-react';
+import { Switch } from '@/components/ui/switch';
 import { AnimatedAvatar } from './AnimatedAvatar';
 import { Profile, BandwidthStatus } from '@/types';
 import { BandwidthStatusPill } from './BandwidthStatus';
@@ -119,16 +120,13 @@ export function UserProfileScreen({ profile, isPaid = false, onUpdateProfile, on
                   <Info size={14} className="text-muted-foreground" />
                 </button>
               </div>
-              <button
-                onClick={() => onToggleBandwidthVisible(!profile.bandwidthVisible)}
-                className={`text-xs font-medium px-3 py-1 rounded-full transition-all ${
-                  profile.bandwidthVisible
-                    ? 'bg-primary text-primary-foreground'
-                    : 'bg-muted text-muted-foreground'
-                }`}
-              >
-                {profile.bandwidthVisible ? 'Visible' : 'Hidden'}
-              </button>
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-muted-foreground">{profile.bandwidthVisible ? 'Public' : 'Private'}</span>
+                <Switch
+                  checked={profile.bandwidthVisible}
+                  onCheckedChange={(checked) => onToggleBandwidthVisible(checked)}
+                />
+              </div>
             </div>
             <AnimatePresence>
               {showBandwidthInfo && (
