@@ -200,29 +200,63 @@ export function useAppState() {
     [isPaid, userProfile]
   );
 
-  // Interest-based glow: find shared interests between user and profile
+  // Interest-based glow: find the SINGLE best match (most shared interests)
   const getGlowResults = useCallback(
     (profile: Profile): GlowResult => {
       const userInterests = new Set(userProfile.preferences);
 
-      const promptGlows: GlowResult['promptGlows'] = {};
-      profile.prompts.forEach((prompt) => {
+      // Score all prompts and photos, pick the single best
+      let bestScore = 0;
+      let bestType: 'prompt' | 'photo' = 'prompt';
+      let bestId: string = '';
+      let bestIndex: number = 0;
+
+      const promptData: Record<string, { shared: string[]; ghostText: string }> = {};
+      profile.prompts.forEach((prompt, idx) => {
         const promptInterests = prompt.interests || [];
         const shared = promptInterests.filter((i) => userInterests.has(i));
-        promptGlows[prompt.id] = {
-          glow: shared.length > 0,
+        promptData[prompt.id] = {
+          shared,
           ghostText: shared.length > 0 ? generateGhostText(shared, prompt.answer) : '',
-          sharedInterests: shared,
+        };
+        if (shared.length > bestScore) {
+          bestScore = shared.length;
+          bestType = 'prompt';
+          bestId = prompt.id;
+          bestIndex = idx;
+        }
+      });
+
+      const photoData: Record<number, { shared: string[] }> = {};
+      profile.photos.forEach((photo, index) => {
+        const photoTags = photo.tags || [];
+        const shared = photoTags.filter((t) => userInterests.has(t));
+        photoData[index] = { shared };
+        if (shared.length > bestScore) {
+          bestScore = shared.length;
+          bestType = 'photo';
+          bestId = String(index);
+          bestIndex = index;
+        }
+      });
+
+      // Only the best one glows
+      const promptGlows: GlowResult['promptGlows'] = {};
+      profile.prompts.forEach((prompt) => {
+        const data = promptData[prompt.id];
+        promptGlows[prompt.id] = {
+          glow: bestType === 'prompt' && bestId === prompt.id,
+          ghostText: data.ghostText,
+          sharedInterests: data.shared,
         };
       });
 
       const photoGlows: GlowResult['photoGlows'] = {};
-      profile.photos.forEach((photo, index) => {
-        const photoTags = photo.tags || [];
-        const shared = photoTags.filter((t) => userInterests.has(t));
+      profile.photos.forEach((_, index) => {
+        const data = photoData[index];
         photoGlows[index] = {
-          glow: shared.length > 0,
-          sharedTags: shared,
+          glow: bestType === 'photo' && bestId === String(index),
+          sharedTags: data.shared,
         };
       });
 
