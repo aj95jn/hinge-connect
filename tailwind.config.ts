@@ -13,6 +13,10 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        serif: ['Playfair Display', 'serif'],
+        sans: ['Inter', 'sans-serif'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -46,6 +50,15 @@ export default {
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
+        },
+        hinge: {
+          purple: "hsl(var(--hinge-purple))",
+          "purple-light": "hsl(var(--hinge-purple-light))",
+          rose: "hsl(var(--hinge-rose))",
+          gold: "hsl(var(--hinge-gold))",
+          warm: "hsl(var(--hinge-warm))",
+          success: "hsl(var(--hinge-success))",
+          orange: "hsl(var(--hinge-orange))",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
