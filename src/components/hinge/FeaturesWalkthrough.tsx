@@ -155,7 +155,7 @@ const FEATURES = [
           </motion.div>
         </div>
         <p className="text-[11px] text-muted-foreground text-center max-w-[240px]">
-          Prompts glow when you share interests with a profile. 💡 Starter idea — you type your own message.
+          Prompts glow when you share interests with a profile. The suggested text is a starter idea based on your common interests and preferences.
         </p>
       </div>
     ),
