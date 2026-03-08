@@ -81,7 +81,7 @@ export const discoverProfiles: Profile[] = [
     preferences: ['music', 'nightlife', 'fashion', 'humor'],
     showVibeSync: true,
     vitals: { age: 26, gender: 'Woman', orientation: 'Straight', ethnicity: 'Mixed', datingGoals: 'Looking for a relationship', relationshipType: 'Monogamy' },
-    vibeData: { avgMessageLength: 5, avgReplyTimeMinutes: 0.3 },
+    vibeData: { avgMessageLength: 5, avgReplyTimeMinutes: 0.3, profileReadTimeSec: 18 },
   },
   {
     id: 'sophia', name: 'Sophia', gender: 'Female', location: 'West Village, NY', verified: true,
