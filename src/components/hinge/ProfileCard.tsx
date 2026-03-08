@@ -112,6 +112,11 @@ export function ProfileCard({
                       </span>
                     </div>
                   )}
+                  {!isPhotoGlowing(i) && (glowResults.photoGlows[i]?.sharedTags?.length ?? 0) > 0 && (
+                    <div className="absolute top-3 left-3 flex items-center gap-1 bg-card/60 backdrop-blur-sm rounded-full px-2.5 py-1 opacity-60">
+                      <span className="text-[10px] text-muted-foreground">Tap to move glow here</span>
+                    </div>
+                  )}
                   <button
                     onClick={() => setSelectedTarget({ type: 'photo', index: i })}
                     className="absolute bottom-3 right-3 bg-card/90 backdrop-blur-sm rounded-full p-2.5 shadow-lg hover:bg-card transition-colors"
