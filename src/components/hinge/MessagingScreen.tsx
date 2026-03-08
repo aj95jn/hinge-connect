@@ -38,7 +38,7 @@ export function MessagingScreen({
     return (
       <ChatThread
         matchName={profile?.name || 'Unknown'}
-        matchPhoto={profile?.photos[0] || ''}
+        matchPhoto={profile?.photos[0]?.url || ''}
         messages={messages}
         onSend={(text) => onSendMessage(activeChatMatchId, text)}
         onBack={onCloseChat}
