@@ -10,12 +10,14 @@ export interface Prompt {
 export interface Profile {
   id: string;
   name: string;
-  age: number;
+  gender: 'Female' | 'Male' | 'Non-binary';
+  age?: number;
   location: string;
   photos: { url: string; tags?: string[] }[];
   prompts: Prompt[];
   preferences: string[]; // user's interests/preferences
-  bandwidthStatus: 'ready' | 'focusing' | 'weekend';
+  bandwidthStatus?: BandwidthStatus;
+  showVibeSync?: boolean; // whether to show vibe sync badge
   vibeData: {
     avgMessageLength: number;
     avgReplyTimeMinutes: number;

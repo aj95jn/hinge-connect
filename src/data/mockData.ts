@@ -1,25 +1,9 @@
 import { Profile, Like, Match, ChatMessage } from '@/types';
 
-import sarah1 from '@/assets/sarah-1.jpg';
-import sarah2 from '@/assets/sarah-2.jpg';
-import sarah3 from '@/assets/sarah-3.jpg';
-import sarah4 from '@/assets/sarah-4.jpg';
-import sarah5 from '@/assets/sarah-5.jpg';
-import sarah6 from '@/assets/sarah-6.jpg';
-import maya1 from '@/assets/maya-1.jpg';
-import maya2 from '@/assets/maya-2.jpg';
-import maya3 from '@/assets/maya-3.jpg';
-import maya4 from '@/assets/maya-4.jpg';
-import emma1 from '@/assets/emma-1.jpg';
-import emma2 from '@/assets/emma-2.jpg';
-import emma3 from '@/assets/emma-3.jpg';
-import jessica1 from '@/assets/jessica-1.jpg';
-import olivia1 from '@/assets/olivia-1.jpg';
-
 export const userProfile: Profile = {
   id: 'aman',
   name: 'Aman',
-  age: 27,
+  gender: 'Male',
   location: 'New York, NY',
   photos: [],
   prompts: [
@@ -53,20 +37,16 @@ export const userProfile: Profile = {
   },
 };
 
+// Sarah: BOTH badges (vibeSync + bandwidth)
+// Maya: Only bandwidth badge, no vibeSync
+// Emma: Only vibeSync badge, no bandwidth
 export const discoverProfiles: Profile[] = [
   {
     id: 'sarah',
     name: 'Sarah',
-    age: 25,
+    gender: 'Female',
     location: 'Brooklyn, NY',
-    photos: [
-      { url: sarah1, tags: ['city', 'casual'] },
-      { url: sarah2, tags: ['travel', 'tokyo'] },
-      { url: sarah3, tags: ['social', 'outdoors'] },
-      { url: sarah4, tags: ['food', 'outdoors'] },
-      { url: sarah5, tags: ['hiking', 'outdoors'] },
-      { url: sarah6, tags: ['cooking', 'food'] },
-    ],
+    photos: [],
     prompts: [
       {
         id: 'p1',
@@ -89,6 +69,7 @@ export const discoverProfiles: Profile[] = [
     ],
     preferences: ['travel', 'philosophy', 'cooking', 'adventure'],
     bandwidthStatus: 'focusing',
+    showVibeSync: true,
     vibeData: {
       avgMessageLength: 4,
       avgReplyTimeMinutes: 0.5,
@@ -97,14 +78,9 @@ export const discoverProfiles: Profile[] = [
   {
     id: 'maya',
     name: 'Maya',
-    age: 26,
+    gender: 'Female',
     location: 'Manhattan, NY',
-    photos: [
-      { url: maya1, tags: ['books', 'intellectual'] },
-      { url: maya2, tags: ['yoga', 'wellness'] },
-      { url: maya3, tags: ['art', 'culture'] },
-      { url: maya4, tags: ['social', 'food'] },
-    ],
+    photos: [],
     prompts: [
       {
         id: 'p4',
@@ -126,7 +102,8 @@ export const discoverProfiles: Profile[] = [
       },
     ],
     preferences: ['books', 'yoga', 'art', 'wellness'],
-    bandwidthStatus: 'ready',
+    bandwidthStatus: 'weekend',
+    showVibeSync: false,
     vibeData: {
       avgMessageLength: 2,
       avgReplyTimeMinutes: 30,
@@ -135,13 +112,9 @@ export const discoverProfiles: Profile[] = [
   {
     id: 'emma',
     name: 'Emma',
-    age: 24,
+    gender: 'Female',
     location: 'Williamsburg, NY',
-    photos: [
-      { url: emma1, tags: ['nightlife', 'social'] },
-      { url: emma2, tags: ['music', 'karaoke'] },
-      { url: emma3, tags: ['fashion', 'city'] },
-    ],
+    photos: [],
     prompts: [
       {
         id: 'p7',
@@ -163,7 +136,8 @@ export const discoverProfiles: Profile[] = [
       },
     ],
     preferences: ['music', 'nightlife', 'fashion', 'humor'],
-    bandwidthStatus: 'weekend',
+    // No bandwidth badge for Emma
+    showVibeSync: true,
     vibeData: {
       avgMessageLength: 5,
       avgReplyTimeMinutes: 0.3,
@@ -189,9 +163,9 @@ export const likesReceivedProfiles: Profile[] = [
   {
     id: 'jessica',
     name: 'Jessica',
-    age: 26,
+    gender: 'Female',
     location: 'SoHo, NY',
-    photos: [{ url: jessica1, tags: ['coffee', 'social'] }],
+    photos: [],
     prompts: [
       {
         id: 'jp1',
@@ -225,9 +199,9 @@ export const matchProfiles: Profile[] = [
   {
     id: 'olivia',
     name: 'Olivia',
-    age: 25,
+    gender: 'Female',
     location: 'Upper East Side, NY',
-    photos: [{ url: olivia1, tags: ['outdoors', 'city'] }],
+    photos: [],
     prompts: [],
     preferences: ['hiking', 'outdoors', 'travel'],
     bandwidthStatus: 'ready',

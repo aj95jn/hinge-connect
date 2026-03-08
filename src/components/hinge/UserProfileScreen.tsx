@@ -54,8 +54,9 @@ export function UserProfileScreen({ profile, onUpdateProfile, onUpdateBandwidth 
         </div>
         <div>
           <h2 className="font-hinge-serif text-2xl font-semibold text-foreground">
-            {profile.name}, {profile.age}
+            {profile.name}
           </h2>
+          <span className="text-sm text-muted-foreground">{profile.gender}</span>
           <div className="flex items-center gap-1 text-sm text-muted-foreground mt-0.5">
             <MapPin size={14} />
             <span>{profile.location}</span>

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Heart, X } from 'lucide-react';
+import { Heart, X, User } from 'lucide-react';
 import { Like, Profile } from '@/types';
 
 interface LikesYouScreenProps {
@@ -39,16 +39,15 @@ export function LikesYouScreen({ likes, profiles, onMatch, onDismiss }: LikesYou
               className="bg-card rounded-2xl overflow-hidden border border-border"
             >
               <div className="flex">
-                <img
-                  src={typeof profile.photos[0] === 'string' ? profile.photos[0] : profile.photos[0]?.url}
-                  alt={profile.name}
-                  className="w-28 h-36 object-cover"
-                />
+                <div className="w-28 h-36 bg-secondary flex items-center justify-center">
+                  <User size={36} className="text-muted-foreground" />
+                </div>
                 <div className="flex-1 p-4 flex flex-col justify-between">
                   <div>
                     <h3 className="font-hinge-serif text-lg font-semibold">
-                      {profile.name}, {profile.age}
+                      {profile.name}
                     </h3>
+                    <span className="text-xs text-muted-foreground">{profile.gender}</span>
                     {like.message && (
                       <p className="text-sm text-muted-foreground mt-1 line-clamp-2">
                         "{like.message}"
