@@ -94,20 +94,11 @@ function StandoutCard({
         </div>
 
         {/* Prompt boxes inside the photo pane — lower area */}
-        <div className="absolute bottom-2 left-2 right-2 flex flex-col gap-2">
+        <div className="absolute bottom-2 left-2 right-2">
           {prompt1 && (
             <PromptOverlay
               prompt={prompt1}
               index={0}
-              profileId={profile.id}
-              rosesLeft={rosesLeft}
-              onSendRose={onSendRose}
-            />
-          )}
-          {prompt2 && (
-            <PromptOverlay
-              prompt={prompt2}
-              index={1}
               profileId={profile.id}
               rosesLeft={rosesLeft}
               onSendRose={onSendRose}
