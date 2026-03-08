@@ -173,8 +173,6 @@ export const likesReceivedProfiles: Profile[] = [
     id: 'jessica', name: 'Jessica', gender: 'Female', location: 'SoHo, NY',
     photos: [
       { url: jessicaProfile, tags: ['coffee', 'social'] },
-      { url: jessica2, tags: ['coffee', 'cozy'] },
-      { url: jessica3, tags: ['pets', 'outdoors'] },
     ],
     prompts: [
       { id: 'jp1', question: 'My simple pleasures', answer: 'Coffee shop hopping and people watching.', interests: ['coffee', 'social'] },
@@ -199,8 +197,6 @@ export const matchProfiles: Profile[] = [
     id: 'olivia', name: 'Olivia', gender: 'Female', location: 'Upper East Side, NY',
     photos: [
       { url: oliviaProfile, tags: ['outdoors', 'city'] },
-      { url: olivia2, tags: ['hiking', 'outdoors'] },
-      { url: olivia3, tags: ['fitness', 'outdoors'] },
     ],
     prompts: [],
     preferences: ['hiking', 'outdoors', 'travel'],
