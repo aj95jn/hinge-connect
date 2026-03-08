@@ -43,6 +43,7 @@ const Index = () => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [hasVisitedProfile, setHasVisitedProfile] = useState(false);
   const [showWhatsNew, setShowWhatsNew] = useState(false);
+  const [whatsNewCount, setWhatsNewCount] = useState(0);
   const whatsNewTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Track profile visits
@@ -54,20 +55,22 @@ const Index = () => {
     }
   }, [state.activeTab]);
 
-  // Show "What's New" popup randomly on discover tab until user visits profile
+  // Show "What's New" popup a few times on discover tab until user visits profile
+  const maxPopups = 3;
   const scheduleWhatsNew = useCallback(() => {
-    if (hasVisitedProfile) return;
-    const delay = 3000 + Math.random() * 8000; // 3–11s random
+    if (hasVisitedProfile || whatsNewCount >= maxPopups) return;
+    const delay = 8000 + Math.random() * 20000; // 8–28s random
     whatsNewTimerRef.current = setTimeout(() => {
-      if (!hasVisitedProfile) {
+      if (!hasVisitedProfile && whatsNewCount < maxPopups) {
         setShowWhatsNew(true);
-        // Auto-dismiss after 2.5s
-        setTimeout(() => setShowWhatsNew(false), 2500);
+        setWhatsNewCount((c) => c + 1);
+        // Auto-dismiss after 3s
+        setTimeout(() => setShowWhatsNew(false), 3000);
         // Schedule next appearance
         scheduleWhatsNew();
       }
     }, delay);
-  }, [hasVisitedProfile]);
+  }, [hasVisitedProfile, whatsNewCount]);
 
   useEffect(() => {
     if (state.activeTab === 'discover' && !hasVisitedProfile) {
@@ -403,7 +406,7 @@ const Index = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 8 }}
             transition={{ duration: 0.2 }}
-            className="fixed bottom-[72px] right-4 z-40 max-w-[200px]"
+            className="absolute bottom-[68px] right-3 z-40"
           >
             <div
               onClick={() => {
@@ -424,8 +427,8 @@ const Index = () => {
                 <X size={10} />
               </button>
             </div>
-            {/* Arrow pointing to profile tab */}
-            <div className="absolute -bottom-1 right-6 w-2 h-2 bg-foreground rotate-45" />
+            {/* Arrow pointing down to profile tab */}
+            <div className="absolute -bottom-1 right-5 w-2 h-2 bg-foreground rotate-45" />
           </motion.div>
         )}
       </AnimatePresence>
