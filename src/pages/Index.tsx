@@ -43,6 +43,7 @@ const Index = () => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [hasVisitedProfile, setHasVisitedProfile] = useState(false);
   const [showWhatsNew, setShowWhatsNew] = useState(false);
+  const [whatsNewCount, setWhatsNewCount] = useState(0);
   const whatsNewTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Track profile visits
