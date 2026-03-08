@@ -13,7 +13,7 @@ import {
 import { toast } from 'sonner';
 
 const FREE_LIKE_LIMIT = 8;
-const REFUND_TIMEOUT_MS = 60000; // 1 minute for demo
+const REFUND_TIMEOUT_MS = 10000; // 10 seconds for demo (3-4 days in production)
 
 export function useAppState() {
   const [activeTab, setActiveTab] = useState<AppTab>('discover');
@@ -30,25 +30,32 @@ export function useAppState() {
   const [activeChatMatchId, setActiveChatMatchId] = useState<string | null>(null);
   const [userProfile, setUserProfile] = useState<Profile>(initialUserProfile);
   const [glowProfilesSeen, setGlowProfilesSeen] = useState<Set<string>>(new Set());
+  const [freeRefundUsed, setFreeRefundUsed] = useState(false);
   
   const FREE_GLOW_LIMIT = 2;
 
-  // Effort Insurance: check for unreplied likes after timeout
+  // Effort Insurance: refund first unreplied like after timeout (once for free users)
   useEffect(() => {
     const interval = setInterval(() => {
+      if (!isPaid && freeRefundUsed) return; // free users only get one refund
+
       setLikesSent((prev) => {
         const now = Date.now();
+        let refundTriggered = false;
         const updated = prev.map((like) => {
           if (
+            !refundTriggered &&
             !like.refunded &&
             !like.read &&
-            like.message &&
-            now - like.timestamp > REFUND_TIMEOUT_MS
+            now - like.timestamp > REFUND_TIMEOUT_MS &&
+            (!freeRefundUsed || isPaid)
           ) {
             const profile = discoverProfiles.find((p) => p.id === like.toProfileId);
             if (profile) {
               setShowRefundPopup({ profileName: profile.name });
               setLikesRemaining((r) => r + 1);
+              if (!isPaid) setFreeRefundUsed(true);
+              refundTriggered = true;
             }
             return { ...like, refunded: true };
           }
@@ -56,9 +63,9 @@ export function useAppState() {
         });
         return updated;
       });
-    }, 10000);
+    }, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [isPaid, freeRefundUsed]);
 
   const sendLike = useCallback(
     (params: {
