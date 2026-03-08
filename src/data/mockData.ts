@@ -111,7 +111,7 @@ export const discoverProfiles: Profile[] = [
     ],
     preferences: ['food', 'music', 'tech', 'humor'],
     vitals: { age: 24, gender: 'Woman', orientation: 'Straight' },
-    bandwidthStatus: 'focusing',
+    bandwidthStatus: 'new_vibes',
     vibeData: { avgMessageLength: 3, avgReplyTimeMinutes: 2 },
   },
   {
