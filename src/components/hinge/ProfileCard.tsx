@@ -241,7 +241,7 @@ export function ProfileCard({
               onClick={onSkip}
               className="w-11 h-11 rounded-full border-2 border-border bg-background shadow-lg flex items-center justify-center hover:bg-muted transition-colors"
             >
-              <X size={22} className="text-muted-foreground" />
+              <X size={22} strokeWidth={3} className="text-foreground" />
             </button>
           </div>
         </div>
