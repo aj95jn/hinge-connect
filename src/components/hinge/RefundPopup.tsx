@@ -3,6 +3,7 @@ import { motion, useMotionValue, useTransform, animate, PanInfo } from 'framer-m
 
 interface RefundPopupProps {
   profileName: string;
+  likeTimestamp: number;
   onClose: () => void;
 }
 
