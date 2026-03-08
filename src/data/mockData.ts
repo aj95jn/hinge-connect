@@ -68,6 +68,7 @@ export const discoverProfiles: Profile[] = [
     preferences: ['travel', 'philosophy', 'cooking', 'adventure'],
     bandwidthStatus: 'focusing', showVibeSync: true,
     vibeData: { avgMessageLength: 4, avgReplyTimeMinutes: 0.5 },
+    vitals: { age: 27, gender: 'Woman', orientation: 'Straight', religion: 'Hindu', politics: 'Not Political', ethnicity: 'South Asian', datingGoals: 'Figuring out my dating goals', relationshipType: 'Monogamy' },
   },
   {
     id: 'maya', name: 'Maya', gender: 'Female', location: 'Manhattan, NY',
@@ -85,6 +86,7 @@ export const discoverProfiles: Profile[] = [
     preferences: ['books', 'yoga', 'art', 'wellness'],
     bandwidthStatus: 'weekend', showVibeSync: false,
     vibeData: { avgMessageLength: 2, avgReplyTimeMinutes: 30 },
+    vitals: { age: 25, gender: 'Woman', orientation: 'Bisexual' },
   },
   {
     id: 'emma', name: 'Emma', gender: 'Female', location: 'Williamsburg, NY', verified: true,
@@ -101,6 +103,7 @@ export const discoverProfiles: Profile[] = [
     ],
     preferences: ['music', 'nightlife', 'fashion', 'humor'],
     showVibeSync: true,
+    vitals: { age: 26, gender: 'Woman', orientation: 'Straight', ethnicity: 'Mixed', datingGoals: 'Looking for a relationship', relationshipType: 'Monogamy' },
     vibeData: { avgMessageLength: 5, avgReplyTimeMinutes: 0.3 },
   },
   {
@@ -117,6 +120,7 @@ export const discoverProfiles: Profile[] = [
     ],
     preferences: ['wine', 'art', 'music', 'romance'],
     bandwidthStatus: 'ready', showVibeSync: true,
+    vitals: { age: 29, gender: 'Woman', orientation: 'Straight', religion: 'Spiritual', politics: 'Liberal' },
     vibeData: { avgMessageLength: 5, avgReplyTimeMinutes: 0.8 },
   },
   {
@@ -132,6 +136,7 @@ export const discoverProfiles: Profile[] = [
       { id: 'lp3', question: 'I geek out on', answer: 'True crime podcasts, keyboard shortcuts, and perfectly organized spreadsheets.', interests: ['tech', 'podcasts', 'organization'] },
     ],
     preferences: ['food', 'music', 'tech', 'humor'],
+    vitals: { age: 24, gender: 'Woman', orientation: 'Straight' },
     bandwidthStatus: 'focusing',
     vibeData: { avgMessageLength: 3, avgReplyTimeMinutes: 2 },
   },
@@ -148,6 +153,7 @@ export const discoverProfiles: Profile[] = [
       { id: 'ap3', question: 'Something I\'ll never shut up about', answer: 'How underrated Harlem\'s food scene is. Fight me on it.', interests: ['food', 'community', 'culture'] },
     ],
     preferences: ['music', 'dancing', 'volunteering', 'food', 'community'],
+    vitals: { age: 28, gender: 'Woman', orientation: 'Queer', ethnicity: 'Black', religion: 'Christian', datingGoals: 'Looking for a relationship' },
     showVibeSync: true, bandwidthStatus: 'ready',
     vibeData: { avgMessageLength: 4, avgReplyTimeMinutes: 0.4 },
   },
@@ -163,6 +169,7 @@ export const discoverProfiles: Profile[] = [
       { id: 'cp2', question: 'Unpopular opinion', answer: 'Morning runs are better than evening ones. The city at 6am is a different world.', interests: ['fitness', 'outdoors', 'adventure'] },
       { id: 'cp3', question: 'We\'ll get along if', answer: 'You can keep up on a hike and aren\'t afraid to try something new.', interests: ['hiking', 'adventure', 'outdoors'] },
     ],
+    vitals: { age: 26, gender: 'Woman', orientation: 'Straight', relationshipType: 'Open to options' },
     preferences: ['fitness', 'hiking', 'climbing', 'adventure', 'outdoors'],
     bandwidthStatus: 'weekend',
     vibeData: { avgMessageLength: 3, avgReplyTimeMinutes: 5 },
@@ -183,6 +190,7 @@ export const discoverProfiles: Profile[] = [
     preferences: ['books', 'writing', 'pets', 'deep-conversations'],
     showVibeSync: true, bandwidthStatus: 'ready',
     vibeData: { avgMessageLength: 6, avgReplyTimeMinutes: 0.2 },
+    vitals: { age: 25, gender: 'Woman', orientation: 'Bisexual', politics: 'Progressive', datingGoals: 'Something serious', relationshipType: 'Monogamy' },
   },
 ];
 
