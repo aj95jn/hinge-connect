@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Heart, X, Sparkles, MoreHorizontal, Undo2 } from 'lucide-react';
+import { Heart, X, Sparkles, MoreHorizontal, Undo2, CheckCircle } from 'lucide-react';
 import { Profile, VibeSyncResult, GlowResult } from '@/types';
 import { VibeSync } from './VibeSync';
 import { BandwidthStatusPill } from './BandwidthStatus';
