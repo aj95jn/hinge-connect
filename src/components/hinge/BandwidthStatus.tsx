@@ -3,9 +3,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { BandwidthStatus as BandwidthType } from '@/types';
 
 const statusConfig: Record<BandwidthType, { label: string; color: string; description: string }> = {
-  ready: { label: 'Ready to Connect', color: 'bg-hinge-success/15 text-hinge-success', description: 'Open to chatting' },
-  focusing: { label: 'Focusing on Matches', color: 'bg-hinge-orange/15 text-hinge-orange', description: 'Prioritizing existing' },
-  weekend: { label: 'Weekend Spark ✨', color: 'bg-primary/10 text-primary', description: 'Active on weekends' },
+  ready: { label: 'Ready to Connect', color: 'bg-foreground/10 text-foreground', description: 'Open to chatting' },
+  focusing: { label: 'Focusing on Matches', color: 'bg-hinge-rose/15 text-hinge-rose', description: 'Prioritizing existing' },
+  weekend: { label: 'Weekend Spark ✨', color: 'bg-hinge-rose/10 text-hinge-rose', description: 'Active on weekends' },
 };
 
 interface BandwidthStatusProps {
