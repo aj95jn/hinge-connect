@@ -393,6 +393,7 @@ const Index = () => {
             onToggleBandwidthVisible={(visible) => {
               state.updateUserProfile({ bandwidthVisible: visible });
             }}
+            onViewWhatsNew={markWhatsNewSeen}
           />
         )}
       </div>
