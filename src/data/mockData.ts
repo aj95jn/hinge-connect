@@ -35,6 +35,7 @@ export const userProfile: Profile = {
 export const discoverProfiles: Profile[] = [
   {
     id: 'sarah', name: 'Sarah', gender: 'Female', location: 'Brooklyn, NY', verified: true,
+    activityTag: 'active_now' as const,
     photos: [
       { url: sarahProfile, tags: ['city', 'travel'] },
       { url: sarah2, tags: ['food', 'cooking'] },
@@ -52,7 +53,7 @@ export const discoverProfiles: Profile[] = [
     vitals: { age: 27, gender: 'Woman', orientation: 'Straight', religion: 'Hindu', politics: 'Not Political', ethnicity: 'South Asian', datingGoals: 'Figuring out my dating goals', relationshipType: 'Monogamy' },
   },
   {
-    id: 'maya', name: 'Maya', gender: 'Female', location: 'Manhattan, NY',
+    id: 'maya', name: 'Maya', gender: 'Female', location: 'Manhattan, NY', activityTag: 'new_user' as const,
     photos: [
       { url: mayaProfile, tags: ['books', 'intellectual'] },
       { url: maya2, tags: ['books', 'deep-conversations'] },
@@ -84,7 +85,7 @@ export const discoverProfiles: Profile[] = [
     vibeData: { avgMessageLength: 5, avgReplyTimeMinutes: 0.3, profileReadTimeSec: 18 },
   },
   {
-    id: 'sophia', name: 'Sophia', gender: 'Female', location: 'West Village, NY', verified: true,
+    id: 'sophia', name: 'Sophia', gender: 'Female', location: 'West Village, NY', verified: true, activityTag: 'active_today' as const,
     photos: [
       { url: sophiaProfile, tags: ['art', 'music'] },
     ],
@@ -115,7 +116,7 @@ export const discoverProfiles: Profile[] = [
     vibeData: { avgMessageLength: 3, avgReplyTimeMinutes: 2 },
   },
   {
-    id: 'ava', name: 'Ava', gender: 'Female', location: 'Harlem, NY', verified: true,
+    id: 'ava', name: 'Ava', gender: 'Female', location: 'Harlem, NY', verified: true, activityTag: 'active_now' as const,
     photos: [
       { url: avaProfile, tags: ['community', 'outdoors'] },
     ],
@@ -131,7 +132,7 @@ export const discoverProfiles: Profile[] = [
     coreValues: ['food', 'community', 'deep-conversations'],
   },
   {
-    id: 'chloe', name: 'Chloe', gender: 'Female', location: 'Chelsea, NY',
+    id: 'chloe', name: 'Chloe', gender: 'Female', location: 'Chelsea, NY', activityTag: 'active_today' as const,
     photos: [
       { url: chloeProfile, tags: ['hiking', 'outdoors'] },
     ],

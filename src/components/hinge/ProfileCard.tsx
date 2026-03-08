@@ -75,7 +75,10 @@ export function ProfileCard({
           <div className="flex items-center justify-between gap-2">
             {/* Left: name + gender */}
             <div className="min-w-0 flex-shrink-0">
-              <h1 className="font-hinge-serif text-2xl font-semibold text-foreground">{profile.name}</h1>
+              <div className="flex items-center gap-2">
+                <h1 className="font-hinge-serif text-2xl font-semibold text-foreground">{profile.name}</h1>
+                {profile.activityTag && <ActivityTag tag={profile.activityTag} />}
+              </div>
               <div className="flex items-center gap-1.5">
                 <span className="text-sm text-muted-foreground">
                   {profile.gender?.toLowerCase() === 'female' ? 'she/her' : profile.gender?.toLowerCase() === 'male' ? 'he/him' : profile.gender}
@@ -308,5 +311,20 @@ function PromptCard({
         </button>
       </div>
     </div>
+  );
+}
+
+function ActivityTag({ tag }: { tag: 'active_now' | 'new_user' | 'active_today' }) {
+  const config = {
+    active_now: { label: 'Active Now', showDot: true },
+    new_user: { label: 'New User', showDot: false },
+    active_today: { label: 'Active Today', showDot: false },
+  };
+  const { label, showDot } = config[tag];
+  return (
+    <span className="inline-flex items-center gap-1 bg-purple-900 text-white rounded-full px-2 py-0.5 text-[10px] font-bold">
+      {showDot && <span className="w-1.5 h-1.5 rounded-full bg-green-400" />}
+      {label}
+    </span>
   );
 }
