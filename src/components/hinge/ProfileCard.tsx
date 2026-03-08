@@ -191,24 +191,26 @@ function PromptCard({
 }) {
   return (
     <motion.div
-      className={`mt-3 ${isGlowing ? 'rose-glow-shimmer' : ''}`}
+      className="mt-3"
       onClick={onDragGlow}
       whileTap={{ scale: 0.98 }}
     >
-      <div className="bg-card rounded-2xl p-5 relative">
-        <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2">
-          {prompt.question}
-        </p>
-        <p className="text-foreground font-hinge-serif text-lg leading-relaxed">{prompt.answer}</p>
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            onLike();
-          }}
-          className="absolute bottom-3 right-3 bg-muted rounded-full p-2 hover:bg-accent transition-colors"
-        >
-          <Heart size={18} className="text-primary" />
-        </button>
+      <div className={isGlowing ? 'rose-glow-shimmer' : ''}>
+        <div className="bg-card rounded-2xl p-5 relative">
+          <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2">
+            {prompt.question}
+          </p>
+          <p className="text-foreground font-hinge-serif text-lg leading-relaxed">{prompt.answer}</p>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onLike();
+            }}
+            className="absolute bottom-3 right-3 bg-muted rounded-full p-2 hover:bg-accent transition-colors"
+          >
+            <Heart size={18} className="text-primary" />
+          </button>
+        </div>
       </div>
     </motion.div>
   );
