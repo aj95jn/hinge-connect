@@ -1,39 +1,20 @@
 import { Profile, Like, Match, ChatMessage } from '@/types';
 
-import sarahProfile from '@/assets/sarah-profile.jpg';
-import sarah2 from '@/assets/sarah-2-new.jpg';
-import sarah3 from '@/assets/sarah-3-new.jpg';
-import sarah4 from '@/assets/sarah-4-new.jpg';
-import mayaProfile from '@/assets/maya-profile.jpg';
-import maya2 from '@/assets/maya-2-new.jpg';
-import maya3 from '@/assets/maya-3-new.jpg';
-import maya4 from '@/assets/maya-4-new.jpg';
-import emmaProfile from '@/assets/emma-profile.jpg';
-import emma2 from '@/assets/emma-2-new.jpg';
-import emma3 from '@/assets/emma-3-new.jpg';
-import emma4 from '@/assets/emma-4-new.jpg';
-import jessicaProfile from '@/assets/jessica-profile.jpg';
-import jessica2 from '@/assets/jessica-2-new.jpg';
-import jessica3 from '@/assets/jessica-3-new.jpg';
-import oliviaProfile from '@/assets/olivia-profile.jpg';
-import olivia2 from '@/assets/olivia-2-new.jpg';
-import olivia3 from '@/assets/olivia-3-new.jpg';
-import sophia1 from '@/assets/sophia-1.jpg';
-import sophia2 from '@/assets/sophia-2.jpg';
-import sophia3 from '@/assets/sophia-3.jpg';
-import lily1 from '@/assets/lily-1.jpg';
-import lily2 from '@/assets/lily-2.jpg';
-import lily3 from '@/assets/lily-3.jpg';
-import ava1 from '@/assets/ava-1.jpg';
-import ava2 from '@/assets/ava-2.jpg';
-import ava3 from '@/assets/ava-3.jpg';
-import chloe1 from '@/assets/chloe-1.jpg';
-import chloe2 from '@/assets/chloe-2.jpg';
-import chloe3 from '@/assets/chloe-3.jpg';
-import mia1 from '@/assets/mia-1.jpg';
-import mia2 from '@/assets/mia-2.jpg';
-import mia3 from '@/assets/mia-3.jpg';
-import mia4 from '@/assets/mia-4.jpg';
+// Simple profile images
+import sarahProfile from '@/assets/sarah-profile-new.jpg';
+import sarah2 from '@/assets/sarah-2-simple.jpg';
+import sarah3 from '@/assets/sarah-3-simple.jpg';
+import mayaProfile from '@/assets/maya-profile-new.jpg';
+import maya2 from '@/assets/maya-2-simple.jpg';
+import emmaProfile from '@/assets/emma-profile-new.jpg';
+import emma2 from '@/assets/emma-2-simple.jpg';
+import jessicaProfile from '@/assets/jessica-profile-new.jpg';
+import oliviaProfile from '@/assets/olivia-profile-new.jpg';
+import sophiaProfile from '@/assets/sophia-profile-new.jpg';
+import lilyProfile from '@/assets/lily-profile-new.jpg';
+import avaProfile from '@/assets/ava-profile-new.jpg';
+import chloeProfile from '@/assets/chloe-profile-new.jpg';
+import miaProfile from '@/assets/mia-profile-new.jpg';
 
 export const userProfile: Profile = {
   id: 'aman',
