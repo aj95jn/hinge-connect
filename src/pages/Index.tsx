@@ -338,6 +338,7 @@ const Index = () => {
         {state.activeTab === 'profile' && (
           <UserProfileScreen
             profile={state.userProfile}
+            isPaid={state.isPaid}
             onUpdateProfile={state.updateUserProfile}
             onUpdateBandwidth={(status) => {
               state.updateUserProfile({ bandwidthStatus: status });
