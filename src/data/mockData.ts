@@ -215,10 +215,20 @@ export const initialChatMessages: ChatMessage[] = [
   { id: 'msg2', matchId: 'match1', from: 'match', text: 'That hiking trail sounds incredible! I\'ve been meaning to try it. Want to go sometime?', timestamp: Date.now() - 7200000 },
 ];
 
+// Simple string hash for deterministic selection
+function stableHash(str: string): number {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = ((hash << 5) - hash) + str.charCodeAt(i);
+    hash |= 0;
+  }
+  return Math.abs(hash);
+}
+
 export function generateGhostText(sharedInterests: string[], promptAnswer: string): string {
   const lower = promptAnswer.toLowerCase();
+  const hash = stableHash(lower);
 
-  // Context-aware: match keywords in the prompt answer to generate relevant ghost text
   const contextPatterns: { keywords: string[]; ghosts: string[] }[] = [
     { keywords: ['silence', 'quiet', 'comfortable'], ghosts: ['What\'s your idea of a perfect quiet evening?', 'I love that — what else feels effortless to you?'] },
     { keywords: ['travel', 'trip', 'lost', 'tokyo', 'abroad', 'explore'], ghosts: ['That sounds amazing — what\'s your next destination?', 'I have a similar story! Where else have you wandered?'] },
@@ -249,13 +259,12 @@ export function generateGhostText(sharedInterests: string[], promptAnswer: strin
 
   for (const pattern of contextPatterns) {
     if (pattern.keywords.some((kw) => lower.includes(kw))) {
-      return pattern.ghosts[Math.floor(Math.random() * pattern.ghosts.length)];
+      return pattern.ghosts[hash % pattern.ghosts.length];
     }
   }
 
-  // Fallback: use shared interests loosely
   if (sharedInterests.length > 0) {
-    return `I\'m into ${sharedInterests[0]} too — tell me more!`;
+    return `I'm into ${sharedInterests[0]} too — tell me more!`;
   }
 
   return 'You have something in common — say hi!';
