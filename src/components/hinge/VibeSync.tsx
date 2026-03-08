@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { VibeSyncResult } from '@/types';
 
@@ -19,12 +19,20 @@ export function VibeSync({ result }: VibeSyncProps) {
 
   const description = labelDescriptions[result.label] || result.label;
 
+  const dismiss = () => setShowTooltip(false);
+
+  useEffect(() => {
+    if (!showTooltip) return;
+    const timer = setTimeout(dismiss, 2000);
+    return () => clearTimeout(timer);
+  }, [showTooltip]);
+
   return (
-    <div className="relative">
+    <div className="relative" onClick={dismiss}>
       <motion.button
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
-        onClick={() => setShowTooltip(!showTooltip)}
+        onClick={(e) => { e.stopPropagation(); setShowTooltip((v) => !v); }}
         className="inline-flex items-center gap-1 bg-purple-900 rounded-full px-2 py-0.5"
       >
         <div className="flex items-center -space-x-1">
@@ -43,7 +51,8 @@ export function VibeSync({ result }: VibeSyncProps) {
             initial={{ opacity: 0, y: -4, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -4, scale: 0.95 }}
-            className="absolute top-full left-0 mt-1.5 bg-foreground text-background text-[11px] font-medium px-3 py-1.5 rounded-lg whitespace-nowrap z-50 shadow-lg"
+            onClick={dismiss}
+            className="absolute top-full left-0 mt-1.5 bg-foreground text-background text-[11px] font-medium px-3 py-1.5 rounded-lg whitespace-nowrap z-50 shadow-lg cursor-pointer"
           >
             {description}
             <div className="absolute -top-1 left-4 w-2 h-2 bg-foreground rotate-45" />
