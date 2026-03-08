@@ -61,6 +61,11 @@ export function ProfileCard({
     return glowResults.promptGlows[promptId]?.glow ?? false;
   };
 
+  const isPhotoGlowing = (index: number) => {
+    if (glowOverride !== null) return glowOverride === `photo:${index}`;
+    return glowResults.photoGlows[index]?.glow ?? false;
+  };
+
   const getGhostText = () => {
     if (!selectedTarget || selectedTarget.type !== 'prompt') return undefined;
     const prompt = profile.prompts[selectedTarget.index];
@@ -105,25 +110,33 @@ export function ProfileCard({
         transition={{ duration: 0.4, ease: 'easeOut' }}
         className="pb-24 relative"
       >
-        {/* Profile Photo */}
+        {/* Profile Photo - Hero */}
         {profile.photos.length > 0 && (
           <div className="px-4 pt-4 pb-2">
-            <div className="relative rounded-2xl overflow-hidden">
-              <img
-                src={profile.photos[0].url}
-                alt={profile.name}
-                className="w-full aspect-[3/4] object-cover"
-                loading="lazy"
-              />
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
-                <h1 className="font-hinge-serif text-2xl font-semibold text-white">
-                  {profile.name}
-                </h1>
-                <div className="flex items-center gap-2 mt-0.5">
-                  <span className="text-xs text-white/80">{profile.gender}</span>
-                  <span className="text-xs text-white/60">·</span>
-                  <span className="text-xs text-white/80">{profile.location}</span>
+            <div
+              ref={(el) => registerDropZone(`photo:0`, el)}
+              className={`${isPhotoGlowing(0) ? 'rose-glow-shimmer' : ''} ${isDragging ? 'ring-2 ring-dashed ring-hinge-gold/30 rounded-2xl' : ''}`}
+            >
+              <div className="relative rounded-2xl overflow-hidden">
+                <img src={profile.photos[0].url} alt={profile.name} className="w-full aspect-[3/4] object-cover" loading="lazy" />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
+                  <h1 className="font-hinge-serif text-2xl font-semibold text-white">{profile.name}</h1>
+                  <div className="flex items-center gap-2 mt-0.5">
+                    <span className="text-xs text-white/80">{profile.gender}</span>
+                    <span className="text-xs text-white/60">·</span>
+                    <span className="text-xs text-white/80">{profile.location}</span>
+                  </div>
                 </div>
+                {isPhotoGlowing(0) && (
+                  <div className="absolute top-3 left-3 flex items-center gap-1 bg-card/90 backdrop-blur-sm rounded-full px-2.5 py-1">
+                    <Sparkles size={12} className="text-hinge-gold" />
+                    <span className="text-[10px] font-medium text-foreground">{glowResults.photoGlows[0]?.sharedTags.join(', ')}</span>
+                  </div>
+                )}
+                <button onClick={(e) => { e.stopPropagation(); setSelectedTarget({ type: 'photo', index: 0 }); }}
+                  className="absolute bottom-3 right-3 bg-card/90 backdrop-blur-sm rounded-full p-2.5 shadow-lg hover:bg-card transition-colors">
+                  <Heart size={20} className="text-primary" />
+                </button>
               </div>
             </div>
           </div>
@@ -132,29 +145,66 @@ export function ProfileCard({
         {/* Badges row */}
         <div className="px-4 pb-2 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            {profile.bandwidthStatus && (
-              <BandwidthStatusPill status={profile.bandwidthStatus} />
-            )}
-            {profile.showVibeSync && vibeSync.hasSync && (
-              <VibeSync result={vibeSync} />
-            )}
+            {profile.bandwidthStatus && <BandwidthStatusPill status={profile.bandwidthStatus} />}
+            {profile.showVibeSync && vibeSync.hasSync && <VibeSync result={vibeSync} />}
           </div>
           <div className="text-xs text-muted-foreground">{likesRemaining} likes left</div>
         </div>
 
-        {/* Prompts */}
+        {/* Interleaved photos and prompts */}
         <div className="space-y-3 px-4">
-          {profile.prompts.map((prompt, i) => (
-            <PromptCard
-              key={prompt.id}
-              prompt={prompt}
-              isGlowing={isPromptGlowing(prompt.id)}
-              sharedInterests={glowResults.promptGlows[prompt.id]?.sharedInterests || []}
-              isDragActive={isDragging}
-              onLike={() => setSelectedTarget({ type: 'prompt', index: i })}
-              registerRef={(el) => registerDropZone(`prompt:${prompt.id}`, el)}
-            />
-          ))}
+          {(() => {
+            const items: React.ReactNode[] = [];
+            const remainingPhotos = profile.photos.slice(1);
+            const prompts = profile.prompts;
+            let photoIdx = 0;
+            let promptIdx = 0;
+
+            // Alternate: prompt, photo, prompt, photo...
+            while (promptIdx < prompts.length || photoIdx < remainingPhotos.length) {
+              if (promptIdx < prompts.length) {
+                const prompt = prompts[promptIdx];
+                const pi = promptIdx;
+                items.push(
+                  <PromptCard key={prompt.id} prompt={prompt}
+                    isGlowing={isPromptGlowing(prompt.id)}
+                    sharedInterests={glowResults.promptGlows[prompt.id]?.sharedInterests || []}
+                    isDragActive={isDragging}
+                    onLike={() => setSelectedTarget({ type: 'prompt', index: pi })}
+                    registerRef={(el) => registerDropZone(`prompt:${prompt.id}`, el)}
+                  />
+                );
+                promptIdx++;
+              }
+              if (photoIdx < remainingPhotos.length) {
+                const actualPhotoIndex = photoIdx + 1;
+                const pi = actualPhotoIndex;
+                items.push(
+                  <div key={`photo-${pi}`}
+                    ref={(el) => registerDropZone(`photo:${pi}`, el)}
+                    className={`mt-3 ${isPhotoGlowing(pi) ? 'rose-glow-shimmer' : ''} ${isDragging && !isPhotoGlowing(pi) ? 'ring-2 ring-dashed ring-hinge-gold/30 rounded-2xl' : ''}`}
+                  >
+                    <div className="relative rounded-2xl overflow-hidden">
+                      <img src={remainingPhotos[photoIdx].url} alt={`${profile.name} photo ${pi + 1}`}
+                        className="w-full aspect-[3/4] object-cover" loading="lazy" />
+                      {isPhotoGlowing(pi) && (
+                        <div className="absolute top-3 left-3 flex items-center gap-1 bg-card/90 backdrop-blur-sm rounded-full px-2.5 py-1">
+                          <Sparkles size={12} className="text-hinge-gold" />
+                          <span className="text-[10px] font-medium text-foreground">{glowResults.photoGlows[pi]?.sharedTags.join(', ')}</span>
+                        </div>
+                      )}
+                      <button onClick={(e) => { e.stopPropagation(); setSelectedTarget({ type: 'photo', index: pi }); }}
+                        className="absolute bottom-3 right-3 bg-card/90 backdrop-blur-sm rounded-full p-2.5 shadow-lg hover:bg-card transition-colors">
+                        <Heart size={20} className="text-primary" />
+                      </button>
+                    </div>
+                  </div>
+                );
+                photoIdx++;
+              }
+            }
+            return items;
+          })()}
         </div>
 
         {/* Skip button */}

@@ -1,10 +1,39 @@
 import { Profile, Like, Match, ChatMessage } from '@/types';
 
 import sarahProfile from '@/assets/sarah-profile.jpg';
+import sarah2 from '@/assets/sarah-2-new.jpg';
+import sarah3 from '@/assets/sarah-3-new.jpg';
+import sarah4 from '@/assets/sarah-4-new.jpg';
 import mayaProfile from '@/assets/maya-profile.jpg';
+import maya2 from '@/assets/maya-2-new.jpg';
+import maya3 from '@/assets/maya-3-new.jpg';
+import maya4 from '@/assets/maya-4-new.jpg';
 import emmaProfile from '@/assets/emma-profile.jpg';
+import emma2 from '@/assets/emma-2-new.jpg';
+import emma3 from '@/assets/emma-3-new.jpg';
+import emma4 from '@/assets/emma-4-new.jpg';
 import jessicaProfile from '@/assets/jessica-profile.jpg';
+import jessica2 from '@/assets/jessica-2-new.jpg';
+import jessica3 from '@/assets/jessica-3-new.jpg';
 import oliviaProfile from '@/assets/olivia-profile.jpg';
+import olivia2 from '@/assets/olivia-2-new.jpg';
+import olivia3 from '@/assets/olivia-3-new.jpg';
+import sophia1 from '@/assets/sophia-1.jpg';
+import sophia2 from '@/assets/sophia-2.jpg';
+import sophia3 from '@/assets/sophia-3.jpg';
+import lily1 from '@/assets/lily-1.jpg';
+import lily2 from '@/assets/lily-2.jpg';
+import lily3 from '@/assets/lily-3.jpg';
+import ava1 from '@/assets/ava-1.jpg';
+import ava2 from '@/assets/ava-2.jpg';
+import ava3 from '@/assets/ava-3.jpg';
+import chloe1 from '@/assets/chloe-1.jpg';
+import chloe2 from '@/assets/chloe-2.jpg';
+import chloe3 from '@/assets/chloe-3.jpg';
+import mia1 from '@/assets/mia-1.jpg';
+import mia2 from '@/assets/mia-2.jpg';
+import mia3 from '@/assets/mia-3.jpg';
+import mia4 from '@/assets/mia-4.jpg';
 
 export const userProfile: Profile = {
   id: 'aman',
@@ -13,228 +42,203 @@ export const userProfile: Profile = {
   location: 'New York, NY',
   photos: [],
   prompts: [
-    {
-      id: 'up1',
-      question: 'A life goal of mine',
-      answer: 'To build something that outlasts me — and travel the world while doing it.',
-      interests: ['travel', 'entrepreneurship'],
-    },
-    {
-      id: 'up2',
-      question: 'I get along best with people who',
-      answer: 'Love deep conversations about philosophy, life, and what makes people tick.',
-      interests: ['philosophy', 'deep-conversations'],
-    },
-    {
-      id: 'up3',
-      question: 'My simple pleasures',
-      answer: 'Cooking a new recipe from scratch, long hikes, and vinyl records on a Sunday.',
-      interests: ['cooking', 'hiking', 'music'],
-    },
+    { id: 'up1', question: 'A life goal of mine', answer: 'To build something that outlasts me — and travel the world while doing it.', interests: ['travel', 'entrepreneurship'] },
+    { id: 'up2', question: 'I get along best with people who', answer: 'Love deep conversations about philosophy, life, and what makes people tick.', interests: ['philosophy', 'deep-conversations'] },
+    { id: 'up3', question: 'My simple pleasures', answer: 'Cooking a new recipe from scratch, long hikes, and vinyl records on a Sunday.', interests: ['cooking', 'hiking', 'music'] },
   ],
-  preferences: [
-    'travel', 'philosophy', 'cooking', 'hiking', 'music',
-    'deep-conversations', 'entrepreneurship', 'food', 'outdoors',
-  ],
+  preferences: ['travel', 'philosophy', 'cooking', 'hiking', 'music', 'deep-conversations', 'entrepreneurship', 'food', 'outdoors'],
   bandwidthStatus: 'ready',
-  vibeData: {
-    avgMessageLength: 4,
-    avgReplyTimeMinutes: 0.5,
-  },
+  vibeData: { avgMessageLength: 4, avgReplyTimeMinutes: 0.5 },
 };
 
 export const discoverProfiles: Profile[] = [
   {
-    id: 'sarah',
-    name: 'Sarah',
-    gender: 'Female',
-    location: 'Brooklyn, NY',
+    id: 'sarah', name: 'Sarah', gender: 'Female', location: 'Brooklyn, NY',
     photos: [
       { url: sarahProfile, tags: ['city', 'casual'] },
+      { url: sarah2, tags: ['food', 'outdoors'] },
+      { url: sarah3, tags: ['hiking', 'outdoors'] },
+      { url: sarah4, tags: ['cooking', 'food'] },
     ],
     prompts: [
-      {
-        id: 'p1',
-        question: 'A life goal of mine',
-        answer: 'To visit every continent before 30. Just got back from Tokyo and it completely changed my perspective on life.',
-        interests: ['travel', 'adventure', 'tokyo'],
-      },
-      {
-        id: 'p2',
-        question: 'I get along best with people who',
-        answer: 'Can debate philosophy over cheap wine and still laugh about it the next morning.',
-        interests: ['philosophy', 'deep-conversations', 'humor'],
-      },
-      {
-        id: 'p3',
-        question: 'My simple pleasures',
-        answer: 'Sunday morning farmers markets, a good podcast on a rainy day, and homemade pasta.',
-        interests: ['cooking', 'food', 'relaxation'],
-      },
+      { id: 'p1', question: 'A life goal of mine', answer: 'To visit every continent before 30. Just got back from Tokyo and it completely changed my perspective on life.', interests: ['travel', 'adventure', 'tokyo'] },
+      { id: 'p2', question: 'I get along best with people who', answer: 'Can debate philosophy over cheap wine and still laugh about it the next morning.', interests: ['philosophy', 'deep-conversations', 'humor'] },
+      { id: 'p3', question: 'My simple pleasures', answer: 'Sunday morning farmers markets, a good podcast on a rainy day, and homemade pasta.', interests: ['cooking', 'food', 'relaxation'] },
     ],
     preferences: ['travel', 'philosophy', 'cooking', 'adventure'],
-    bandwidthStatus: 'focusing',
-    showVibeSync: true,
-    vibeData: {
-      avgMessageLength: 4,
-      avgReplyTimeMinutes: 0.5,
-    },
+    bandwidthStatus: 'focusing', showVibeSync: true,
+    vibeData: { avgMessageLength: 4, avgReplyTimeMinutes: 0.5 },
   },
   {
-    id: 'maya',
-    name: 'Maya',
-    gender: 'Female',
-    location: 'Manhattan, NY',
+    id: 'maya', name: 'Maya', gender: 'Female', location: 'Manhattan, NY',
     photos: [
       { url: mayaProfile, tags: ['books', 'intellectual'] },
+      { url: maya2, tags: ['books', 'café'] },
+      { url: maya3, tags: ['yoga', 'wellness'] },
+      { url: maya4, tags: ['art', 'culture'] },
     ],
     prompts: [
-      {
-        id: 'p4',
-        question: 'The way to win me over is',
-        answer: 'Show up with a book recommendation and tell me why it matters to you.',
-        interests: ['books', 'intellectual', 'deep-conversations'],
-      },
-      {
-        id: 'p5',
-        question: 'My most irrational fear',
-        answer: 'That my houseplants are secretly judging my life choices.',
-        interests: ['humor', 'plants'],
-      },
-      {
-        id: 'p6',
-        question: 'Typical Sunday',
-        answer: 'Yoga at sunrise, brunch with friends, then getting lost in a museum.',
-        interests: ['yoga', 'art', 'social'],
-      },
+      { id: 'p4', question: 'The way to win me over is', answer: 'Show up with a book recommendation and tell me why it matters to you.', interests: ['books', 'intellectual', 'deep-conversations'] },
+      { id: 'p5', question: 'My most irrational fear', answer: 'That my houseplants are secretly judging my life choices.', interests: ['humor', 'plants'] },
+      { id: 'p6', question: 'Typical Sunday', answer: 'Yoga at sunrise, brunch with friends, then getting lost in a museum.', interests: ['yoga', 'art', 'social'] },
     ],
     preferences: ['books', 'yoga', 'art', 'wellness'],
-    bandwidthStatus: 'weekend',
-    showVibeSync: false,
-    vibeData: {
-      avgMessageLength: 2,
-      avgReplyTimeMinutes: 30,
-    },
+    bandwidthStatus: 'weekend', showVibeSync: false,
+    vibeData: { avgMessageLength: 2, avgReplyTimeMinutes: 30 },
   },
   {
-    id: 'emma',
-    name: 'Emma',
-    gender: 'Female',
-    location: 'Williamsburg, NY',
+    id: 'emma', name: 'Emma', gender: 'Female', location: 'Williamsburg, NY',
     photos: [
       { url: emmaProfile, tags: ['nightlife', 'social'] },
+      { url: emma2, tags: ['music', 'karaoke'] },
+      { url: emma3, tags: ['fashion', 'city'] },
+      { url: emma4, tags: ['social', 'nightlife'] },
     ],
     prompts: [
-      {
-        id: 'p7',
-        question: 'I\'m convinced that',
-        answer: 'The best conversations happen after midnight with strangers who become friends.',
-        interests: ['deep-conversations', 'social', 'nightlife'],
-      },
-      {
-        id: 'p8',
-        question: 'Green flags I look for',
-        answer: 'You remember the little things, you\'re kind to waiters, and you can laugh at yourself.',
-        interests: ['kindness', 'humor', 'empathy'],
-      },
-      {
-        id: 'p9',
-        question: 'My go-to karaoke song',
-        answer: 'Don\'t Stop Believin\' — and yes, I do the air guitar.',
-        interests: ['music', 'fun', 'karaoke'],
-      },
+      { id: 'p7', question: 'I\'m convinced that', answer: 'The best conversations happen after midnight with strangers who become friends.', interests: ['deep-conversations', 'social', 'nightlife'] },
+      { id: 'p8', question: 'Green flags I look for', answer: 'You remember the little things, you\'re kind to waiters, and you can laugh at yourself.', interests: ['kindness', 'humor', 'empathy'] },
+      { id: 'p9', question: 'My go-to karaoke song', answer: 'Don\'t Stop Believin\' — and yes, I do the air guitar.', interests: ['music', 'fun', 'karaoke'] },
     ],
     preferences: ['music', 'nightlife', 'fashion', 'humor'],
     showVibeSync: true,
-    vibeData: {
-      avgMessageLength: 5,
-      avgReplyTimeMinutes: 0.3,
-    },
+    vibeData: { avgMessageLength: 5, avgReplyTimeMinutes: 0.3 },
+  },
+  {
+    id: 'sophia', name: 'Sophia', gender: 'Female', location: 'West Village, NY',
+    photos: [
+      { url: sophia1, tags: ['city', 'elegant'] },
+      { url: sophia2, tags: ['wine', 'nightlife'] },
+      { url: sophia3, tags: ['art', 'creative'] },
+    ],
+    prompts: [
+      { id: 'sp1', question: 'A perfect date looks like', answer: 'Wine tasting followed by a walk through the village, ending at a hidden jazz bar.', interests: ['wine', 'music', 'adventure'] },
+      { id: 'sp2', question: 'My creative outlet', answer: 'Painting. There\'s something about putting brush to canvas that quiets everything else.', interests: ['art', 'creative', 'mindfulness'] },
+      { id: 'sp3', question: 'I\'m looking for someone who', answer: 'Appreciates the little things — a good sunset, a handwritten note, an unexpected detour.', interests: ['romance', 'adventure', 'mindfulness'] },
+    ],
+    preferences: ['wine', 'art', 'music', 'romance'],
+    bandwidthStatus: 'ready', showVibeSync: true,
+    vibeData: { avgMessageLength: 5, avgReplyTimeMinutes: 0.8 },
+  },
+  {
+    id: 'lily', name: 'Lily', gender: 'Female', location: 'Midtown, NY',
+    photos: [
+      { url: lily1, tags: ['city', 'casual'] },
+      { url: lily2, tags: ['food', 'social'] },
+      { url: lily3, tags: ['music', 'creative'] },
+    ],
+    prompts: [
+      { id: 'lp1', question: 'The quickest way to my heart', answer: 'Take me to a hole-in-the-wall ramen spot and share your Spotify Wrapped.', interests: ['food', 'music', 'adventure'] },
+      { id: 'lp2', question: 'My hidden talent', answer: 'I can play three instruments but can\'t carry a tune to save my life.', interests: ['music', 'humor'] },
+      { id: 'lp3', question: 'I geek out on', answer: 'True crime podcasts, keyboard shortcuts, and perfectly organized spreadsheets.', interests: ['tech', 'podcasts', 'organization'] },
+    ],
+    preferences: ['food', 'music', 'tech', 'humor'],
+    bandwidthStatus: 'focusing',
+    vibeData: { avgMessageLength: 3, avgReplyTimeMinutes: 2 },
+  },
+  {
+    id: 'ava', name: 'Ava', gender: 'Female', location: 'Harlem, NY',
+    photos: [
+      { url: ava1, tags: ['city', 'casual'] },
+      { url: ava2, tags: ['dancing', 'nightlife'] },
+      { url: ava3, tags: ['volunteering', 'outdoors'] },
+    ],
+    prompts: [
+      { id: 'ap1', question: 'My happy place', answer: 'A live jazz session in a dim-lit bar where everyone\'s swaying and nobody\'s on their phone.', interests: ['music', 'dancing', 'nightlife'] },
+      { id: 'ap2', question: 'On weekends you\'ll find me', answer: 'At the community garden or teaching dance to kids at the rec center.', interests: ['volunteering', 'dancing', 'outdoors'] },
+      { id: 'ap3', question: 'Something I\'ll never shut up about', answer: 'How underrated Harlem\'s food scene is. Fight me on it.', interests: ['food', 'community', 'culture'] },
+    ],
+    preferences: ['music', 'dancing', 'volunteering', 'food', 'community'],
+    showVibeSync: true, bandwidthStatus: 'ready',
+    vibeData: { avgMessageLength: 4, avgReplyTimeMinutes: 0.4 },
+  },
+  {
+    id: 'chloe', name: 'Chloe', gender: 'Female', location: 'Chelsea, NY',
+    photos: [
+      { url: chloe1, tags: ['city', 'sporty'] },
+      { url: chloe2, tags: ['fitness', 'climbing'] },
+      { url: chloe3, tags: ['outdoors', 'travel'] },
+    ],
+    prompts: [
+      { id: 'cp1', question: 'My biggest flex', answer: 'I can boulder a V6 and still make it to brunch by 11.', interests: ['fitness', 'climbing', 'social'] },
+      { id: 'cp2', question: 'Unpopular opinion', answer: 'Morning runs are better than evening ones. The city at 6am is a different world.', interests: ['fitness', 'outdoors', 'adventure'] },
+      { id: 'cp3', question: 'We\'ll get along if', answer: 'You can keep up on a hike and aren\'t afraid to try something new.', interests: ['hiking', 'adventure', 'outdoors'] },
+    ],
+    preferences: ['fitness', 'hiking', 'climbing', 'adventure', 'outdoors'],
+    bandwidthStatus: 'weekend',
+    vibeData: { avgMessageLength: 3, avgReplyTimeMinutes: 5 },
+  },
+  {
+    id: 'mia', name: 'Mia', gender: 'Female', location: 'Greenwich Village, NY',
+    photos: [
+      { url: mia1, tags: ['books', 'city'] },
+      { url: mia2, tags: ['books', 'intellectual'] },
+      { url: mia3, tags: ['pets', 'cozy'] },
+      { url: mia4, tags: ['writing', 'café'] },
+    ],
+    prompts: [
+      { id: 'mp1', question: 'My love language is', answer: 'Recommending you a book and then texting you every chapter to see if you cried yet.', interests: ['books', 'deep-conversations', 'humor'] },
+      { id: 'mp2', question: 'Best thing about me', answer: 'My cat already likes everyone, so you\'ve got that going for you.', interests: ['pets', 'humor'] },
+      { id: 'mp3', question: 'I\'m secretly really into', answer: 'Writing short stories about strangers I observe at cafés. You might already be a character.', interests: ['writing', 'creative', 'observation'] },
+    ],
+    preferences: ['books', 'writing', 'pets', 'deep-conversations'],
+    showVibeSync: true, bandwidthStatus: 'ready',
+    vibeData: { avgMessageLength: 6, avgReplyTimeMinutes: 0.2 },
   },
 ];
 
 export const initialLikesReceived: Like[] = [
   {
-    id: 'like1',
-    fromProfileId: 'jessica',
-    toProfileId: 'aman',
-    targetType: 'prompt',
-    targetIndex: 0,
+    id: 'like1', fromProfileId: 'jessica', toProfileId: 'aman',
+    targetType: 'prompt', targetIndex: 0,
     message: 'Your travel stories sound amazing! Where\'s next on the list?',
-    timestamp: Date.now() - 3600000,
-    read: false,
-    refunded: false,
+    timestamp: Date.now() - 3600000, read: false, refunded: false,
   },
 ];
 
 export const likesReceivedProfiles: Profile[] = [
   {
-    id: 'jessica',
-    name: 'Jessica',
-    gender: 'Female',
-    location: 'SoHo, NY',
-    photos: [{ url: jessicaProfile, tags: ['coffee', 'social'] }],
+    id: 'jessica', name: 'Jessica', gender: 'Female', location: 'SoHo, NY',
+    photos: [
+      { url: jessicaProfile, tags: ['coffee', 'social'] },
+      { url: jessica2, tags: ['coffee', 'cozy'] },
+      { url: jessica3, tags: ['pets', 'outdoors'] },
+    ],
     prompts: [
-      {
-        id: 'jp1',
-        question: 'My simple pleasures',
-        answer: 'Coffee shop hopping and people watching.',
-        interests: ['coffee', 'social'],
-      },
+      { id: 'jp1', question: 'My simple pleasures', answer: 'Coffee shop hopping and people watching.', interests: ['coffee', 'social'] },
     ],
     preferences: ['coffee', 'travel', 'social'],
     bandwidthStatus: 'ready',
-    vibeData: {
-      avgMessageLength: 3,
-      avgReplyTimeMinutes: 1,
-    },
+    vibeData: { avgMessageLength: 3, avgReplyTimeMinutes: 1 },
   },
 ];
 
 export const initialMatches: Match[] = [
   {
-    id: 'match1',
-    profileId: 'olivia',
+    id: 'match1', profileId: 'olivia',
     lastMessage: 'That hiking trail sounds incredible!',
     lastMessageTimestamp: Date.now() - 7200000,
-    lastMessageFrom: 'match',
-    unread: true,
-    isNew: false,
+    lastMessageFrom: 'match', unread: true, isNew: false,
   },
 ];
 
 export const matchProfiles: Profile[] = [
   {
-    id: 'olivia',
-    name: 'Olivia',
-    gender: 'Female',
-    location: 'Upper East Side, NY',
-    photos: [{ url: oliviaProfile, tags: ['outdoors', 'city'] }],
+    id: 'olivia', name: 'Olivia', gender: 'Female', location: 'Upper East Side, NY',
+    photos: [
+      { url: oliviaProfile, tags: ['outdoors', 'city'] },
+      { url: olivia2, tags: ['hiking', 'outdoors'] },
+      { url: olivia3, tags: ['fitness', 'outdoors'] },
+    ],
     prompts: [],
     preferences: ['hiking', 'outdoors', 'travel'],
     bandwidthStatus: 'ready',
-    vibeData: {
-      avgMessageLength: 3,
-      avgReplyTimeMinutes: 5,
-    },
+    vibeData: { avgMessageLength: 3, avgReplyTimeMinutes: 5 },
   },
 ];
 
 export const initialChatMessages: ChatMessage[] = [
-  {
-    id: 'msg1',
-    matchId: 'match1',
-    from: 'user',
-    text: 'Hey Olivia! I noticed you love hiking too. Have you tried the Breakneck Ridge trail?',
-    timestamp: Date.now() - 14400000,
-  },
-  {
-    id: 'msg2',
-    matchId: 'match1',
-    from: 'match',
-    text: 'That hiking trail sounds incredible! I\'ve been meaning to try it. Want to go sometime?',
-    timestamp: Date.now() - 7200000,
-  },
+  { id: 'msg1', matchId: 'match1', from: 'user', text: 'Hey Olivia! I noticed you love hiking too. Have you tried the Breakneck Ridge trail?', timestamp: Date.now() - 14400000 },
+  { id: 'msg2', matchId: 'match1', from: 'match', text: 'That hiking trail sounds incredible! I\'ve been meaning to try it. Want to go sometime?', timestamp: Date.now() - 7200000 },
 ];
 
 export function generateGhostText(sharedInterests: string[], promptAnswer: string): string {
@@ -247,6 +251,13 @@ export function generateGhostText(sharedInterests: string[], promptAnswer: strin
     'deep-conversations': ['What topic keeps her up at night?', 'Share a thought that changed your perspective!'],
     food: ['Ask about her favorite restaurant!', 'What cuisine does she love?'],
     humor: ['Tell her something funny!', 'Share a joke that always lands!'],
+    books: ['Ask what she\'s reading!', 'Share your favorite book!'],
+    art: ['What\'s her favorite art style?', 'Which gallery does she love?'],
+    fitness: ['What\'s her workout routine?', 'Ask about her climbing goals!'],
+    dancing: ['What style does she dance?', 'Ask about her favorite music to dance to!'],
+    wine: ['What\'s her favorite region?', 'Red or white — start a friendly debate!'],
+    pets: ['Tell her about your favorite animal!', 'Ask about her cat!'],
+    writing: ['Ask what she\'s working on!', 'Share a story idea!'],
   };
 
   for (const interest of sharedInterests) {
