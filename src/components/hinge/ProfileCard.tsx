@@ -73,7 +73,7 @@ export function ProfileCard({
                 {profile.gender?.toLowerCase() === 'female' ? 'she/her' : profile.gender?.toLowerCase() === 'male' ? 'he/him' : profile.gender}
               </span>
             </div>
-            <div className="flex items-center gap-2 flex-wrap justify-end">
+            <div className="flex flex-col items-end gap-1.5">
               {profile.bandwidthStatus && <BandwidthStatusPill status={profile.bandwidthStatus} />}
               {profile.showVibeSync && vibeSync.hasSync && <VibeSync result={vibeSync} />}
             </div>
