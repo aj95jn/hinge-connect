@@ -1,13 +1,14 @@
 import { useState, useCallback, useEffect } from 'react';
-import { AppTab, Like, Match, ChatMessage, BandwidthStatus } from '@/types';
+import { AppTab, Like, Match, ChatMessage, BandwidthStatus, GlowResult, Profile } from '@/types';
 import {
   discoverProfiles,
   initialLikesReceived,
   initialMatches,
   initialChatMessages,
-  userProfile,
+  userProfile as initialUserProfile,
   likesReceivedProfiles,
   matchProfiles,
+  generateGhostText,
 } from '@/data/mockData';
 import { toast } from 'sonner';
 
@@ -27,6 +28,7 @@ export function useAppState() {
   const [userBandwidth, setUserBandwidth] = useState<BandwidthStatus>('ready');
   const [showRefundPopup, setShowRefundPopup] = useState<{ profileName: string } | null>(null);
   const [activeChatMatchId, setActiveChatMatchId] = useState<string | null>(null);
+  const [userProfile, setUserProfile] = useState<Profile>(initialUserProfile);
 
   // Effort Insurance: check for unreplied likes after timeout
   useEffect(() => {
@@ -87,7 +89,6 @@ export function useAppState() {
       if (!isPaid) setLikesRemaining((r) => r - 1);
       if (params.isRose) setRosesRemaining((r) => r - 1);
 
-      // Move to next profile
       setCurrentProfileIndex((i) => i + 1);
       toast.success(params.isRose ? 'Rose sent! 🌹' : 'Like sent! ❤️');
       return true;
@@ -146,7 +147,6 @@ export function useAppState() {
         )
       );
 
-      // Simulate reply after a short delay
       setTimeout(() => {
         const replyMsg: ChatMessage = {
           id: `msg_${Date.now() + 1}`,
@@ -197,8 +197,43 @@ export function useAppState() {
       }
       return { hasSync: false, label: '' };
     },
-    [isPaid]
+    [isPaid, userProfile]
   );
+
+  // Interest-based glow: find shared interests between user and profile
+  const getGlowResults = useCallback(
+    (profile: Profile): GlowResult => {
+      const userInterests = new Set(userProfile.preferences);
+
+      const promptGlows: GlowResult['promptGlows'] = {};
+      profile.prompts.forEach((prompt) => {
+        const promptInterests = prompt.interests || [];
+        const shared = promptInterests.filter((i) => userInterests.has(i));
+        promptGlows[prompt.id] = {
+          glow: shared.length > 0,
+          ghostText: shared.length > 0 ? generateGhostText(shared, prompt.answer) : '',
+          sharedInterests: shared,
+        };
+      });
+
+      const photoGlows: GlowResult['photoGlows'] = {};
+      profile.photos.forEach((photo, index) => {
+        const photoTags = photo.tags || [];
+        const shared = photoTags.filter((t) => userInterests.has(t));
+        photoGlows[index] = {
+          glow: shared.length > 0,
+          sharedTags: shared,
+        };
+      });
+
+      return { promptGlows, photoGlows };
+    },
+    [userProfile]
+  );
+
+  const updateUserProfile = useCallback((updates: Partial<Profile>) => {
+    setUserProfile((prev) => ({ ...prev, ...updates }));
+  }, []);
 
   return {
     activeTab,
@@ -216,6 +251,8 @@ export function useAppState() {
     isPaid,
     userBandwidth,
     setUserBandwidth,
+    userProfile,
+    updateUserProfile,
     showRefundPopup,
     setShowRefundPopup,
     activeChatMatchId,
@@ -226,6 +263,7 @@ export function useAppState() {
     dismissLike,
     sendMessage,
     getVibeSync,
+    getGlowResults,
     hasMoreProfiles: currentProfileIndex < discoverProfiles.length,
   };
 }

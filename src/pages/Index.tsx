@@ -4,6 +4,7 @@ import { BottomNav } from '@/components/hinge/BottomNav';
 import { ProfileCard } from '@/components/hinge/ProfileCard';
 import { LikesYouScreen } from '@/components/hinge/LikesYouScreen';
 import { MessagingScreen } from '@/components/hinge/MessagingScreen';
+import { UserProfileScreen } from '@/components/hinge/UserProfileScreen';
 import { RefundPopup } from '@/components/hinge/RefundPopup';
 import { Heart } from 'lucide-react';
 
@@ -33,6 +34,7 @@ const Index = () => {
               <ProfileCard
                 profile={state.currentProfile}
                 vibeSync={state.getVibeSync(state.currentProfile.id)}
+                glowResults={state.getGlowResults(state.currentProfile)}
                 likesRemaining={state.likesRemaining}
                 rosesRemaining={state.rosesRemaining}
                 onLike={(params) =>
@@ -75,6 +77,17 @@ const Index = () => {
             onOpenChat={state.setActiveChatMatchId}
             onCloseChat={() => state.setActiveChatMatchId(null)}
             onSendMessage={state.sendMessage}
+          />
+        )}
+
+        {state.activeTab === 'profile' && (
+          <UserProfileScreen
+            profile={state.userProfile}
+            onUpdateProfile={state.updateUserProfile}
+            onUpdateBandwidth={(status) => {
+              state.updateUserProfile({ bandwidthStatus: status });
+              state.setUserBandwidth(status);
+            }}
           />
         )}
       </div>

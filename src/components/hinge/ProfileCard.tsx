@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Heart, X } from 'lucide-react';
-import { Profile, VibeSyncResult } from '@/types';
+import { Heart, X, Sparkles } from 'lucide-react';
+import { Profile, VibeSyncResult, GlowResult } from '@/types';
 import { VibeSync } from './VibeSync';
 import { BandwidthStatusPill } from './BandwidthStatus';
 import { LikePanel } from './LikePanel';
@@ -9,6 +9,7 @@ import { LikePanel } from './LikePanel';
 interface ProfileCardProps {
   profile: Profile;
   vibeSync: VibeSyncResult;
+  glowResults: GlowResult;
   likesRemaining: number;
   rosesRemaining: number;
   onLike: (params: {
@@ -24,6 +25,7 @@ interface ProfileCardProps {
 export function ProfileCard({
   profile,
   vibeSync,
+  glowResults,
   likesRemaining,
   rosesRemaining,
   onLike,
@@ -35,13 +37,12 @@ export function ProfileCard({
   } | null>(null);
   const [glowOverrides, setGlowOverrides] = useState<Record<string, boolean>>({});
 
-  const isGlowing = (promptId: string, promptIndex: number) => {
+  const isPromptGlowing = (promptId: string) => {
     if (glowOverrides[promptId] !== undefined) return glowOverrides[promptId];
-    return profile.prompts[promptIndex]?.isBridgeBuilder ?? false;
+    return glowResults.promptGlows[promptId]?.glow ?? false;
   };
 
   const handleDragGlow = (promptId: string) => {
-    // Reset all overrides, set this one as the glow
     const newOverrides: Record<string, boolean> = {};
     profile.prompts.forEach((p) => {
       newOverrides[p.id] = p.id === promptId;
@@ -53,10 +54,14 @@ export function ProfileCard({
     if (!selectedTarget || selectedTarget.type !== 'prompt') return undefined;
     const prompt = profile.prompts[selectedTarget.index];
     if (!prompt) return undefined;
-    if (isGlowing(prompt.id, selectedTarget.index)) {
-      return prompt.bridgeGhostText;
+    if (isPromptGlowing(prompt.id)) {
+      return glowResults.promptGlows[prompt.id]?.ghostText || prompt.bridgeGhostText;
     }
     return undefined;
+  };
+
+  const isPhotoGlowing = (index: number) => {
+    return glowResults.photoGlows[index]?.glow ?? false;
   };
 
   return (
@@ -87,33 +92,42 @@ export function ProfileCard({
 
         {/* Scrollable profile content */}
         <div className="space-y-3 px-4">
-          {/* Photos and prompts interleaved */}
           {profile.photos.map((photo, i) => (
             <div key={`photo-${i}`}>
-              <div className="relative rounded-2xl overflow-hidden">
-                <img
-                  src={photo}
-                  alt={`${profile.name} photo ${i + 1}`}
-                  className="w-full aspect-[3/4] object-cover"
-                  loading="lazy"
-                />
-                <button
-                  onClick={() => setSelectedTarget({ type: 'photo', index: i })}
-                  className="absolute bottom-3 right-3 bg-card/90 backdrop-blur-sm rounded-full p-2.5 shadow-lg hover:bg-card transition-colors"
-                >
-                  <Heart size={20} className="text-primary" />
-                </button>
+              {/* Photo with optional glow */}
+              <div className={isPhotoGlowing(i) ? 'rose-glow-shimmer' : ''}>
+                <div className="relative rounded-2xl overflow-hidden">
+                  <img
+                    src={photo.url}
+                    alt={`${profile.name} photo ${i + 1}`}
+                    className="w-full aspect-[3/4] object-cover"
+                    loading="lazy"
+                  />
+                  {isPhotoGlowing(i) && (
+                    <div className="absolute top-3 left-3 flex items-center gap-1 bg-card/90 backdrop-blur-sm rounded-full px-2.5 py-1">
+                      <Sparkles size={12} className="text-hinge-gold" />
+                      <span className="text-[10px] font-medium text-foreground">
+                        {glowResults.photoGlows[i]?.sharedTags.join(', ')}
+                      </span>
+                    </div>
+                  )}
+                  <button
+                    onClick={() => setSelectedTarget({ type: 'photo', index: i })}
+                    className="absolute bottom-3 right-3 bg-card/90 backdrop-blur-sm rounded-full p-2.5 shadow-lg hover:bg-card transition-colors"
+                  >
+                    <Heart size={20} className="text-primary" />
+                  </button>
+                </div>
               </div>
 
               {/* Insert prompt after every 2 photos */}
               {i % 2 === 1 && profile.prompts[Math.floor(i / 2)] && (
                 <PromptCard
                   prompt={profile.prompts[Math.floor(i / 2)]}
-                  index={Math.floor(i / 2)}
-                  isGlowing={isGlowing(
-                    profile.prompts[Math.floor(i / 2)].id,
-                    Math.floor(i / 2)
-                  )}
+                  isGlowing={isPromptGlowing(profile.prompts[Math.floor(i / 2)].id)}
+                  sharedInterests={
+                    glowResults.promptGlows[profile.prompts[Math.floor(i / 2)].id]?.sharedInterests || []
+                  }
                   onLike={() =>
                     setSelectedTarget({ type: 'prompt', index: Math.floor(i / 2) })
                   }
@@ -132,8 +146,8 @@ export function ProfileCard({
               <PromptCard
                 key={prompt.id}
                 prompt={prompt}
-                index={actualIndex}
-                isGlowing={isGlowing(prompt.id, actualIndex)}
+                isGlowing={isPromptGlowing(prompt.id)}
+                sharedInterests={glowResults.promptGlows[prompt.id]?.sharedInterests || []}
                 onLike={() => setSelectedTarget({ type: 'prompt', index: actualIndex })}
                 onDragGlow={() => handleDragGlow(prompt.id)}
               />
@@ -178,14 +192,14 @@ export function ProfileCard({
 
 function PromptCard({
   prompt,
-  index,
   isGlowing,
+  sharedInterests,
   onLike,
   onDragGlow,
 }: {
   prompt: { id: string; question: string; answer: string };
-  index: number;
   isGlowing: boolean;
+  sharedInterests: string[];
   onLike: () => void;
   onDragGlow: () => void;
 }) {
@@ -197,6 +211,14 @@ function PromptCard({
     >
       <div className={isGlowing ? 'rose-glow-shimmer' : ''}>
         <div className="bg-card rounded-2xl p-5 relative">
+          {isGlowing && sharedInterests.length > 0 && (
+            <div className="flex items-center gap-1.5 mb-3">
+              <Sparkles size={14} className="text-hinge-gold" />
+              <span className="text-[11px] font-medium text-hinge-orange">
+                You both love: {sharedInterests.join(', ')}
+              </span>
+            </div>
+          )}
           <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2">
             {prompt.question}
           </p>
