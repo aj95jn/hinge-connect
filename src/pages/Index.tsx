@@ -344,6 +344,9 @@ const Index = () => {
               state.updateUserProfile({ bandwidthStatus: status });
               state.setUserBandwidth(status);
             }}
+            onToggleBandwidthVisible={(visible) => {
+              state.updateUserProfile({ bandwidthVisible: visible });
+            }}
           />
         )}
       </div>
