@@ -51,10 +51,7 @@ export function VibeSync({ result, isPaid = false }: VibeSyncProps) {
         onClick={(e) => { e.stopPropagation(); setShowTooltip((v) => !v); }}
         className="inline-flex items-center gap-1 bg-purple-900 rounded-full px-2 py-0.5"
       >
-        <div className="flex items-center -space-x-1">
-          <div className="w-2.5 h-2.5 rounded-full border-[1.5px] border-white bg-transparent" />
-          <div className="w-2.5 h-2.5 rounded-full border-[1.5px] border-white/60 bg-transparent" />
-        </div>
+        <img src={vibeSyncIcon} alt="Vibe Sync" className="w-3.5 h-3.5" />
         <span className="text-[10px] font-bold text-white">{result.label}</span>
         {result.detail && (
           <span className="text-[10px] text-muted-foreground">· {result.detail}</span>
