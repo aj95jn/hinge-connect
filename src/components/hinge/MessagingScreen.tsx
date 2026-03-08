@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, ChevronUp, MessageCircle } from 'lucide-react';
+import { AnimatedAvatar } from './AnimatedAvatar';
 import { Match, Profile, ChatMessage } from '@/types';
 import { ChatThread } from './ChatThread';
 
