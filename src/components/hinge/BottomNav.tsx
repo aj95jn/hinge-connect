@@ -21,12 +21,7 @@ function HingeLogo({ active }: { active: boolean }) {
 }
 
 export function BottomNav({ activeTab, onTabChange, likesCount, matchesUnread }: BottomNavProps) {
-  const tabs: { key: AppTab; label: string }[] = [
-    { key: 'discover', label: 'Discover' },
-    { key: 'likes', label: 'Likes' },
-    { key: 'matches', label: 'Matches' },
-    { key: 'profile', label: 'Profile' },
-  ];
+  const tabs: AppTab[] = ['discover', 'likes', 'matches', 'profile'];
 
   const renderIcon = (key: AppTab, active: boolean) => {
     const cls = active ? 'text-white' : 'text-white/40';
@@ -45,19 +40,19 @@ export function BottomNav({ activeTab, onTabChange, likesCount, matchesUnread }:
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 max-w-md mx-auto">
       <div className="bg-[hsl(0,0%,15%)] rounded-t-2xl flex items-center justify-around py-4 px-2">
-        {tabs.map((tab) => (
+        {tabs.map((key) => (
           <button
-            key={tab.key}
-            onClick={() => onTabChange(tab.key)}
+            key={key}
+            onClick={() => onTabChange(key)}
             className="relative flex items-center justify-center w-12 h-8"
           >
-            {renderIcon(tab.key, activeTab === tab.key)}
-            {tab.key === 'likes' && likesCount > 0 && (
+            {renderIcon(key, activeTab === key)}
+            {key === 'likes' && likesCount > 0 && (
               <span className="absolute -top-1 -right-0.5 bg-hinge-rose text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
                 {likesCount}
               </span>
             )}
-            {tab.key === 'matches' && matchesUnread > 0 && (
+            {key === 'matches' && matchesUnread > 0 && (
               <span className="absolute -top-1 -right-0.5 bg-hinge-rose text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
                 {matchesUnread}
               </span>
