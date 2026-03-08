@@ -169,6 +169,7 @@ export const discoverProfiles: Profile[] = [
       { id: 'cp2', question: 'Unpopular opinion', answer: 'Morning runs are better than evening ones. The city at 6am is a different world.', interests: ['fitness', 'outdoors', 'adventure'] },
       { id: 'cp3', question: 'We\'ll get along if', answer: 'You can keep up on a hike and aren\'t afraid to try something new.', interests: ['hiking', 'adventure', 'outdoors'] },
     ],
+    vitals: { age: 26, gender: 'Woman', orientation: 'Straight', relationshipType: 'Open to options' },
     preferences: ['fitness', 'hiking', 'climbing', 'adventure', 'outdoors'],
     bandwidthStatus: 'weekend',
     vibeData: { avgMessageLength: 3, avgReplyTimeMinutes: 5 },
