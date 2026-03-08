@@ -41,6 +41,42 @@ const Index = () => {
     intentions: string[];
   }>({ age: null, height: null, intentions: [] });
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const [hasVisitedProfile, setHasVisitedProfile] = useState(false);
+  const [showWhatsNew, setShowWhatsNew] = useState(false);
+  const whatsNewTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Track profile visits
+  useEffect(() => {
+    if (state.activeTab === 'profile') {
+      setHasVisitedProfile(true);
+      setShowWhatsNew(false);
+      if (whatsNewTimerRef.current) clearTimeout(whatsNewTimerRef.current);
+    }
+  }, [state.activeTab]);
+
+  // Show "What's New" popup randomly on discover tab until user visits profile
+  const scheduleWhatsNew = useCallback(() => {
+    if (hasVisitedProfile) return;
+    const delay = 3000 + Math.random() * 8000; // 3–11s random
+    whatsNewTimerRef.current = setTimeout(() => {
+      if (!hasVisitedProfile) {
+        setShowWhatsNew(true);
+        // Auto-dismiss after 2.5s
+        setTimeout(() => setShowWhatsNew(false), 2500);
+        // Schedule next appearance
+        scheduleWhatsNew();
+      }
+    }, delay);
+  }, [hasVisitedProfile]);
+
+  useEffect(() => {
+    if (state.activeTab === 'discover' && !hasVisitedProfile) {
+      scheduleWhatsNew();
+    }
+    return () => {
+      if (whatsNewTimerRef.current) clearTimeout(whatsNewTimerRef.current);
+    };
+  }, [state.activeTab, hasVisitedProfile, scheduleWhatsNew]);
 
   const matchesUnread = state.matches.filter((m) => m.unread).length;
 
