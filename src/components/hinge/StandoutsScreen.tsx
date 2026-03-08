@@ -89,7 +89,9 @@ function StandoutCard({
             {profile.name}
           </span>
           {profile.verified && (
-            <CheckCircle2 size={18} className="text-purple-400 fill-purple-400" strokeWidth={0} />
+            <span className="w-5 h-5 rounded-full bg-purple-800 flex items-center justify-center">
+              <Check size={13} className="text-white" strokeWidth={3.5} />
+            </span>
           )}
         </div>
 
