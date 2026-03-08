@@ -64,21 +64,18 @@ export function ProfileCard({
         transition={{ duration: 0.4, ease: 'easeOut' }}
         className="pb-24 relative"
       >
-        {/* Name, badges, and info — above the image */}
+        {/* Name, gender, and badges — above the image */}
         <div className="px-4 pt-4 pb-2">
           <div className="flex items-start justify-between gap-2">
             <div>
               <h1 className="font-hinge-serif text-2xl font-semibold text-foreground">{profile.name}</h1>
-              <div className="flex items-center gap-2 mt-0.5">
-                <span className="text-xs text-muted-foreground">{profile.gender}</span>
-                <span className="text-xs text-muted-foreground/60">·</span>
-                <span className="text-xs text-muted-foreground">{profile.location}</span>
-              </div>
+              <span className="text-sm text-muted-foreground">
+                {profile.gender?.toLowerCase() === 'female' ? 'she/her' : profile.gender?.toLowerCase() === 'male' ? 'he/him' : profile.gender}
+              </span>
             </div>
             <div className="flex items-center gap-2 flex-wrap justify-end">
               {profile.bandwidthStatus && <BandwidthStatusPill status={profile.bandwidthStatus} />}
               {profile.showVibeSync && vibeSync.hasSync && <VibeSync result={vibeSync} />}
-              <span className="text-[10px] text-muted-foreground whitespace-nowrap">{likesRemaining} left</span>
             </div>
           </div>
         </div>
