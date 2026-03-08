@@ -36,6 +36,7 @@ const Index = () => {
                 glowResults={state.getGlowResults(state.currentProfile)}
                 likesRemaining={state.likesRemaining}
                 rosesRemaining={state.rosesRemaining}
+                isPaid={state.isPaid}
                 onLike={(params) =>
                   state.sendLike({
                     profileId: state.currentProfile!.id,
@@ -43,6 +44,7 @@ const Index = () => {
                   })
                 }
                 onSkip={state.skipProfile}
+                onGoBack={state.goBackProfile}
               />
             ) : (
               <div className="flex flex-col items-center justify-center h-[60vh] px-8 text-center">
