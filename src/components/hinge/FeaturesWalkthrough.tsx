@@ -304,15 +304,17 @@ export function FeaturesWalkthrough({ isPaid }: FeaturesWalkthroughProps) {
             {/* Icon + Title */}
             <div className="mb-1">{feature.icon}</div>
             <h3 className="font-hinge-serif text-lg font-semibold text-foreground mb-1">{feature.title}</h3>
-            <span
-              className={`text-[9px] font-bold px-2 py-0.5 rounded-full mb-4 ${
-                isPaid
-                  ? 'bg-primary text-primary-foreground'
-                  : 'bg-muted text-muted-foreground'
-              }`}
-            >
-              {isPaid ? feature.paidTag : feature.freeTag}
-            </span>
+            {(isPaid ? feature.paidTag : feature.freeTag) && (
+              <span
+                className={`text-[9px] font-bold px-2 py-0.5 rounded-full mb-4 ${
+                  isPaid
+                    ? 'bg-primary text-primary-foreground'
+                    : 'bg-muted text-muted-foreground'
+                }`}
+              >
+                {isPaid ? feature.paidTag : feature.freeTag}
+              </span>
+            )}
 
             {/* Visual Demo */}
             {feature.visual(isPaid)}
