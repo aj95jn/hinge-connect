@@ -38,7 +38,7 @@ export function MessagingScreen({
     return (
       <ChatThread
         matchName={profile?.name || 'Unknown'}
-        matchPhoto={profile?.photos[0] || ''}
+        matchPhoto={profile?.photos[0]?.url || ''}
         messages={messages}
         onSend={(text) => onSendMessage(activeChatMatchId, text)}
         onBack={onCloseChat}
@@ -66,7 +66,7 @@ export function MessagingScreen({
                   className="flex flex-col items-center gap-1 min-w-[72px]"
                 >
                   <div className="w-16 h-16 rounded-full overflow-hidden ring-2 ring-primary ring-offset-2 ring-offset-background">
-                    <img src={profile.photos[0]} alt={profile.name} className="w-full h-full object-cover" />
+                    <img src={profile.photos[0]?.url} alt={profile.name} className="w-full h-full object-cover" />
                   </div>
                   <span className="text-xs font-medium text-foreground">{profile.name}</span>
                   <span className="text-[10px] text-primary font-medium">Tap to chat</span>
@@ -185,7 +185,7 @@ function MatchRow({
       className="flex items-center gap-3 w-full p-3 rounded-xl hover:bg-muted transition-colors text-left"
     >
       <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
-        <img src={profile.photos[0]} alt={profile.name} className="w-full h-full object-cover" />
+        <img src={profile.photos[0]?.url} alt={profile.name} className="w-full h-full object-cover" />
       </div>
       <div className="flex-1 min-w-0">
         <p className="text-sm font-semibold text-foreground">{profile.name}</p>

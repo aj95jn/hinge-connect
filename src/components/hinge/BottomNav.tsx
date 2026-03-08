@@ -1,4 +1,4 @@
-import { Heart, MessageCircle, Search } from 'lucide-react';
+import { Heart, MessageCircle, Search, User } from 'lucide-react';
 import { AppTab } from '@/types';
 import { motion } from 'framer-motion';
 
@@ -14,6 +14,7 @@ export function BottomNav({ activeTab, onTabChange, likesCount, matchesUnread }:
     { key: 'discover', icon: Search, label: 'Discover' },
     { key: 'likes', icon: Heart, label: 'Likes', badge: likesCount },
     { key: 'matches', icon: MessageCircle, label: 'Matches', badge: matchesUnread },
+    { key: 'profile', icon: User, label: 'Profile' },
   ];
 
   return (
@@ -23,13 +24,13 @@ export function BottomNav({ activeTab, onTabChange, likesCount, matchesUnread }:
           <button
             key={tab.key}
             onClick={() => onTabChange(tab.key)}
-            className="relative flex flex-col items-center gap-0.5 px-6 py-1"
+            className="relative flex flex-col items-center gap-0.5 px-4 py-1"
           >
             <div className="relative">
               <tab.icon
-                size={24}
+                size={22}
                 className={activeTab === tab.key ? 'text-primary' : 'text-muted-foreground'}
-                fill={activeTab === tab.key ? 'currentColor' : 'none'}
+                fill={activeTab === tab.key && tab.key !== 'profile' ? 'currentColor' : 'none'}
               />
               {tab.badge && tab.badge > 0 && (
                 <motion.span

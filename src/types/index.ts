@@ -2,8 +2,9 @@ export interface Prompt {
   id: string;
   question: string;
   answer: string;
-  isBridgeBuilder?: boolean; // AI-identified best icebreaker
-  bridgeGhostText?: string; // AI ghost text suggestion
+  interests?: string[]; // tags associated with this prompt
+  isBridgeBuilder?: boolean;
+  bridgeGhostText?: string;
 }
 
 export interface Profile {
@@ -11,11 +12,12 @@ export interface Profile {
   name: string;
   age: number;
   location: string;
-  photos: string[];
+  photos: { url: string; tags?: string[] }[];
   prompts: Prompt[];
+  preferences: string[]; // user's interests/preferences
   bandwidthStatus: 'ready' | 'focusing' | 'weekend';
   vibeData: {
-    avgMessageLength: number; // in sentences
+    avgMessageLength: number;
     avgReplyTimeMinutes: number;
   };
 }
@@ -41,7 +43,7 @@ export interface Match {
   lastMessageTimestamp?: number;
   lastMessageFrom?: 'user' | 'match';
   unread: boolean;
-  isNew: boolean; // "tap to chat" highlight
+  isNew: boolean;
 }
 
 export interface ChatMessage {
@@ -52,12 +54,17 @@ export interface ChatMessage {
   timestamp: number;
 }
 
-export type AppTab = 'discover' | 'likes' | 'matches';
+export type AppTab = 'discover' | 'likes' | 'matches' | 'profile';
 
 export type BandwidthStatus = 'ready' | 'focusing' | 'weekend';
 
 export interface VibeSyncResult {
   hasSync: boolean;
   label: string;
-  detail?: string; // for paid users
+  detail?: string;
+}
+
+export interface GlowResult {
+  promptGlows: Record<string, { glow: boolean; ghostText: string; sharedInterests: string[] }>;
+  photoGlows: Record<number, { glow: boolean; sharedTags: string[] }>;
 }
