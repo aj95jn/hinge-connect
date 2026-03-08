@@ -66,7 +66,7 @@ export function MessagingScreen({
                   className="flex flex-col items-center gap-1 min-w-[72px]"
                 >
                   <div className="w-16 h-16 rounded-full overflow-hidden ring-2 ring-primary ring-offset-2 ring-offset-background">
-                    <img src={profile.photos[0]} alt={profile.name} className="w-full h-full object-cover" />
+                    <img src={profile.photos[0]?.url} alt={profile.name} className="w-full h-full object-cover" />
                   </div>
                   <span className="text-xs font-medium text-foreground">{profile.name}</span>
                   <span className="text-[10px] text-primary font-medium">Tap to chat</span>
