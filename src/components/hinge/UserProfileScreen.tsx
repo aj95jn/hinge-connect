@@ -85,6 +85,127 @@ export function UserProfileScreen({ profile, isPaid = false, onUpdateProfile, on
         </div>
       </div>
 
+      {/* Smart Features Overview */}
+      <div className="mb-6">
+        <h3 className="text-sm font-semibold text-foreground mb-3 flex items-center gap-1.5">
+          <Zap size={14} className="text-hinge-gold" />
+          Smart Features
+        </h3>
+        <div className="space-y-3">
+          {/* Vibe Sync */}
+          <div className="bg-card rounded-2xl p-4 border border-border">
+            <div className="flex items-start gap-3">
+              <div className="w-9 h-9 rounded-xl bg-accent flex items-center justify-center flex-shrink-0">
+                <Sparkles size={18} className="text-hinge-gold" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="text-sm font-semibold text-foreground">Vibe Sync</span>
+                  {isPaid ? (
+                    <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-primary text-primary-foreground">ACTIVE</span>
+                  ) : (
+                    <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-muted text-muted-foreground">BASIC</span>
+                  )}
+                </div>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  {isPaid
+                    ? 'Full behavioral matching — see detailed Vibe Sync labels like "Shared Conversation Style" and "Deep Common Ground" on compatible profiles.'
+                    : 'You see simplified Vibe Sync badges. Upgrade to unlock detailed compatibility breakdowns based on messaging habits, reply patterns, and shared interests.'}
+                </p>
+                {!isPaid && (
+                  <button className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline">
+                    <Crown size={12} />
+                    Unlock full Vibe Sync
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* Rose Glow */}
+          <div className="bg-card rounded-2xl p-4 border border-border">
+            <div className="flex items-start gap-3">
+              <div className="w-9 h-9 rounded-xl bg-accent flex items-center justify-center flex-shrink-0">
+                <Eye size={18} className="text-hinge-rose" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="text-sm font-semibold text-foreground">Rose Glow</span>
+                  {isPaid ? (
+                    <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-primary text-primary-foreground">UNLIMITED</span>
+                  ) : (
+                    <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-muted text-muted-foreground">2 PROFILES</span>
+                  )}
+                </div>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  {isPaid
+                    ? 'Unlimited glowing highlights on prompts & photos that match your interests. AI-powered conversation starters on every glowing prompt.'
+                    : 'Prompts and photos that match your interests glow pink with ✦ stars. Free users see this on up to 2 profiles — upgrade for unlimited.'}
+                </p>
+                {!isPaid && (
+                  <button className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline">
+                    <Crown size={12} />
+                    Get unlimited Rose Glow
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* AI Bridge Text */}
+          <div className="bg-card rounded-2xl p-4 border border-border">
+            <div className="flex items-start gap-3">
+              <div className="w-9 h-9 rounded-xl bg-accent flex items-center justify-center flex-shrink-0">
+                <MessageCircle size={18} className="text-primary" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="text-sm font-semibold text-foreground">AI Bridge Text</span>
+                  <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-primary text-primary-foreground">
+                    {isPaid ? 'ENHANCED' : 'ACTIVE'}
+                  </span>
+                </div>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  {isPaid
+                    ? 'Curated conversation starters based on shared habits, behaviors, and commonalities. Suggestions are tailored to each prompt and stay consistent.'
+                    : 'Get AI-suggested openers on glowing prompts based on what you have in common. Upgrade for richer, more personalized suggestions.'}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Bandwidth Status */}
+          <div className="bg-card rounded-2xl p-4 border border-border">
+            <div className="flex items-start gap-3">
+              <div className="w-9 h-9 rounded-xl bg-accent flex items-center justify-center flex-shrink-0">
+                <Shield size={18} className="text-green-500" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="text-sm font-semibold text-foreground">Bandwidth Status</span>
+                  {isPaid ? (
+                    <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-primary text-primary-foreground">VISIBLE</span>
+                  ) : (
+                    <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-muted text-muted-foreground">HIDDEN</span>
+                  )}
+                </div>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  {isPaid
+                    ? 'Your availability status is visible to others. See other people\'s bandwidth status to know when they\'re most receptive.'
+                    : 'Set your availability status. Upgrade to make it visible on your profile and see others\' bandwidth status.'}
+                </p>
+                {!isPaid && (
+                  <button className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline">
+                    <Crown size={12} />
+                    Show your status
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Preferences / Interests */}
       <div className="mb-6">
         <div className="flex items-center justify-between mb-3">
