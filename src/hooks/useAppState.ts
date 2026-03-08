@@ -23,7 +23,7 @@ export function useAppState() {
   const [matches, setMatches] = useState<Match[]>(initialMatches);
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>(initialChatMessages);
   const [likesRemaining, setLikesRemaining] = useState(FREE_LIKE_LIMIT);
-  const [rosesRemaining, setRosesRemaining] = useState(3);
+  const [rosesRemaining, setRosesRemaining] = useState(1);
   const [isPaid] = useState(false);
   const [userBandwidth, setUserBandwidth] = useState<BandwidthStatus>('ready');
   const [showRefundPopup, setShowRefundPopup] = useState<{ profileName: string } | null>(null);
