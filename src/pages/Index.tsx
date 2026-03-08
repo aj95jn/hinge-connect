@@ -333,12 +333,7 @@ const Index = () => {
                 likesRemaining={state.likesRemaining}
                 rosesRemaining={state.rosesRemaining}
                 isPaid={state.isPaid}
-                onLike={(params) =>
-                  state.sendLike({
-                    profileId: state.currentProfile!.id,
-                    ...params,
-                  })
-                }
+                onLike={handleLikeWithPopup}
                 onSkip={state.skipProfile}
                 onGoBack={state.goBackProfile}
               />
