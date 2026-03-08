@@ -209,10 +209,10 @@ const FEATURES = [
             <span className="text-[9px] text-muted-foreground">3–4 days</span>
           </div>
         </div>
-        <p className="text-[11px] text-muted-foreground text-center max-w-[200px]">
+        <p className="text-[11px] text-muted-foreground text-center max-w-[220px]">
           {isPaid
             ? 'Unlimited refunds. Unread likes are returned automatically after 3–4 days.'
-            : 'Get your like back if it goes unread after 3–4 days. Free users get 1 refund.'}
+            : 'Get your like back if it goes unread after 3–4 days. Free users get 1 refund per week.'}
         </p>
       </div>
     ),
