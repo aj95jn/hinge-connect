@@ -51,42 +51,34 @@ const FEATURES = [
           Vibe Sync analyzes how you and a match communicate — reply speed, message length, and shared values.
         </p>
 
-        {/* Example badges — styled like the real purple pills, but bigger */}
-        <div className="flex flex-col gap-2.5 w-full max-w-[260px]">
+        {/* Example badges — centered, styled like real purple pills */}
+        <div className="flex flex-col items-center gap-2.5 w-full max-w-[260px]">
           {[
-            { label: 'Shared Conversation Style', desc: isPaid ? 'You both send 3+ sentences per message' : 'You both write longer texts' },
-            { label: 'Fast-Paced Match', desc: isPaid ? 'You both reply within 2 hours' : 'You both reply fast' },
-            { label: 'Deep Common Ground', desc: isPaid ? 'High overlap in core value answers' : 'You share core values' },
+            { label: 'Shared Conversation Style' },
+            { label: 'Fast-Paced Match' },
+            { label: 'Deep Common Ground' },
           ].map((badge, i) => (
             <motion.div
               key={badge.label}
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.15 * i }}
-              className="flex items-start gap-2.5"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.15 * i, type: 'spring' }}
+              className="inline-flex items-center gap-1.5 bg-purple-900 rounded-full px-3 py-1.5 shadow-[0_2px_8px_-2px_rgba(76,29,149,0.4)]"
             >
-              {/* Badge pill — matching bg-purple-900 style from VibeSync.tsx */}
-              <div className="inline-flex items-center gap-1.5 bg-purple-900 rounded-full px-3 py-1 flex-shrink-0">
-                <div className="flex items-center -space-x-0.5">
-                  <div className="w-3 h-3 rounded-full border-[1.5px] border-white bg-transparent" />
-                  <div className="w-3 h-3 rounded-full border-[1.5px] border-white bg-transparent" />
-                </div>
-                <span className="text-[11px] font-bold text-white whitespace-nowrap">{badge.label}</span>
+              <div className="flex items-center -space-x-0.5">
+                <div className="w-3 h-3 rounded-full border-[1.5px] border-white bg-transparent" />
+                <div className="w-3 h-3 rounded-full border-[1.5px] border-white bg-transparent" />
               </div>
+              <span className="text-[11px] font-bold text-white whitespace-nowrap">{badge.label}</span>
             </motion.div>
           ))}
         </div>
 
-        {/* What's included with upgrade */}
+        {/* Subscribe nudge */}
         {!isPaid && (
-          <div className="w-full max-w-[260px] mt-2 bg-muted rounded-xl px-3 py-2.5">
-            <p className="text-[10px] font-semibold text-foreground mb-1">With Hinge+ or HingeX:</p>
-            <ul className="text-[10px] text-muted-foreground space-y-0.5">
-              <li>• See detailed badge labels (e.g. "Shared Conversation Style")</li>
-              <li>• Get specific insights like reply times and message depth</li>
-              <li>• Know exactly <em>why</em> you're compatible before you like</li>
-            </ul>
-          </div>
+          <p className="text-[10px] text-muted-foreground text-center mt-1 italic">
+            Subscribe to see more details before swiping.
+          </p>
         )}
       </div>
     ),
