@@ -29,6 +29,9 @@ export function useAppState() {
   const [showRefundPopup, setShowRefundPopup] = useState<{ profileName: string } | null>(null);
   const [activeChatMatchId, setActiveChatMatchId] = useState<string | null>(null);
   const [userProfile, setUserProfile] = useState<Profile>(initialUserProfile);
+  const [glowProfilesSeen, setGlowProfilesSeen] = useState<Set<string>>(new Set());
+  
+  const FREE_GLOW_LIMIT = 2;
 
   // Effort Insurance: check for unreplied likes after timeout
   useEffect(() => {
@@ -212,12 +215,14 @@ export function useAppState() {
   const getGlowResults = useCallback(
     (profile: Profile): GlowResult => {
       const userInterests = new Set(userProfile.preferences);
+      
+      // Check if glow should be enabled for this profile (free user limit: 2 profiles)
+      const canShowGlow = isPaid || glowProfilesSeen.size < FREE_GLOW_LIMIT || glowProfilesSeen.has(profile.id);
 
       // Score all prompts and photos, pick the single best
       let bestScore = 0;
       let bestType: 'prompt' | 'photo' = 'prompt';
       let bestId: string = '';
-      let bestIndex: number = 0;
 
       const promptData: Record<string, { shared: string[]; ghostText: string }> = {};
       profile.prompts.forEach((prompt, idx) => {
@@ -231,7 +236,6 @@ export function useAppState() {
           bestScore = shared.length;
           bestType = 'prompt';
           bestId = prompt.id;
-          bestIndex = idx;
         }
       });
 
@@ -244,16 +248,22 @@ export function useAppState() {
           bestScore = shared.length;
           bestType = 'photo';
           bestId = String(index);
-          bestIndex = index;
         }
       });
 
-      // Only the best one glows
+      // Only the best one glows (if allowed)
+      const shouldGlow = canShowGlow && bestScore > 0;
+      
+      // Track this profile if it has a glow
+      if (shouldGlow && !glowProfilesSeen.has(profile.id)) {
+        setGlowProfilesSeen(prev => new Set(prev).add(profile.id));
+      }
+
       const promptGlows: GlowResult['promptGlows'] = {};
       profile.prompts.forEach((prompt) => {
         const data = promptData[prompt.id];
         promptGlows[prompt.id] = {
-          glow: bestType === 'prompt' && bestId === prompt.id,
+          glow: shouldGlow && bestType === 'prompt' && bestId === prompt.id,
           ghostText: data.ghostText,
           sharedInterests: data.shared,
         };
@@ -263,14 +273,14 @@ export function useAppState() {
       profile.photos.forEach((_, index) => {
         const data = photoData[index];
         photoGlows[index] = {
-          glow: bestType === 'photo' && bestId === String(index),
+          glow: shouldGlow && bestType === 'photo' && bestId === String(index),
           sharedTags: data.shared,
         };
       });
 
       return { promptGlows, photoGlows };
     },
-    [userProfile]
+    [userProfile, isPaid, glowProfilesSeen]
   );
 
   const updateUserProfile = useCallback((updates: Partial<Profile>) => {
