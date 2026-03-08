@@ -92,16 +92,18 @@
   }
 
   .rose-glow-shimmer {
-    background: linear-gradient(45deg, hsl(340 60% 50%), hsl(30 80% 45%), hsl(340 60% 50%));
-    background-size: 300% 300%;
-    animation: shimmer 1.8s ease-in-out infinite;
-    padding: 5px;
+    background: linear-gradient(135deg, hsl(340 70% 85%), hsl(30 80% 90%), hsl(340 70% 85%));
+    background-size: 200% 200%;
+    animation: shimmer 2.5s ease-in-out infinite;
+    padding: 3px;
     border-radius: 1.25rem;
-    box-shadow: 0 0 18px 4px hsla(340, 60%, 50%, 0.35);
   }
 
   .rose-glow-prompt {
-    background: hsl(340 50% 92%);
+    background: linear-gradient(135deg, hsl(340 70% 92%), hsl(30 70% 95%), hsl(340 70% 92%));
+    background-size: 200% 200%;
+    animation: shimmer 2.5s ease-in-out infinite;
+    padding: 3px;
     border-radius: 1rem;
   }
 
