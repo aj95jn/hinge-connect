@@ -301,6 +301,7 @@ export function useAppState() {
     setActiveChatMatchId,
     sendLike,
     skipProfile,
+    goBackProfile,
     matchWithLike,
     dismissLike,
     sendMessage,
