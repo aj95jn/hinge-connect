@@ -52,8 +52,13 @@ export function BandwidthStatusPill({ status, isPaid = false }: BandwidthStatusP
     <div className="relative" onClick={dismiss}>
       <button
         onClick={(e) => { e.stopPropagation(); setShowTooltip((v) => !v); }}
-        className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold ${config.color}`}
+        className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold ${config.color}`}
       >
+        <div className="flex items-end gap-[1.5px] h-2.5">
+          <div className="w-[2px] h-[40%] bg-white rounded-full" />
+          <div className="w-[2px] h-[65%] bg-white rounded-full" />
+          <div className="w-[2px] h-[90%] bg-white rounded-full" />
+        </div>
         {config.label}
       </button>
 
