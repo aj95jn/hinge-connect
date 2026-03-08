@@ -29,7 +29,7 @@ export const userProfile: Profile = {
   ],
   preferences: ['travel', 'philosophy', 'cooking', 'hiking', 'music', 'deep-conversations', 'entrepreneurship', 'food', 'outdoors'],
   bandwidthStatus: 'ready',
-  vibeData: { avgMessageLength: 4, avgReplyTimeMinutes: 0.5 },
+  vibeData: { avgMessageLength: 4, avgReplyTimeMinutes: 0.5, profileReadTimeSec: 20 },
 };
 
 export const discoverProfiles: Profile[] = [
