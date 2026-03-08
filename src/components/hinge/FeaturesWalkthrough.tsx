@@ -196,7 +196,6 @@ const FEATURES = [
             </motion.div>
             <div>
               <p className="text-xs font-semibold text-foreground">Like refunded!</p>
-              <p className="text-[10px] text-muted-foreground">No response after 3–4 days (72–96 hrs)</p>
             </div>
           </div>
           <motion.div
