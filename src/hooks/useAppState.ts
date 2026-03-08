@@ -26,7 +26,7 @@ export function useAppState() {
   const [rosesRemaining, setRosesRemaining] = useState(1);
   const [isPaid] = useState(false);
   const [userBandwidth, setUserBandwidth] = useState<BandwidthStatus>('ready');
-  const [showRefundPopup, setShowRefundPopup] = useState<{ profileName: string } | null>(null);
+  const [showRefundPopup, setShowRefundPopup] = useState<{ profileName: string; likeTimestamp: number } | null>(null);
   const [activeChatMatchId, setActiveChatMatchId] = useState<string | null>(null);
   const [userProfile, setUserProfile] = useState<Profile>(initialUserProfile);
   const [glowProfilesSeen, setGlowProfilesSeen] = useState<Set<string>>(new Set());
@@ -52,7 +52,7 @@ export function useAppState() {
           ) {
             const profile = discoverProfiles.find((p) => p.id === like.toProfileId);
             if (profile) {
-              setShowRefundPopup({ profileName: profile.name });
+              setShowRefundPopup({ profileName: profile.name, likeTimestamp: like.timestamp });
               setLikesRemaining((r) => r + 1);
               if (!isPaid) setFreeRefundUsed(true);
               refundTriggered = true;
@@ -103,11 +103,8 @@ export function useAppState() {
 
       const profile = discoverProfiles.find((p) => p.id === params.profileId);
       const name = profile?.name || 'Someone';
-      const now = new Date();
-      const timeStr = now.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
-      const dateStr = now.toLocaleDateString([], { month: 'short', day: 'numeric' });
       const likeType = params.isRose ? '🌹 Rose' : '❤️ Like';
-      toast.success(`${name} — ${likeType} sent · ${dateStr}, ${timeStr}`);
+      toast.success(`${name} — ${likeType} sent`);
       return true;
     },
     [isPaid, likesRemaining]
