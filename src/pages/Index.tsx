@@ -55,20 +55,22 @@ const Index = () => {
     }
   }, [state.activeTab]);
 
-  // Show "What's New" popup randomly on discover tab until user visits profile
+  // Show "What's New" popup a few times on discover tab until user visits profile
+  const maxPopups = 3;
   const scheduleWhatsNew = useCallback(() => {
-    if (hasVisitedProfile) return;
-    const delay = 3000 + Math.random() * 8000; // 3–11s random
+    if (hasVisitedProfile || whatsNewCount >= maxPopups) return;
+    const delay = 8000 + Math.random() * 20000; // 8–28s random
     whatsNewTimerRef.current = setTimeout(() => {
-      if (!hasVisitedProfile) {
+      if (!hasVisitedProfile && whatsNewCount < maxPopups) {
         setShowWhatsNew(true);
-        // Auto-dismiss after 2.5s
-        setTimeout(() => setShowWhatsNew(false), 2500);
+        setWhatsNewCount((c) => c + 1);
+        // Auto-dismiss after 3s
+        setTimeout(() => setShowWhatsNew(false), 3000);
         // Schedule next appearance
         scheduleWhatsNew();
       }
     }, delay);
-  }, [hasVisitedProfile]);
+  }, [hasVisitedProfile, whatsNewCount]);
 
   useEffect(() => {
     if (state.activeTab === 'discover' && !hasVisitedProfile) {
