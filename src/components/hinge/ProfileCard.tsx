@@ -133,7 +133,7 @@ export function ProfileCard({
                     setSelectedTarget({ type: 'prompt', index: Math.floor(i / 2) })
                   }
                   onDragGlow={() =>
-                    handleDragGlow(profile.prompts[Math.floor(i / 2)].id)
+                    handleDragGlow(`prompt:${profile.prompts[Math.floor(i / 2)].id}`)
                   }
                 />
               )}
