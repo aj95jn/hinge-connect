@@ -127,7 +127,8 @@ export const discoverProfiles: Profile[] = [
     preferences: ['music', 'dancing', 'volunteering', 'food', 'community'],
     vitals: { age: 28, gender: 'Woman', orientation: 'Queer', ethnicity: 'Black', religion: 'Christian', datingGoals: 'Looking for a relationship' },
     showVibeSync: true, bandwidthStatus: 'ready',
-    vibeData: { avgMessageLength: 4, avgReplyTimeMinutes: 0.4 },
+    vibeData: { avgMessageLength: 4, avgReplyTimeMinutes: 0.4, profileReadTimeSec: 28 },
+    coreValues: ['food', 'community', 'deep-conversations'],
   },
   {
     id: 'chloe', name: 'Chloe', gender: 'Female', location: 'Chelsea, NY',
