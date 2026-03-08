@@ -93,74 +93,6 @@ const FEATURES = [
     ),
   },
   {
-    id: 'bridge-builder',
-    title: 'Bridge Builder',
-    icon: <Sparkles size={28} className="text-hinge-rose" />,
-    freeTag: '2 PROFILES',
-    paidTag: 'UNLIMITED',
-    visual: (isPaid: boolean) => (
-      <div className="flex flex-col items-center gap-3">
-        {/* Mini prompt with rose glow */}
-        <div className="w-full max-w-[220px] relative">
-          <motion.div
-            initial={{ boxShadow: '0 0 0px 0px hsla(340, 70%, 50%, 0)' }}
-            animate={{
-              boxShadow: [
-                '0 0 10px 2px hsla(340, 70%, 50%, 0.2)',
-                '0 0 20px 6px hsla(340, 70%, 50%, 0.4)',
-                '0 0 10px 2px hsla(340, 70%, 50%, 0.2)',
-              ],
-            }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="bg-card rounded-2xl p-4 border border-border relative overflow-visible"
-            style={{ borderColor: 'hsla(340, 70%, 50%, 0.4)' }}
-          >
-            {/* Shared interest chip */}
-            <div className="flex items-center gap-1 mb-2">
-              <Sparkles size={11} className="text-hinge-gold" />
-              <span className="text-[10px] font-medium text-hinge-orange">You both love: cooking, travel</span>
-            </div>
-            <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider mb-1.5">
-              A life goal of mine
-            </p>
-            <p className="text-foreground font-hinge-serif text-sm leading-relaxed">
-              Travel to Japan and learn to cook authentic ramen 🍜
-            </p>
-            {/* Like button like the real card */}
-            <div className="absolute bottom-2.5 right-2.5 bg-muted rounded-full p-1.5">
-              <Heart size={14} strokeWidth={2.5} className="text-foreground" />
-            </div>
-            {/* Floating stars */}
-            {['top-1 left-2', 'top-0 right-4', 'bottom-2 left-6', 'bottom-1 right-2', 'top-3 right-1', '-top-1 left-8'].map((pos, i) => (
-              <motion.span
-                key={i}
-                className={`absolute ${pos} text-hinge-rose text-[10px] pointer-events-none`}
-                animate={{ opacity: [0.3, 1, 0.3], scale: [0.7, 1.2, 0.7] }}
-                transition={{ duration: 1.5 + i * 0.3, repeat: Infinity, delay: i * 0.2 }}
-              >
-                ✦
-              </motion.span>
-            ))}
-          </motion.div>
-          {/* Ghost text preview */}
-          <motion.div
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
-            className="mt-2 bg-muted rounded-xl px-3 py-2"
-          >
-            <p className="text-[10px] text-muted-foreground italic">
-              "I'd love to swap ramen spots — have you tried making it from scratch?"
-            </p>
-          </motion.div>
-        </div>
-        <p className="text-[11px] text-muted-foreground text-center max-w-[240px]">
-          Prompts glow when you share interests with a profile. The suggested text is a starter idea based on your common interests and preferences.
-        </p>
-      </div>
-    ),
-  },
-  {
     id: 'bandwidth',
     title: 'Bandwidth',
     icon: (
@@ -226,6 +158,74 @@ const FEATURES = [
           {isPaid
             ? 'Your status is visible. See when others are most open to connecting.'
             : 'Set your availability. Upgrade to show it on your profile and see others\'.'}
+        </p>
+      </div>
+    ),
+  },
+  {
+    id: 'bridge-builder',
+    title: 'Bridge Builder',
+    icon: <Sparkles size={28} className="text-hinge-rose" />,
+    freeTag: '2 PROFILES',
+    paidTag: 'UNLIMITED',
+    visual: (isPaid: boolean) => (
+      <div className="flex flex-col items-center gap-3">
+        {/* Mini prompt with rose glow */}
+        <div className="w-full max-w-[220px] relative">
+          <motion.div
+            initial={{ boxShadow: '0 0 0px 0px hsla(340, 70%, 50%, 0)' }}
+            animate={{
+              boxShadow: [
+                '0 0 10px 2px hsla(340, 70%, 50%, 0.2)',
+                '0 0 20px 6px hsla(340, 70%, 50%, 0.4)',
+                '0 0 10px 2px hsla(340, 70%, 50%, 0.2)',
+              ],
+            }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="bg-card rounded-2xl p-4 border border-border relative overflow-visible"
+            style={{ borderColor: 'hsla(340, 70%, 50%, 0.4)' }}
+          >
+            {/* Shared interest chip */}
+            <div className="flex items-center gap-1 mb-2">
+              <Sparkles size={11} className="text-hinge-gold" />
+              <span className="text-[10px] font-medium text-hinge-orange">You both love: cooking, travel</span>
+            </div>
+            <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider mb-1.5">
+              A life goal of mine
+            </p>
+            <p className="text-foreground font-hinge-serif text-sm leading-relaxed">
+              Travel to Japan and learn to cook authentic ramen 🍜
+            </p>
+            {/* Like button like the real card */}
+            <div className="absolute bottom-2.5 right-2.5 bg-muted rounded-full p-1.5">
+              <Heart size={14} strokeWidth={2.5} className="text-foreground" />
+            </div>
+            {/* Floating stars */}
+            {['top-1 left-2', 'top-0 right-4', 'bottom-2 left-6', 'bottom-1 right-2', 'top-3 right-1', '-top-1 left-8'].map((pos, i) => (
+              <motion.span
+                key={i}
+                className={`absolute ${pos} text-hinge-rose text-[10px] pointer-events-none`}
+                animate={{ opacity: [0.3, 1, 0.3], scale: [0.7, 1.2, 0.7] }}
+                transition={{ duration: 1.5 + i * 0.3, repeat: Infinity, delay: i * 0.2 }}
+              >
+                ✦
+              </motion.span>
+            ))}
+          </motion.div>
+          {/* Ghost text preview */}
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+            className="mt-2 bg-muted rounded-xl px-3 py-2"
+          >
+            <p className="text-[10px] text-muted-foreground italic">
+              "I'd love to swap ramen spots — have you tried making it from scratch?"
+            </p>
+          </motion.div>
+        </div>
+        <p className="text-[11px] text-muted-foreground text-center max-w-[240px]">
+          Prompts glow when you share interests with a profile. The suggested text is a starter idea based on your common interests and preferences.
         </p>
       </div>
     ),
