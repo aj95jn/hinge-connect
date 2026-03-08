@@ -406,7 +406,7 @@ const Index = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 8 }}
             transition={{ duration: 0.2 }}
-            className="fixed bottom-[72px] right-[calc(50%-200px+20px)] z-40 max-w-[160px]"
+            className="absolute bottom-[68px] right-3 z-40"
           >
             <div
               onClick={() => {
@@ -427,8 +427,8 @@ const Index = () => {
                 <X size={10} />
               </button>
             </div>
-            {/* Arrow pointing to profile tab */}
-            <div className="absolute -bottom-1 right-6 w-2 h-2 bg-foreground rotate-45" />
+            {/* Arrow pointing down to profile tab */}
+            <div className="absolute -bottom-1 right-5 w-2 h-2 bg-foreground rotate-45" />
           </motion.div>
         )}
       </AnimatePresence>
