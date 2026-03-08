@@ -70,11 +70,15 @@ const FEATURES = [
               transition={{ delay: 0.15 * i, type: 'spring' }}
               className="flex flex-col items-center gap-1.5"
             >
-              {/* Tooltip box on top */}
-              <div className="relative bg-foreground rounded-md px-2 py-1 shadow-sm">
+              {/* Blinking tooltip box on top */}
+              <motion.div
+                className="relative bg-foreground rounded-md px-2 py-1 shadow-sm"
+                animate={{ opacity: [0, 1, 1, 0] }}
+                transition={{ duration: 4, times: [0, 0.1, 0.75, 1], repeat: Infinity, delay: i * 1.5 }}
+              >
                 <p className="text-[8px] font-medium text-background leading-tight">{badge.desc}</p>
                 <div className="absolute left-1/2 -translate-x-1/2 -bottom-[3px] w-1.5 h-1.5 bg-foreground rotate-45" />
-              </div>
+              </motion.div>
               {/* Badge pill */}
               <div className="inline-flex items-center gap-1.5 bg-purple-900 rounded-full px-3 py-1.5 shadow-[0_2px_8px_-2px_rgba(76,29,149,0.4)]">
                 <div className="flex items-center -space-x-0.5">
