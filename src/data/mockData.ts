@@ -85,7 +85,7 @@ export const discoverProfiles: Profile[] = [
     vibeData: { avgMessageLength: 5, avgReplyTimeMinutes: 0.3, profileReadTimeSec: 18 },
   },
   {
-    id: 'sophia', name: 'Sophia', gender: 'Female', location: 'West Village, NY', verified: true,
+    id: 'sophia', name: 'Sophia', gender: 'Female', location: 'West Village, NY', verified: true, activityTag: 'active_today' as const,
     photos: [
       { url: sophiaProfile, tags: ['art', 'music'] },
     ],
