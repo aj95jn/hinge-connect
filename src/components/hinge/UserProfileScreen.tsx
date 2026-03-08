@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Edit3, Plus, X, Sparkles } from 'lucide-react';
+import { MapPin, Edit3, Plus, X, Sparkles, Zap, Eye, MessageCircle, Shield, Lock, Crown } from 'lucide-react';
 import { AnimatedAvatar } from './AnimatedAvatar';
 import { Profile, BandwidthStatus } from '@/types';
 import { BandwidthStatusPill } from './BandwidthStatus';
@@ -15,11 +15,12 @@ const ALL_INTERESTS = [
 
 interface UserProfileScreenProps {
   profile: Profile;
+  isPaid?: boolean;
   onUpdateProfile: (updates: Partial<Profile>) => void;
   onUpdateBandwidth: (status: BandwidthStatus) => void;
 }
 
-export function UserProfileScreen({ profile, onUpdateProfile, onUpdateBandwidth }: UserProfileScreenProps) {
+export function UserProfileScreen({ profile, isPaid = false, onUpdateProfile, onUpdateBandwidth }: UserProfileScreenProps) {
   const [editingPrompt, setEditingPrompt] = useState<string | null>(null);
   const [editText, setEditText] = useState('');
   const [showInterestPicker, setShowInterestPicker] = useState(false);
