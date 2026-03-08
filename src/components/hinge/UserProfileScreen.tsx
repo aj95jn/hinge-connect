@@ -107,12 +107,32 @@ export function UserProfileScreen({ profile, isPaid = false, onUpdateProfile, on
         <div className="px-4">
           {/* Bandwidth Status */}
           <div className="mb-6">
-            <h3 className="text-sm font-semibold text-foreground mb-3">Your Status</h3>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-sm font-semibold text-foreground">Your Status</h3>
+              <button
+                onClick={() => onToggleBandwidthVisible(!profile.bandwidthVisible)}
+                className={`text-xs font-medium px-3 py-1 rounded-full transition-all ${
+                  profile.bandwidthVisible
+                    ? 'bg-primary text-primary-foreground'
+                    : 'bg-muted text-muted-foreground'
+                }`}
+              >
+                {profile.bandwidthVisible ? 'Visible' : 'Hidden'}
+              </button>
+            </div>
+            {!profile.bandwidthVisible && (
+              <p className="text-[11px] text-muted-foreground mb-3">
+                Your status is hidden. Toggle to make it visible on your profile.
+              </p>
+            )}
+            <div className={`flex flex-wrap gap-2 ${!profile.bandwidthVisible ? 'opacity-50' : ''}`}>
               {bandwidthOptions.map((opt) => (
                 <button
                   key={opt.value}
-                  onClick={() => onUpdateBandwidth(opt.value)}
+                  onClick={() => {
+                    onUpdateBandwidth(opt.value);
+                    if (!profile.bandwidthVisible) onToggleBandwidthVisible(true);
+                  }}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                     profile.bandwidthStatus === opt.value
                       ? 'bg-primary text-primary-foreground'
