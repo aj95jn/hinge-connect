@@ -1,4 +1,4 @@
-import { Heart, MessageSquare, Star, User, Sparkles } from 'lucide-react';
+import { Heart, MessageSquare, Star, User } from 'lucide-react';
 import { AppTab } from '@/types';
 
 interface BottomNavProps {
