@@ -53,7 +53,7 @@ export const userProfile: Profile = {
 
 export const discoverProfiles: Profile[] = [
   {
-    id: 'sarah', name: 'Sarah', gender: 'Female', location: 'Brooklyn, NY',
+    id: 'sarah', name: 'Sarah', gender: 'Female', location: 'Brooklyn, NY', verified: true,
     photos: [
       { url: sarahProfile, tags: ['city', 'casual'] },
       { url: sarah2, tags: ['food', 'outdoors'] },
@@ -87,7 +87,7 @@ export const discoverProfiles: Profile[] = [
     vibeData: { avgMessageLength: 2, avgReplyTimeMinutes: 30 },
   },
   {
-    id: 'emma', name: 'Emma', gender: 'Female', location: 'Williamsburg, NY',
+    id: 'emma', name: 'Emma', gender: 'Female', location: 'Williamsburg, NY', verified: true,
     photos: [
       { url: emmaProfile, tags: ['nightlife', 'social'] },
       { url: emma2, tags: ['music', 'karaoke'] },
@@ -104,7 +104,7 @@ export const discoverProfiles: Profile[] = [
     vibeData: { avgMessageLength: 5, avgReplyTimeMinutes: 0.3 },
   },
   {
-    id: 'sophia', name: 'Sophia', gender: 'Female', location: 'West Village, NY',
+    id: 'sophia', name: 'Sophia', gender: 'Female', location: 'West Village, NY', verified: true,
     photos: [
       { url: sophia1, tags: ['city', 'elegant'] },
       { url: sophia2, tags: ['wine', 'nightlife'] },
@@ -136,7 +136,7 @@ export const discoverProfiles: Profile[] = [
     vibeData: { avgMessageLength: 3, avgReplyTimeMinutes: 2 },
   },
   {
-    id: 'ava', name: 'Ava', gender: 'Female', location: 'Harlem, NY',
+    id: 'ava', name: 'Ava', gender: 'Female', location: 'Harlem, NY', verified: true,
     photos: [
       { url: ava1, tags: ['city', 'casual'] },
       { url: ava2, tags: ['dancing', 'nightlife'] },
@@ -168,7 +168,7 @@ export const discoverProfiles: Profile[] = [
     vibeData: { avgMessageLength: 3, avgReplyTimeMinutes: 5 },
   },
   {
-    id: 'mia', name: 'Mia', gender: 'Female', location: 'Greenwich Village, NY',
+    id: 'mia', name: 'Mia', gender: 'Female', location: 'Greenwich Village, NY', verified: true,
     photos: [
       { url: mia1, tags: ['books', 'city'] },
       { url: mia2, tags: ['books', 'intellectual'] },

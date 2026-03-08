@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Heart, X, Sparkles, MoreHorizontal, Undo2 } from 'lucide-react';
+import { Heart, X, Sparkles, MoreHorizontal, Undo2, CheckCircle } from 'lucide-react';
 import { Profile, VibeSyncResult, GlowResult } from '@/types';
 import { VibeSync } from './VibeSync';
 import { BandwidthStatusPill } from './BandwidthStatus';
@@ -75,9 +75,17 @@ export function ProfileCard({
             {/* Left: name + gender */}
             <div className="min-w-0 flex-shrink-0">
               <h1 className="font-hinge-serif text-2xl font-semibold text-foreground">{profile.name}</h1>
-              <span className="text-sm text-muted-foreground">
-                {profile.gender?.toLowerCase() === 'female' ? 'she/her' : profile.gender?.toLowerCase() === 'male' ? 'he/him' : profile.gender}
-              </span>
+              <div className="flex items-center gap-1.5">
+                <span className="text-sm text-muted-foreground">
+                  {profile.gender?.toLowerCase() === 'female' ? 'she/her' : profile.gender?.toLowerCase() === 'male' ? 'he/him' : profile.gender}
+                </span>
+                {profile.verified && (
+                  <span className="inline-flex items-center gap-0.5 text-[10px] font-semibold text-hinge-rose">
+                    <CheckCircle size={12} className="text-hinge-rose" fill="currentColor" stroke="white" strokeWidth={3} />
+                    Verified
+                  </span>
+                )}
+              </div>
             </div>
             {/* Center: badges */}
             <div className="flex flex-col items-center gap-1 flex-1">

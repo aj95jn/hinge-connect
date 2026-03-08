@@ -13,6 +13,7 @@ export interface Profile {
   gender: 'Female' | 'Male' | 'Non-binary';
   age?: number;
   location: string;
+  verified?: boolean;
   photos: { url: string; tags?: string[] }[];
   prompts: Prompt[];
   preferences: string[]; // user's interests/preferences
