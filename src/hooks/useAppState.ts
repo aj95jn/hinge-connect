@@ -100,6 +100,10 @@ export function useAppState() {
     setCurrentProfileIndex((i) => i + 1);
   }, []);
 
+  const goBackProfile = useCallback(() => {
+    setCurrentProfileIndex((i) => Math.max(0, i - 1));
+  }, []);
+
   const matchWithLike = useCallback(
     (likeId: string) => {
       const like = likesReceived.find((l) => l.id === likeId);
@@ -297,6 +301,7 @@ export function useAppState() {
     setActiveChatMatchId,
     sendLike,
     skipProfile,
+    goBackProfile,
     matchWithLike,
     dismissLike,
     sendMessage,
