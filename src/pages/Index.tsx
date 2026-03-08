@@ -112,4 +112,17 @@ const Index = () => {
   );
 };
 
+function FilterPill({ label, filled }: { label: string; filled?: boolean }) {
+  return (
+    <button className={`flex items-center gap-1 px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
+      filled 
+        ? 'bg-foreground text-background' 
+        : 'bg-transparent border border-border text-foreground'
+    }`}>
+      {label}
+      <ChevronDown size={14} />
+    </button>
+  );
+}
+
 export default Index;
