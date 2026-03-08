@@ -58,31 +58,31 @@ const Index = () => {
     }
   }, []);
 
-  // Show popup on discover tab: immediately + every 15s
+  // Show popup immediately + every 10s on any tab (except profile)
   useEffect(() => {
     if (hasSeenWhatsNew) return;
-
-    if (state.activeTab === 'discover') {
-      // Show immediately
-      setShowWhatsNew(true);
-      const dismissTimer = setTimeout(() => setShowWhatsNew(false), 3000);
-
-      // Then repeat every 10s
-      const interval = setInterval(() => {
-        if (hasSeenRef.current) return;
-        setShowWhatsNew(true);
-        setTimeout(() => setShowWhatsNew(false), 3000);
-      }, 10000);
-      whatsNewIntervalRef.current = interval;
-
-      return () => {
-        clearTimeout(dismissTimer);
-        clearInterval(interval);
-        whatsNewIntervalRef.current = null;
-      };
-    } else {
+    if (state.activeTab === 'profile') {
       setShowWhatsNew(false);
+      return;
     }
+
+    // Show immediately
+    setShowWhatsNew(true);
+    const dismissTimer = setTimeout(() => setShowWhatsNew(false), 3000);
+
+    // Then repeat every 10s
+    const interval = setInterval(() => {
+      if (hasSeenRef.current) return;
+      setShowWhatsNew(true);
+      setTimeout(() => setShowWhatsNew(false), 3000);
+    }, 10000);
+    whatsNewIntervalRef.current = interval;
+
+    return () => {
+      clearTimeout(dismissTimer);
+      clearInterval(interval);
+      whatsNewIntervalRef.current = null;
+    };
   }, [state.activeTab, hasSeenWhatsNew]);
 
   // Track likes — show popup every 3 likes
@@ -423,13 +423,14 @@ const Index = () => {
 
       {/* What's New Popup */}
       <AnimatePresence>
-        {showWhatsNew && state.activeTab === 'discover' && (
+        {showWhatsNew && (
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 8 }}
             transition={{ duration: 0.2 }}
-            className="absolute bottom-[68px] right-3 z-40"
+            className="fixed bottom-[68px] right-[calc(50%-224px+12px)] z-50"
+            style={{ maxWidth: 'calc(100vw - 24px)' }}
           >
             <div
               onClick={() => {
@@ -439,7 +440,7 @@ const Index = () => {
               className="flex items-center gap-1.5 bg-foreground text-background pl-2.5 pr-1.5 py-1.5 rounded-lg shadow-md cursor-pointer hover:opacity-90 transition-opacity"
             >
               <Zap size={11} />
-              <span className="text-[10px] font-semibold">What's New</span>
+              <span className="text-[10px] font-semibold">Explore what's new on Hinge</span>
               <button
                 onClick={(e) => {
                   e.stopPropagation();
