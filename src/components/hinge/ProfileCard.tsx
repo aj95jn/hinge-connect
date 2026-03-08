@@ -80,8 +80,8 @@ export function ProfileCard({
                   {profile.gender?.toLowerCase() === 'female' ? 'she/her' : profile.gender?.toLowerCase() === 'male' ? 'he/him' : profile.gender}
                 </span>
                 {profile.verified && (
-                  <span className="inline-flex items-center gap-0.5 text-[10px] font-semibold text-hinge-rose">
-                    <CheckCircle size={12} className="text-hinge-rose" fill="currentColor" stroke="white" strokeWidth={3} />
+                  <span className="inline-flex items-center gap-0.5 text-[10px] font-bold" style={{ color: '#6B21A8' }}>
+                    <CheckCircle size={12} fill="#6B21A8" stroke="white" strokeWidth={3} />
                     Verified
                   </span>
                 )}
