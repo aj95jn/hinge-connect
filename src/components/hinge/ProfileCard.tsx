@@ -105,15 +105,31 @@ export function ProfileCard({
         transition={{ duration: 0.4, ease: 'easeOut' }}
         className="pb-24 relative"
       >
-        {/* Animated Profile Header */}
-        <div className="px-4 pt-4 pb-2">
-          <AnimatedProfileHeader
-            name={profile.name}
-            gender={profile.gender}
-            location={profile.location}
-          />
-        </div>
+        {/* Profile Photo */}
+        {profile.photos.length > 0 && (
+          <div className="px-4 pt-4 pb-2">
+            <div className="relative rounded-2xl overflow-hidden">
+              <img
+                src={profile.photos[0].url}
+                alt={profile.name}
+                className="w-full aspect-[3/4] object-cover"
+                loading="lazy"
+              />
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
+                <h1 className="font-hinge-serif text-2xl font-semibold text-white">
+                  {profile.name}
+                </h1>
+                <div className="flex items-center gap-2 mt-0.5">
+                  <span className="text-xs text-white/80">{profile.gender}</span>
+                  <span className="text-xs text-white/60">·</span>
+                  <span className="text-xs text-white/80">{profile.location}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
+        {/* Badges row */}
         <div className="px-4 pb-2 flex items-center justify-between">
           <div className="flex items-center gap-2">
             {profile.bandwidthStatus && (
@@ -126,8 +142,7 @@ export function ProfileCard({
           <div className="text-xs text-muted-foreground">{likesRemaining} likes left</div>
         </div>
 
-
-        {/* Prompts only */}
+        {/* Prompts */}
         <div className="space-y-3 px-4">
           {profile.prompts.map((prompt, i) => (
             <PromptCard
