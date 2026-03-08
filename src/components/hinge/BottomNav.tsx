@@ -33,7 +33,7 @@ export function BottomNav({ activeTab, onTabChange, likesCount, matchesUnread }:
       case 'discover':
         return <HingeLogo active={active} />;
       case 'standouts':
-        return <Sparkles size={24} className={cls} fill={active ? 'currentColor' : 'none'} />;
+        return <Star size={24} className={cls} fill={active ? 'currentColor' : 'none'} />;
       case 'likes':
         return <Star size={24} className={cls} fill={active ? 'currentColor' : 'none'} />;
       case 'matches':
