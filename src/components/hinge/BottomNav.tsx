@@ -31,7 +31,7 @@ export function BottomNav({ activeTab, onTabChange, likesCount, matchesUnread }:
     const cls = active ? 'text-white' : hasNotification(key) ? 'text-white/60' : 'text-white/40';
     switch (key) {
       case 'discover':
-        return <HingeLogo active={active} hasNotification={false} />;
+        return <HingeLogo active={active} />;
       case 'likes':
         return <Star size={24} className={cls} fill={active ? 'currentColor' : 'none'} />;
       case 'matches':
