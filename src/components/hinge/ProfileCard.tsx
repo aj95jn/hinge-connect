@@ -90,8 +90,8 @@ export function ProfileCard({
             </div>
             {/* Center: badges */}
             <div className="flex flex-col items-center gap-1 flex-1">
-              {profile.bandwidthStatus && <BandwidthStatusPill status={profile.bandwidthStatus} />}
-              {profile.showVibeSync && vibeSync.hasSync && <VibeSync result={vibeSync} />}
+              {profile.bandwidthStatus && <BandwidthStatusPill status={profile.bandwidthStatus} isPaid={isPaid} />}
+              {profile.showVibeSync && vibeSync.hasSync && <VibeSync result={vibeSync} isPaid={isPaid} />}
             </div>
             {/* Right: back arrow + dots */}
             <div className="flex items-center gap-2 flex-shrink-0">

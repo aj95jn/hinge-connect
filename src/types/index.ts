@@ -33,8 +33,10 @@ export interface Profile {
   vibeData: {
     avgMessageLength: number;
     avgReplyTimeMinutes: number;
+    profileReadTimeSec?: number; // avg seconds spent reading profiles before liking
   };
   vitals?: ProfileVitals;
+  coreValues?: string[]; // core value tags for Deep Common Ground matching
 }
 
 export interface Like {
@@ -71,7 +73,9 @@ export interface ChatMessage {
 
 export type AppTab = 'discover' | 'likes' | 'matches' | 'chat' | 'profile';
 
-export type BandwidthStatus = 'ready' | 'focusing' | 'weekend';
+export type BandwidthStatus = 'ready' | 'focusing' | 'weekend' | 'new_vibes';
+
+export type VibeSyncLabel = 'Shared Conversation Style' | 'Fast-Paced Match' | 'Both Thoughtful Sharers' | 'Deep Common Ground';
 
 export interface VibeSyncResult {
   hasSync: boolean;

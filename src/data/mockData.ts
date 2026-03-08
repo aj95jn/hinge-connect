@@ -29,7 +29,7 @@ export const userProfile: Profile = {
   ],
   preferences: ['travel', 'philosophy', 'cooking', 'hiking', 'music', 'deep-conversations', 'entrepreneurship', 'food', 'outdoors'],
   bandwidthStatus: 'ready',
-  vibeData: { avgMessageLength: 4, avgReplyTimeMinutes: 0.5 },
+  vibeData: { avgMessageLength: 4, avgReplyTimeMinutes: 0.5, profileReadTimeSec: 20 },
 };
 
 export const discoverProfiles: Profile[] = [
@@ -47,7 +47,8 @@ export const discoverProfiles: Profile[] = [
     ],
     preferences: ['travel', 'philosophy', 'cooking', 'adventure'],
     bandwidthStatus: 'focusing', showVibeSync: true,
-    vibeData: { avgMessageLength: 4, avgReplyTimeMinutes: 0.5 },
+    vibeData: { avgMessageLength: 4, avgReplyTimeMinutes: 0.5, profileReadTimeSec: 25 },
+    coreValues: ['travel', 'philosophy', 'deep-conversations'],
     vitals: { age: 27, gender: 'Woman', orientation: 'Straight', religion: 'Hindu', politics: 'Not Political', ethnicity: 'South Asian', datingGoals: 'Figuring out my dating goals', relationshipType: 'Monogamy' },
   },
   {
@@ -63,7 +64,7 @@ export const discoverProfiles: Profile[] = [
     ],
     preferences: ['books', 'yoga', 'art', 'wellness'],
     bandwidthStatus: 'weekend', showVibeSync: false,
-    vibeData: { avgMessageLength: 2, avgReplyTimeMinutes: 30 },
+    vibeData: { avgMessageLength: 2, avgReplyTimeMinutes: 30, profileReadTimeSec: 30 },
     vitals: { age: 25, gender: 'Woman', orientation: 'Bisexual' },
   },
   {
@@ -80,7 +81,7 @@ export const discoverProfiles: Profile[] = [
     preferences: ['music', 'nightlife', 'fashion', 'humor'],
     showVibeSync: true,
     vitals: { age: 26, gender: 'Woman', orientation: 'Straight', ethnicity: 'Mixed', datingGoals: 'Looking for a relationship', relationshipType: 'Monogamy' },
-    vibeData: { avgMessageLength: 5, avgReplyTimeMinutes: 0.3 },
+    vibeData: { avgMessageLength: 5, avgReplyTimeMinutes: 0.3, profileReadTimeSec: 18 },
   },
   {
     id: 'sophia', name: 'Sophia', gender: 'Female', location: 'West Village, NY', verified: true,
@@ -95,7 +96,8 @@ export const discoverProfiles: Profile[] = [
     preferences: ['wine', 'art', 'music', 'romance'],
     bandwidthStatus: 'ready', showVibeSync: true,
     vitals: { age: 29, gender: 'Woman', orientation: 'Straight', religion: 'Spiritual', politics: 'Liberal' },
-    vibeData: { avgMessageLength: 5, avgReplyTimeMinutes: 0.8 },
+    vibeData: { avgMessageLength: 5, avgReplyTimeMinutes: 0.8, profileReadTimeSec: 22 },
+    coreValues: ['food', 'deep-conversations', 'philosophy', 'adventure'],
   },
   {
     id: 'lily', name: 'Lily', gender: 'Female', location: 'Midtown, NY',
@@ -109,7 +111,7 @@ export const discoverProfiles: Profile[] = [
     ],
     preferences: ['food', 'music', 'tech', 'humor'],
     vitals: { age: 24, gender: 'Woman', orientation: 'Straight' },
-    bandwidthStatus: 'focusing',
+    bandwidthStatus: 'new_vibes',
     vibeData: { avgMessageLength: 3, avgReplyTimeMinutes: 2 },
   },
   {
@@ -125,7 +127,8 @@ export const discoverProfiles: Profile[] = [
     preferences: ['music', 'dancing', 'volunteering', 'food', 'community'],
     vitals: { age: 28, gender: 'Woman', orientation: 'Queer', ethnicity: 'Black', religion: 'Christian', datingGoals: 'Looking for a relationship' },
     showVibeSync: true, bandwidthStatus: 'ready',
-    vibeData: { avgMessageLength: 4, avgReplyTimeMinutes: 0.4 },
+    vibeData: { avgMessageLength: 4, avgReplyTimeMinutes: 0.4, profileReadTimeSec: 28 },
+    coreValues: ['food', 'community', 'deep-conversations'],
   },
   {
     id: 'chloe', name: 'Chloe', gender: 'Female', location: 'Chelsea, NY',
@@ -153,8 +156,9 @@ export const discoverProfiles: Profile[] = [
       { id: 'mp3', question: 'I\'ll fall for you if', answer: 'You can make me laugh at a funeral. Too dark? Maybe. But life\'s too short for boring humor.', interests: ['humor', 'deep-conversations'] },
     ],
     preferences: ['books', 'writing', 'pets', 'deep-conversations'],
-    showVibeSync: true, bandwidthStatus: 'ready',
-    vibeData: { avgMessageLength: 6, avgReplyTimeMinutes: 0.2 },
+    showVibeSync: true, bandwidthStatus: 'new_vibes',
+    vibeData: { avgMessageLength: 6, avgReplyTimeMinutes: 0.2, profileReadTimeSec: 35 },
+    coreValues: ['deep-conversations', 'philosophy', 'books'],
     vitals: { age: 25, gender: 'Woman', orientation: 'Bisexual', politics: 'Progressive', datingGoals: 'Something serious', relationshipType: 'Monogamy' },
   },
 ];
