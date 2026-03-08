@@ -96,7 +96,13 @@ export function UserProfileScreen({ profile, isPaid = false, onUpdateProfile, on
       </div>
 
       {activeTab === 'features' ? (
-        <FeaturesWalkthrough isPaid={isPaid} />
+        <FeaturesWalkthrough
+          isPaid={isPaid}
+          bandwidthVisible={profile.bandwidthVisible ?? false}
+          bandwidthStatus={profile.bandwidthStatus}
+          onToggleBandwidthVisible={onToggleBandwidthVisible}
+          onUpdateBandwidth={onUpdateBandwidth}
+        />
       ) : (
         <div className="px-4">
           {/* Bandwidth Status */}
