@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
-import { Heart, X, User } from 'lucide-react';
+import { Heart, X } from 'lucide-react';
 import { Like, Profile } from '@/types';
+import { AnimatedAvatar } from './AnimatedAvatar';
 
 interface LikesYouScreenProps {
   likes: Like[];
