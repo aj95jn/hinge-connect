@@ -69,6 +69,7 @@ export function VibeSync({ result, isPaid = false }: VibeSyncProps) {
             onClick={dismiss}
             className="absolute top-full left-0 mt-1.5 bg-foreground text-background text-[11px] font-medium px-3 py-1.5 rounded-lg whitespace-nowrap z-50 shadow-lg cursor-pointer"
           >
+            <span className="text-[9px] uppercase tracking-wider opacity-60 block mb-0.5">Vibe Sync</span>
             {description}
             <div className="absolute -top-1 left-4 w-2 h-2 bg-foreground rotate-45" />
           </motion.div>
