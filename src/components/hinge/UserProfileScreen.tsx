@@ -108,7 +108,7 @@ export function UserProfileScreen({ profile, isPaid = false, onUpdateProfile, on
           {/* Bandwidth Status */}
           <div className="mb-6">
             <div className="flex items-center justify-between mb-3">
-              <h3 className="text-sm font-semibold text-foreground">Your Status</h3>
+              <h3 className="text-sm font-semibold text-foreground">Your Bandwidth Status</h3>
               <button
                 onClick={() => onToggleBandwidthVisible(!profile.bandwidthVisible)}
                 className={`text-xs font-medium px-3 py-1 rounded-full transition-all ${
