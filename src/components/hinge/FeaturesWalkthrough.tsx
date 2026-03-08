@@ -104,61 +104,50 @@ const FEATURES = [
     paidTag: 'VISIBLE',
     visual: (isPaid: boolean) => (
       <div className="flex flex-col items-center gap-3">
-        {/* How it looks on a profile */}
-        <div className="w-full max-w-[240px]">
-          <p className="text-[9px] uppercase tracking-wider text-muted-foreground mb-1.5 text-center">How it appears</p>
-          <div className="bg-card rounded-2xl border border-border p-3 shadow-sm mb-3">
-            <div className="flex items-center gap-2 mb-2">
-              <div className="w-7 h-7 rounded-full bg-muted" />
-              <div>
-                <div className="h-2.5 w-14 bg-muted rounded-full" />
-                <div className="h-2 w-9 bg-muted rounded-full mt-1" />
-              </div>
-            </div>
-            <motion.button
-              initial={{ scale: 0.85, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ delay: 0.3, type: 'spring' }}
-              className="inline-flex items-center gap-1 bg-purple-900 rounded-full px-2 py-0.5"
-            >
-              <svg width="14" height="12" viewBox="0 0 18 14" fill="none" className="shrink-0">
-                <circle cx="6" cy="5" r="2" fill="white" />
-                <path d="M3 11C3 8.8 4.3 7.5 6 7.5C7.7 7.5 9 8.8 9 11" stroke="white" strokeWidth="1.2" strokeLinecap="round" fill="none" />
-                <path d="M11 7C12 5.8 12 4.2 11 3" stroke="white" strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.5" />
-                <path d="M13.5 8.5C15 6.5 15 3.5 13.5 1.5" stroke="white" strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.35" />
-              </svg>
-              <span className="text-[10px] font-bold text-white">Ready to Connect</span>
-            </motion.button>
-          </div>
-        </div>
+        {/* Explanation */}
+        <p className="text-[11px] text-muted-foreground text-center max-w-[240px] mb-1">
+          Shows how available someone is to chat — set yours and see others' at a glance.
+        </p>
 
-        {/* Status pills demo */}
-        <div className="flex flex-col gap-2 w-full max-w-[220px]">
+        {/* Bandwidth badges — same alternating style as Vibe Sync */}
+        <div className="flex flex-col items-center gap-4 w-full max-w-[280px]">
           {[
-            { label: 'Ready to Connect', active: true },
-            { label: 'Focusing on Matches', active: false },
-            { label: 'Weekend Spark ✨', active: false },
-          ].map((s, i) => (
+            { label: 'Ready to Connect', desc: 'Open & active', side: 'right' as const },
+            { label: 'Focusing on Matches', desc: 'Currently busy', side: 'left' as const },
+            { label: 'Weekend Spark ✨', desc: 'Weekend only', side: 'right' as const },
+          ].map((badge, i) => (
             <motion.div
-              key={s.label}
-              initial={{ opacity: 0, x: -12 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.15 * i }}
-              className={`px-4 py-2 rounded-full text-xs font-medium text-center transition-all ${
-                s.active
-                  ? 'bg-primary text-primary-foreground'
-                  : 'bg-muted text-muted-foreground'
-              }`}
+              key={badge.label}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.15 * i, type: 'spring' }}
+              className={`flex items-center gap-2 w-full ${badge.side === 'left' ? 'flex-row-reverse' : 'flex-row'}`}
             >
-              {s.label}
+              {/* Badge pill — matching purple-900 style */}
+              <div className="inline-flex items-center gap-1.5 bg-purple-900 rounded-full px-3 py-1.5 shadow-[0_2px_8px_-2px_rgba(76,29,149,0.4)] flex-shrink-0">
+                <svg width="14" height="12" viewBox="0 0 18 14" fill="none" className="shrink-0">
+                  <circle cx="6" cy="5" r="2" fill="white" />
+                  <path d="M3 11C3 8.8 4.3 7.5 6 7.5C7.7 7.5 9 8.8 9 11" stroke="white" strokeWidth="1.2" strokeLinecap="round" fill="none" />
+                  <path d="M11 7C12 5.8 12 4.2 11 3" stroke="white" strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.5" />
+                  <path d="M13.5 8.5C15 6.5 15 3.5 13.5 1.5" stroke="white" strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.35" />
+                </svg>
+                <span className="text-[10px] font-bold text-white whitespace-nowrap">{badge.label}</span>
+              </div>
+              {/* Tooltip box */}
+              <div className="relative bg-foreground rounded-lg px-2.5 py-1.5 shadow-sm">
+                <p className="text-[9px] font-medium text-background leading-tight">{badge.desc}</p>
+                <div className={`absolute top-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-foreground rotate-45 ${badge.side === 'right' ? '-left-0.5' : '-right-0.5'}`} />
+              </div>
             </motion.div>
           ))}
         </div>
-        <p className="text-[11px] text-muted-foreground text-center max-w-[200px]">
-          {isPaid
-            ? 'Your status is visible. See when others are most open to connecting.'
-            : 'Set your availability. Upgrade to show it on your profile and see others\'.'}
-        </p>
+
+        {/* Subscribe nudge */}
+        {!isPaid && (
+          <p className="text-[10px] text-muted-foreground text-center mt-1 italic">
+            Subscribe to see others' bandwidth before swiping.
+          </p>
+        )}
       </div>
     ),
   },
