@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { VibeSyncResult } from '@/types';
+import vibeSyncIcon from '@/assets/vibe-sync-icon.png';
 
 const labelDescriptions: Record<string, { free: string; paid: string }> = {
   'Shared Conversation Style': {
