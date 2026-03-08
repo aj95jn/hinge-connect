@@ -92,12 +92,14 @@
   }
 
   .rose-glow-shimmer {
-    background: linear-gradient(45deg, hsl(340 82% 65%), hsl(30 100% 55%), hsl(43 100% 50%), hsl(340 82% 65%));
-    background-size: 300% 300%;
-    animation: shimmer 1.8s ease-in-out infinite;
+    background: hsl(340 60% 45%);
     padding: 5px;
     border-radius: 1.25rem;
-    box-shadow: 0 0 18px 4px hsla(340, 82%, 70%, 0.35), 0 0 40px 8px hsla(43, 100%, 50%, 0.15);
+  }
+
+  .rose-glow-prompt {
+    background: hsl(340 50% 92%);
+    border-radius: 1rem;
   }
 
   @keyframes shimmer {
