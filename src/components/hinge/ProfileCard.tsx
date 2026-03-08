@@ -5,6 +5,7 @@ import { Profile, VibeSyncResult, GlowResult } from '@/types';
 import { VibeSync } from './VibeSync';
 import { BandwidthStatusPill } from './BandwidthStatus';
 import { LikePanel } from './LikePanel';
+import { ProfileInfoPane } from './ProfileInfoPane';
 
 interface ProfileCardProps {
   profile: Profile;
