@@ -16,14 +16,10 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background max-w-md mx-auto relative">
       {/* Top bar */}
-      <div className="sticky top-0 z-40 bg-background/80 backdrop-blur-md border-b border-border px-4 py-3 flex items-center justify-between">
+      <div className="sticky top-0 z-40 bg-background/80 backdrop-blur-md border-b border-border px-4 py-3">
         <h1 className="font-hinge-serif text-xl font-bold text-foreground tracking-tight">
           hinge
         </h1>
-        <div className="flex items-center gap-1 text-xs text-muted-foreground">
-          <Heart size={12} className="text-hinge-rose" fill="currentColor" />
-          <span>{state.likesRemaining} likes</span>
-        </div>
       </div>
 
       {/* Content */}
