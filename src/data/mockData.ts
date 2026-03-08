@@ -87,7 +87,7 @@ export const discoverProfiles: Profile[] = [
     vibeData: { avgMessageLength: 2, avgReplyTimeMinutes: 30 },
   },
   {
-    id: 'emma', name: 'Emma', gender: 'Female', location: 'Williamsburg, NY',
+    id: 'emma', name: 'Emma', gender: 'Female', location: 'Williamsburg, NY', verified: true,
     photos: [
       { url: emmaProfile, tags: ['nightlife', 'social'] },
       { url: emma2, tags: ['music', 'karaoke'] },
