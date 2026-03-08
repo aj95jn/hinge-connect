@@ -116,7 +116,7 @@ export const discoverProfiles: Profile[] = [
     vibeData: { avgMessageLength: 3, avgReplyTimeMinutes: 2 },
   },
   {
-    id: 'ava', name: 'Ava', gender: 'Female', location: 'Harlem, NY', verified: true,
+    id: 'ava', name: 'Ava', gender: 'Female', location: 'Harlem, NY', verified: true, activityTag: 'active_now' as const,
     photos: [
       { url: avaProfile, tags: ['community', 'outdoors'] },
     ],
