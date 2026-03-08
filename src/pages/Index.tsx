@@ -360,6 +360,7 @@ const Index = () => {
         {state.showRefundPopup && (
           <RefundPopup
             profileName={state.showRefundPopup.profileName}
+            likeTimestamp={state.showRefundPopup.likeTimestamp}
             onClose={() => state.setShowRefundPopup(null)}
           />
         )}
