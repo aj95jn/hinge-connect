@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { User, MapPin, Edit3, Plus, X, Sparkles } from 'lucide-react';
+import { MapPin, Edit3, Plus, X, Sparkles } from 'lucide-react';
+import { AnimatedAvatar } from './AnimatedAvatar';
 import { Profile, BandwidthStatus } from '@/types';
 import { BandwidthStatusPill } from './BandwidthStatus';
 
