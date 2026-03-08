@@ -179,12 +179,7 @@ export function ProfileCard({
             let photoIdx = 0;
             let promptIdx = 0;
             let infoPaneInserted = false;
-            const insertInfoPaneAfterIndex = Math.min(1, prompts.length); // After first prompt
-            const items: React.ReactNode[] = [];
-            const remainingPhotos = profile.photos.slice(1);
-            const prompts = profile.prompts;
-            let photoIdx = 0;
-            let promptIdx = 0;
+            const insertInfoPaneAfterIndex = Math.min(1, prompts.length);
 
             while (promptIdx < prompts.length || photoIdx < remainingPhotos.length) {
               if (promptIdx < prompts.length) {
@@ -198,6 +193,16 @@ export function ProfileCard({
                   />
                 );
                 promptIdx++;
+                
+                // Insert info pane after specified prompt
+                if (!infoPaneInserted && promptIdx > insertInfoPaneAfterIndex && profile.vitals) {
+                  items.push(
+                    <div key="info-pane" className="mt-3">
+                      <ProfileInfoPane vitals={profile.vitals} />
+                    </div>
+                  );
+                  infoPaneInserted = true;
+                }
               }
               if (photoIdx < remainingPhotos.length) {
                 const actualPhotoIndex = photoIdx + 1;
