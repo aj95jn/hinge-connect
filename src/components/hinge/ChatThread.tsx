@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Send } from 'lucide-react';
 import { ChatMessage } from '@/types';
+import { AnimatedAvatar } from './AnimatedAvatar';
 
 interface ChatThreadProps {
   matchName: string;
