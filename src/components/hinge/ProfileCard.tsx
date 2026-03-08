@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
-import { motion, AnimatePresence, useDragControls } from 'framer-motion';
-import { Heart, X, Sparkles, Flame } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Heart, X, Sparkles, Flame, User } from 'lucide-react';
 import { Profile, VibeSyncResult, GlowResult } from '@/types';
 import { VibeSync } from './VibeSync';
 import { BandwidthStatusPill } from './BandwidthStatus';
@@ -23,7 +23,6 @@ interface ProfileCardProps {
   onSkip: () => void;
 }
 
-// Track drop zone refs
 interface DropZone {
   key: string;
   ref: HTMLDivElement | null;
@@ -61,11 +60,6 @@ export function ProfileCard({
     return glowResults.promptGlows[promptId]?.glow ?? false;
   };
 
-  const isPhotoGlowing = (index: number) => {
-    if (glowOverride !== null) return glowOverride === `photo:${index}`;
-    return glowResults.photoGlows[index]?.glow ?? false;
-  };
-
   const getGhostText = () => {
     if (!selectedTarget || selectedTarget.type !== 'prompt') return undefined;
     const prompt = profile.prompts[selectedTarget.index];
@@ -91,14 +85,10 @@ export function ProfileCard({
     }
   };
 
-  // Find current glow key
   const currentGlowKey = (() => {
     if (glowOverride) return glowOverride;
     for (const prompt of profile.prompts) {
       if (glowResults.promptGlows[prompt.id]?.glow) return `prompt:${prompt.id}`;
-    }
-    for (let i = 0; i < profile.photos.length; i++) {
-      if (glowResults.photoGlows[i]?.glow) return `photo:${i}`;
     }
     return null;
   })();
@@ -117,89 +107,46 @@ export function ProfileCard({
         {/* Header */}
         <div className="px-4 pt-4 pb-2 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <h1 className="font-hinge-serif text-2xl font-semibold text-foreground">
-              {profile.name}, {profile.age}
-            </h1>
-            <VibeSync result={vibeSync} />
+            <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center">
+              <User size={20} className="text-muted-foreground" />
+            </div>
+            <div>
+              <h1 className="font-hinge-serif text-2xl font-semibold text-foreground">
+                {profile.name}
+              </h1>
+              <span className="text-xs text-muted-foreground">{profile.gender}</span>
+            </div>
           </div>
           <div className="text-xs text-muted-foreground">{likesRemaining} likes left</div>
         </div>
 
         <div className="px-4 pb-2 flex items-center gap-2">
           <span className="text-sm text-muted-foreground">{profile.location}</span>
-          <BandwidthStatusPill status={profile.bandwidthStatus} />
+          {profile.bandwidthStatus && (
+            <BandwidthStatusPill status={profile.bandwidthStatus} />
+          )}
         </div>
 
-        {/* Scrollable profile content */}
+        {/* Vibe Sync badge */}
+        {profile.showVibeSync && vibeSync.hasSync && (
+          <div className="px-4 pb-2">
+            <VibeSync result={vibeSync} />
+          </div>
+        )}
+
+        {/* Prompts only */}
         <div className="space-y-3 px-4">
-          {profile.photos.map((photo, i) => (
-            <div key={`photo-${i}`}>
-              <div
-                ref={(el) => registerDropZone(`photo:${i}`, el)}
-                className={`${isPhotoGlowing(i) ? 'rose-glow-shimmer' : ''} ${isDragging ? 'ring-2 ring-dashed ring-hinge-gold/30 rounded-2xl' : ''}`}
-              >
-                <div className="relative rounded-2xl overflow-hidden">
-                  <img
-                    src={photo.url}
-                    alt={`${profile.name} photo ${i + 1}`}
-                    className="w-full aspect-[3/4] object-cover"
-                    loading="lazy"
-                  />
-                  {isPhotoGlowing(i) && (
-                    <div className="absolute top-3 left-3 flex items-center gap-1 bg-card/90 backdrop-blur-sm rounded-full px-2.5 py-1">
-                      <Sparkles size={12} className="text-hinge-gold" />
-                      <span className="text-[10px] font-medium text-foreground">
-                        {glowResults.photoGlows[i]?.sharedTags.join(', ')}
-                      </span>
-                    </div>
-                  )}
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setSelectedTarget({ type: 'photo', index: i });
-                    }}
-                    className="absolute bottom-3 right-3 bg-card/90 backdrop-blur-sm rounded-full p-2.5 shadow-lg hover:bg-card transition-colors"
-                  >
-                    <Heart size={20} className="text-primary" />
-                  </button>
-                </div>
-              </div>
-
-              {/* Insert prompt after every 2 photos */}
-              {i % 2 === 1 && profile.prompts[Math.floor(i / 2)] && (
-                <PromptCard
-                  prompt={profile.prompts[Math.floor(i / 2)]}
-                  isGlowing={isPromptGlowing(profile.prompts[Math.floor(i / 2)].id)}
-                  sharedInterests={
-                    glowResults.promptGlows[profile.prompts[Math.floor(i / 2)].id]?.sharedInterests || []
-                  }
-                  isDragActive={isDragging}
-                  onLike={() =>
-                    setSelectedTarget({ type: 'prompt', index: Math.floor(i / 2) })
-                  }
-                  registerRef={(el) =>
-                    registerDropZone(`prompt:${profile.prompts[Math.floor(i / 2)].id}`, el)
-                  }
-                />
-              )}
-            </div>
+          {profile.prompts.map((prompt, i) => (
+            <PromptCard
+              key={prompt.id}
+              prompt={prompt}
+              isGlowing={isPromptGlowing(prompt.id)}
+              sharedInterests={glowResults.promptGlows[prompt.id]?.sharedInterests || []}
+              isDragActive={isDragging}
+              onLike={() => setSelectedTarget({ type: 'prompt', index: i })}
+              registerRef={(el) => registerDropZone(`prompt:${prompt.id}`, el)}
+            />
           ))}
-
-          {/* Remaining prompts */}
-          {profile.prompts.slice(Math.floor(profile.photos.length / 2)).map((prompt, i) => {
-            const actualIndex = i + Math.floor(profile.photos.length / 2);
-            return (
-              <PromptCard
-                key={prompt.id}
-                prompt={prompt}
-                isGlowing={isPromptGlowing(prompt.id)}
-                sharedInterests={glowResults.promptGlows[prompt.id]?.sharedInterests || []}
-                isDragActive={isDragging}
-                onLike={() => setSelectedTarget({ type: 'prompt', index: actualIndex })}
-                registerRef={(el) => registerDropZone(`prompt:${prompt.id}`, el)}
-              />
-            );
-          })}
         </div>
 
         {/* Skip button */}
