@@ -326,8 +326,8 @@ export function FeaturesWalkthrough({ isPaid, bandwidthVisible = false, bandwidt
             {/* Visual Demo */}
             {feature.id === 'bandwidth' ? renderBandwidthVisual() : feature.visual?.(isPaid)}
 
-            {/* Upgrade CTA for free */}
-            {!isPaid && feature.id !== 'bandwidth' && (
+            {/* Upgrade CTA for free — only for vibe-sync and bridge-builder */}
+            {!isPaid && (feature.id === 'vibe-sync' || feature.id === 'bridge-builder') && (
               <button className="mt-4 inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-foreground text-background text-xs font-semibold hover:opacity-90 transition-opacity">
                 <Crown size={13} />
                 Upgrade to unlock
