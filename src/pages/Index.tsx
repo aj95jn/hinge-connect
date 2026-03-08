@@ -68,6 +68,15 @@ const Index = () => {
         )}
 
         {state.activeTab === 'matches' && (
+          <LikesYouScreen
+            likes={state.likesReceived}
+            profiles={state.likesReceivedProfiles}
+            onMatch={state.matchWithLike}
+            onDismiss={state.dismissLike}
+          />
+        )}
+
+        {state.activeTab === 'chat' && (
           <MessagingScreen
             matches={state.matches}
             profiles={state.matchProfiles}
