@@ -192,28 +192,25 @@ export function useAppState() {
       const userVibe = userProfile.vibeData;
       const theirVibe = profile.vibeData;
 
-      const replyMatch = userVibe.avgReplyTimeMinutes <= 1 && theirVibe.avgReplyTimeMinutes <= 1;
-      const isWeekend = profile.bandwidthStatus === 'weekend' || userProfile.bandwidthStatus === 'weekend';
+      const replyMatch = userVibe.avgReplyTimeMinutes <= 120 && theirVibe.avgReplyTimeMinutes <= 120;
+      const bothLongMessages = userVibe.avgMessageLength >= 3 && theirVibe.avgMessageLength >= 3;
+      const bothThoughtful = (userVibe.profileReadTimeSec ?? 0) >= 15 && (theirVibe.profileReadTimeSec ?? 0) >= 15;
+      const coreValueOverlap = (profile.coreValues || []).filter((v) => (userProfile.preferences || []).includes(v)).length >= 2;
 
       if (replyMatch) {
-        return {
-          hasSync: true,
-          label: 'Fast-Paced Match',
-          detail: isPaid ? 'Both reply in <1min' : undefined,
-        };
+        return { hasSync: true, label: 'Fast-Paced Match' };
       }
-      if (isWeekend) {
-        return {
-          hasSync: true,
-          label: 'Weekend Spark',
-          detail: isPaid ? 'Active on weekends' : undefined,
-        };
+      if (bothLongMessages) {
+        return { hasSync: true, label: 'Shared Conversation Style' };
       }
-      return {
-        hasSync: true,
-        label: 'Shared Style',
-        detail: isPaid ? 'Similar messaging style' : undefined,
-      };
+      if (bothThoughtful) {
+        return { hasSync: true, label: 'Both Thoughtful Sharers' };
+      }
+      if (coreValueOverlap) {
+        return { hasSync: true, label: 'Deep Common Ground' };
+      }
+      // Fallback: if showVibeSync is on but no specific match, pick best fit
+      return { hasSync: true, label: 'Shared Conversation Style' };
     },
     [isPaid, userProfile]
   );

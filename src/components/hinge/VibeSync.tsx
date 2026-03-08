@@ -2,19 +2,36 @@ import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { VibeSyncResult } from '@/types';
 
-const labelDescriptions: Record<string, string> = {
-  'Fast-Paced Match': 'You both reply quickly',
-  'Shared Style': 'Similar messaging style',
-  'Weekend Spark': 'Active on weekends',
+const labelDescriptions: Record<string, { free: string; paid: string }> = {
+  'Shared Conversation Style': {
+    free: 'Similar texters',
+    paid: 'You both typically send 3+ sentences per message',
+  },
+  'Fast-Paced Match': {
+    free: 'Quick replies',
+    paid: 'You both typically reply within 2 hours',
+  },
+  'Both Thoughtful Sharers': {
+    free: 'Thoughtful readers',
+    paid: 'You both spend time reading profiles before liking',
+  },
+  'Deep Common Ground': {
+    free: 'Shared values',
+    paid: 'High overlap in your core value prompt answers',
+  },
 };
 
 interface VibeSyncProps {
   result: VibeSyncResult;
+  isPaid?: boolean;
 }
 
-export function VibeSync({ result }: VibeSyncProps) {
+export function VibeSync({ result, isPaid = false }: VibeSyncProps) {
   const [showTooltip, setShowTooltip] = useState(false);
-  const description = labelDescriptions[result.label] || result.label;
+  const descriptions = labelDescriptions[result.label];
+  const description = descriptions
+    ? (isPaid ? descriptions.paid : descriptions.free)
+    : result.label;
   const dismiss = useCallback(() => setShowTooltip(false), []);
 
   useEffect(() => {
