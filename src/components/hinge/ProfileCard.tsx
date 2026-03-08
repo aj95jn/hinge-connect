@@ -61,6 +61,11 @@ export function ProfileCard({
     return glowResults.promptGlows[promptId]?.glow ?? false;
   };
 
+  const isPhotoGlowing = (index: number) => {
+    if (glowOverride !== null) return glowOverride === `photo:${index}`;
+    return glowResults.photoGlows[index]?.glow ?? false;
+  };
+
   const getGhostText = () => {
     if (!selectedTarget || selectedTarget.type !== 'prompt') return undefined;
     const prompt = profile.prompts[selectedTarget.index];
