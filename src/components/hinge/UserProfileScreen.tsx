@@ -289,27 +289,6 @@ export function UserProfileScreen({ profile, isPaid = false, onUpdateProfile, on
               ))}
             </div>
           </div>
-
-          {/* Vibe Stats */}
-          <div>
-            <h3 className="text-sm font-semibold text-foreground mb-3">Your Vibe Stats</h3>
-            <div className="grid grid-cols-2 gap-3">
-              <div className="bg-card rounded-2xl p-4 border border-border text-center">
-                <p className="text-2xl font-hinge-serif font-semibold text-primary">
-                  {profile.vibeData.avgMessageLength}
-                </p>
-                <p className="text-xs text-muted-foreground mt-1">Avg. sentence length</p>
-              </div>
-              <div className="bg-card rounded-2xl p-4 border border-border text-center">
-                <p className="text-2xl font-hinge-serif font-semibold text-primary">
-                  {profile.vibeData.avgReplyTimeMinutes < 1
-                    ? `${Math.round(profile.vibeData.avgReplyTimeMinutes * 60)}s`
-                    : `${profile.vibeData.avgReplyTimeMinutes}m`}
-                </p>
-                <p className="text-xs text-muted-foreground mt-1">Avg. reply time</p>
-              </div>
-            </div>
-          </div>
         </div>
       )}
     </div>
