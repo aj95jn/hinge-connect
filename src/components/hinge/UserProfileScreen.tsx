@@ -155,7 +155,7 @@ export function UserProfileScreen({ profile, isPaid = false, onUpdateProfile, on
                         Bandwidth lets others know how available you are to chat. Choose a status and make it visible on your profile so matches can see when you're most responsive.
                       </p>
                       {/* Arrow pointing up */}
-                      <div className="absolute -top-[5px] left-[90px] w-2.5 h-2.5 bg-card border-l border-t border-border rotate-45" />
+                      <div className="absolute -bottom-[5px] left-[90px] w-2.5 h-2.5 bg-card border-r border-b border-border rotate-45" />
                     </motion.div>
                   )}
                 </AnimatePresence>
