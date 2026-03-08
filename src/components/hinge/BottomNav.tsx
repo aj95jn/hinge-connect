@@ -21,7 +21,7 @@ function HingeLogo({ active }: { active: boolean }) {
 }
 
 export function BottomNav({ activeTab, onTabChange, likesCount, matchesUnread }: BottomNavProps) {
-  const tabs: AppTab[] = ['discover', 'likes', 'matches', 'profile'];
+  const tabs: AppTab[] = ['discover', 'likes', 'matches', 'chat', 'profile'];
 
   const renderIcon = (key: AppTab, active: boolean) => {
     const cls = active ? 'text-white' : 'text-white/40';
@@ -32,8 +32,10 @@ export function BottomNav({ activeTab, onTabChange, likesCount, matchesUnread }:
         return <Star size={24} className={cls} fill={active ? 'currentColor' : 'none'} />;
       case 'matches':
         return <Heart size={24} className={cls} fill={active ? 'currentColor' : 'none'} />;
-      case 'profile':
+      case 'chat':
         return <MessageSquare size={24} className={cls} fill={active ? 'currentColor' : 'none'} />;
+      case 'profile':
+        return <User size={24} className={cls} fill={active ? 'currentColor' : 'none'} />;
     }
   };
 
@@ -52,7 +54,7 @@ export function BottomNav({ activeTab, onTabChange, likesCount, matchesUnread }:
                 {likesCount}
               </span>
             )}
-            {key === 'matches' && matchesUnread > 0 && (
+            {key === 'chat' && matchesUnread > 0 && (
               <span className="absolute -top-1 -right-0.5 bg-hinge-rose text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
                 {matchesUnread}
               </span>
