@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MapPin, Edit3, Plus, X, Sparkles, Zap, Info } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
