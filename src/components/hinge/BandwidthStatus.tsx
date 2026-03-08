@@ -22,7 +22,7 @@ const statusConfig: Record<BandwidthType, { label: string; color: string; freeDe
     paidDesc: 'Active but hasn\'t started a new chat in 48-72 hours',
   },
   new_vibes: {
-    label: 'Opening for New Vibes',
+    label: 'Open to New Vibes',
     color: 'bg-purple-900 text-white',
     freeDesc: 'New & ready to meet',
     paidDesc: 'New user or empty queue — wide open for connections',
