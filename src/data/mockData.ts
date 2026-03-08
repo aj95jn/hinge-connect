@@ -39,7 +39,6 @@ export const discoverProfiles: Profile[] = [
       { url: sarahProfile, tags: ['city', 'casual'] },
       { url: sarah2, tags: ['food', 'outdoors'] },
       { url: sarah3, tags: ['hiking', 'outdoors'] },
-      { url: sarah4, tags: ['cooking', 'food'] },
     ],
     prompts: [
       { id: 'p1', question: 'A life goal of mine', answer: 'To visit every continent before 30. Just got back from Tokyo and it completely changed my perspective on life.', interests: ['travel', 'adventure', 'tokyo'] },
@@ -56,8 +55,6 @@ export const discoverProfiles: Profile[] = [
     photos: [
       { url: mayaProfile, tags: ['books', 'intellectual'] },
       { url: maya2, tags: ['books', 'café'] },
-      { url: maya3, tags: ['yoga', 'wellness'] },
-      { url: maya4, tags: ['art', 'culture'] },
     ],
     prompts: [
       { id: 'p4', question: 'The way to win me over is', answer: 'Show up with a book recommendation and tell me why it matters to you.', interests: ['books', 'intellectual', 'deep-conversations'] },
@@ -74,8 +71,6 @@ export const discoverProfiles: Profile[] = [
     photos: [
       { url: emmaProfile, tags: ['nightlife', 'social'] },
       { url: emma2, tags: ['music', 'karaoke'] },
-      { url: emma3, tags: ['fashion', 'city'] },
-      { url: emma4, tags: ['social', 'nightlife'] },
     ],
     prompts: [
       { id: 'p7', question: 'I\'m convinced that', answer: 'The best conversations happen after midnight with strangers who become friends.', interests: ['deep-conversations', 'social', 'nightlife'] },
@@ -90,9 +85,7 @@ export const discoverProfiles: Profile[] = [
   {
     id: 'sophia', name: 'Sophia', gender: 'Female', location: 'West Village, NY', verified: true,
     photos: [
-      { url: sophia1, tags: ['city', 'elegant'] },
-      { url: sophia2, tags: ['wine', 'nightlife'] },
-      { url: sophia3, tags: ['art', 'creative'] },
+      { url: sophiaProfile, tags: ['city', 'elegant'] },
     ],
     prompts: [
       { id: 'sp1', question: 'A perfect date looks like', answer: 'Wine tasting followed by a walk through the village, ending at a hidden jazz bar.', interests: ['wine', 'music', 'adventure'] },
@@ -107,9 +100,7 @@ export const discoverProfiles: Profile[] = [
   {
     id: 'lily', name: 'Lily', gender: 'Female', location: 'Midtown, NY',
     photos: [
-      { url: lily1, tags: ['city', 'casual'] },
-      { url: lily2, tags: ['food', 'social'] },
-      { url: lily3, tags: ['music', 'creative'] },
+      { url: lilyProfile, tags: ['city', 'casual'] },
     ],
     prompts: [
       { id: 'lp1', question: 'The quickest way to my heart', answer: 'Take me to a hole-in-the-wall ramen spot and share your Spotify Wrapped.', interests: ['food', 'music', 'adventure'] },
@@ -124,9 +115,7 @@ export const discoverProfiles: Profile[] = [
   {
     id: 'ava', name: 'Ava', gender: 'Female', location: 'Harlem, NY', verified: true,
     photos: [
-      { url: ava1, tags: ['city', 'casual'] },
-      { url: ava2, tags: ['dancing', 'nightlife'] },
-      { url: ava3, tags: ['volunteering', 'outdoors'] },
+      { url: avaProfile, tags: ['city', 'casual'] },
     ],
     prompts: [
       { id: 'ap1', question: 'My happy place', answer: 'A live jazz session in a dim-lit bar where everyone\'s swaying and nobody\'s on their phone.', interests: ['music', 'dancing', 'nightlife'] },
@@ -141,9 +130,7 @@ export const discoverProfiles: Profile[] = [
   {
     id: 'chloe', name: 'Chloe', gender: 'Female', location: 'Chelsea, NY',
     photos: [
-      { url: chloe1, tags: ['city', 'sporty'] },
-      { url: chloe2, tags: ['fitness', 'climbing'] },
-      { url: chloe3, tags: ['outdoors', 'travel'] },
+      { url: chloeProfile, tags: ['city', 'sporty'] },
     ],
     prompts: [
       { id: 'cp1', question: 'My biggest flex', answer: 'I can boulder a V6 and still make it to brunch by 11.', interests: ['fitness', 'climbing', 'social'] },
@@ -158,10 +145,7 @@ export const discoverProfiles: Profile[] = [
   {
     id: 'mia', name: 'Mia', gender: 'Female', location: 'Greenwich Village, NY', verified: true,
     photos: [
-      { url: mia1, tags: ['books', 'city'] },
-      { url: mia2, tags: ['books', 'intellectual'] },
-      { url: mia3, tags: ['pets', 'cozy'] },
-      { url: mia4, tags: ['writing', 'café'] },
+      { url: miaProfile, tags: ['books', 'city'] },
     ],
     prompts: [
       { id: 'mp1', question: 'My love language is', answer: 'Recommending you a book and then texting you every chapter to see if you cried yet.', interests: ['books', 'deep-conversations', 'humor'] },
