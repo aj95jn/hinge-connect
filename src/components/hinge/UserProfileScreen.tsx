@@ -154,7 +154,7 @@ export function UserProfileScreen({ profile, isPaid = false, onUpdateProfile, on
                   key={opt.value}
                   onClick={() => {
                     onUpdateBandwidth(opt.value);
-                    if (!profile.bandwidthVisible) onToggleBandwidthVisible(true);
+                    
                   }}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                     profile.bandwidthStatus === opt.value
