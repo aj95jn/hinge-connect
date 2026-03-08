@@ -315,15 +315,17 @@ function PromptCard({
 }
 
 function ActivityTag({ tag }: { tag: 'active_now' | 'new_user' | 'active_today' }) {
-  const config = {
-    active_now: { label: 'Active Now', showDot: true },
-    new_user: { label: 'New User', showDot: false },
-    active_today: { label: 'Active Today', showDot: false },
-  };
-  const { label, showDot } = config[tag];
+  if (tag === 'active_now') {
+    return (
+      <span className="inline-flex items-center gap-1 text-[9px] font-semibold text-muted-foreground">
+        <span className="w-1 h-1 rounded-full bg-green-500" />
+        Active Now
+      </span>
+    );
+  }
+  const label = tag === 'new_user' ? 'New User' : 'Active Today';
   return (
-    <span className="inline-flex items-center gap-1 bg-purple-900 text-white rounded-full px-2 py-0.5 text-[10px] font-bold">
-      {showDot && <span className="w-1.5 h-1.5 rounded-full bg-green-400" />}
+    <span className="inline-flex items-center bg-purple-900 text-white rounded-full px-1.5 py-px text-[8px] font-bold">
       {label}
     </span>
   );
