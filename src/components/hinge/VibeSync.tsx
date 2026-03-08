@@ -25,7 +25,7 @@ export function VibeSync({ result }: VibeSyncProps) {
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         onClick={() => setShowTooltip(!showTooltip)}
-        className="inline-flex items-center gap-1 bg-purple-700 rounded-full px-2 py-0.5"
+        className="inline-flex items-center gap-1 bg-purple-900 rounded-full px-2 py-0.5"
       >
         <div className="flex items-center -space-x-1">
           <div className="w-2.5 h-2.5 rounded-full border-[1.5px] border-white bg-transparent" />
