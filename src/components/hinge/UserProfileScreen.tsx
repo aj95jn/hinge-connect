@@ -111,7 +111,7 @@ export function UserProfileScreen({ profile, isPaid = false, onUpdateProfile, on
           {/* Bandwidth Status */}
           <div className="mb-6">
             <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-1.5 relative">
                 <h3 className="text-sm font-semibold text-foreground">Your Bandwidth Status</h3>
                 <button
                   onClick={() => setShowBandwidthInfo(!showBandwidthInfo)}
@@ -119,30 +119,32 @@ export function UserProfileScreen({ profile, isPaid = false, onUpdateProfile, on
                 >
                   <Info size={14} className="text-muted-foreground" />
                 </button>
+
+                {/* Info popup */}
+                <AnimatePresence>
+                  {showBandwidthInfo && (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.9, y: 4 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      exit={{ opacity: 0, scale: 0.9, y: 4 }}
+                      className="absolute top-7 left-0 z-50 w-64 bg-card rounded-xl p-3 shadow-lg border border-border"
+                    >
+                      <button
+                        onClick={() => setShowBandwidthInfo(false)}
+                        className="absolute top-2 right-2 p-0.5 rounded-full hover:bg-muted transition-colors"
+                      >
+                        <X size={12} className="text-muted-foreground" />
+                      </button>
+                      <p className="font-semibold text-foreground text-xs mb-1">What is Bandwidth?</p>
+                      <p className="text-[11px] text-muted-foreground leading-relaxed">
+                        Bandwidth lets others know how available you are to chat. Choose a status and make it visible on your profile so matches can see when you're most responsive.
+                      </p>
+                      {/* Arrow pointing up */}
+                      <div className="absolute -top-[5px] left-[90px] w-2.5 h-2.5 bg-card border-l border-t border-border rotate-45" />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
-              <div className="flex items-center gap-2">
-                <span className="text-xs text-muted-foreground">{profile.bandwidthVisible ? 'Public' : 'Private'}</span>
-                <Switch
-                  checked={profile.bandwidthVisible}
-                  onCheckedChange={(checked) => onToggleBandwidthVisible(checked)}
-                />
-              </div>
-            </div>
-            <AnimatePresence>
-              {showBandwidthInfo && (
-                <motion.div
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: 'auto', opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  className="overflow-hidden mb-3"
-                >
-                  <div className="bg-muted rounded-xl p-3 text-[11px] text-muted-foreground leading-relaxed">
-                    <p className="font-semibold text-foreground text-xs mb-1">What is Bandwidth?</p>
-                    <p>Bandwidth lets others know how available you are to chat. Choose a status and make it visible on your profile so matches can see when you're most responsive.</p>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
             {!profile.bandwidthVisible && (
               <p className="text-[11px] text-muted-foreground mb-3">
                 Your status is hidden. Toggle to make it visible on your profile.
