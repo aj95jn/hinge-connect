@@ -50,12 +50,12 @@ export function BottomNav({ activeTab, onTabChange, likesCount, matchesUnread }:
           >
             {renderIcon(key, activeTab === key)}
             {key === 'likes' && likesCount > 0 && (
-              <span className="absolute -top-1 -right-0.5 bg-hinge-rose text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+              <span className="absolute -top-1 -right-0.5 bg-purple-900 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
                 {likesCount}
               </span>
             )}
             {key === 'chat' && matchesUnread > 0 && (
-              <span className="absolute -top-1 -right-0.5 bg-hinge-rose text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+              <span className="absolute -top-1 -right-0.5 bg-purple-900 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
                 {matchesUnread}
               </span>
             )}
