@@ -100,9 +100,9 @@
   }
 
   .rose-glow-prompt {
-    background: white;
     border-radius: 1rem;
-    box-shadow: 0 0 24px 8px hsla(340, 70%, 45%, 0.5), 0 0 48px 16px hsla(340, 60%, 55%, 0.25);
+    box-shadow: 0 0 20px 6px hsla(340, 70%, 45%, 0.55), 0 0 40px 14px hsla(340, 60%, 50%, 0.3), inset 0 0 12px 2px hsla(340, 70%, 50%, 0.1);
+    border: 1.5px solid hsla(340, 70%, 50%, 0.4) !important;
     position: relative;
     overflow: visible;
   }
