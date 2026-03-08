@@ -30,8 +30,10 @@ export function ProfileCard({
   glowResults,
   likesRemaining,
   rosesRemaining,
+  isPaid,
   onLike,
   onSkip,
+  onGoBack,
 }: ProfileCardProps) {
   const [selectedTarget, setSelectedTarget] = useState<{
     type: 'photo' | 'prompt';
