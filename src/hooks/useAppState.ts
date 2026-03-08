@@ -103,11 +103,8 @@ export function useAppState() {
 
       const profile = discoverProfiles.find((p) => p.id === params.profileId);
       const name = profile?.name || 'Someone';
-      const now = new Date();
-      const timeStr = now.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
-      const dateStr = now.toLocaleDateString([], { month: 'short', day: 'numeric' });
       const likeType = params.isRose ? '🌹 Rose' : '❤️ Like';
-      toast.success(`${name} — ${likeType} sent · ${dateStr}, ${timeStr}`);
+      toast.success(`${name} — ${likeType} sent`);
       return true;
     },
     [isPaid, likesRemaining]
