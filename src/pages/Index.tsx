@@ -67,12 +67,12 @@ const Index = () => {
       setShowWhatsNew(true);
       const dismissTimer = setTimeout(() => setShowWhatsNew(false), 3000);
 
-      // Then repeat every 15s
+      // Then repeat every 10s
       const interval = setInterval(() => {
         if (hasSeenRef.current) return;
         setShowWhatsNew(true);
         setTimeout(() => setShowWhatsNew(false), 3000);
-      }, 15000);
+      }, 10000);
       whatsNewIntervalRef.current = interval;
 
       return () => {
