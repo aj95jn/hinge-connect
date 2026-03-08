@@ -1,55 +1,117 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, Sparkles, Heart, Undo2, Radio, Crown } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Sparkles, Heart, Undo2, Crown } from 'lucide-react';
 
 interface FeaturesWalkthroughProps {
   isPaid: boolean;
+}
+
+/* Matching the interlocking-circles icon from VibeSync.tsx */
+function VibeSyncIcon({ size = 28 }: { size?: number }) {
+  const r = size * 0.22;
+  const cx1 = size * 0.38;
+  const cx2 = size * 0.62;
+  const cy = size * 0.5;
+  return (
+    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} fill="none">
+      <circle cx={cx1} cy={cy} r={r} stroke="currentColor" strokeWidth={size * 0.08} fill="none" />
+      <circle cx={cx2} cy={cy} r={r} stroke="currentColor" strokeWidth={size * 0.08} fill="none" />
+    </svg>
+  );
+}
+
+/* Matching the person-with-signal-waves SVG from BandwidthStatus.tsx */
+function BandwidthIcon({ size = 28 }: { size?: number }) {
+  const scale = size / 18;
+  return (
+    <svg width={size} height={size} viewBox="0 0 18 14" fill="none">
+      <circle cx="6" cy="5" r={2 * scale * 0.6} fill="currentColor" />
+      <path d={`M3 11C3 8.8 4.3 7.5 6 7.5C7.7 7.5 9 8.8 9 11`} stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" fill="none" />
+      <path d="M11 7C12 5.8 12 4.2 11 3" stroke="currentColor" strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.5" />
+      <path d="M13.5 8.5C15 6.5 15 3.5 13.5 1.5" stroke="currentColor" strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.35" />
+    </svg>
+  );
 }
 
 const FEATURES = [
   {
     id: 'vibe-sync',
     title: 'Vibe Sync',
-    icon: <Sparkles size={28} className="text-hinge-gold" />,
-    color: 'hsl(45, 93%, 47%)',
+    icon: (
+      <span className="text-purple-300">
+        <VibeSyncIcon size={28} />
+      </span>
+    ),
     freeTag: 'BASIC',
     paidTag: 'FULL ACCESS',
     visual: (isPaid: boolean) => (
       <div className="flex flex-col items-center gap-3">
-        {/* Mini profile mockup with Vibe Sync badge */}
-        <div className="w-full max-w-[220px] bg-card rounded-2xl border border-border p-4 shadow-sm">
-          <div className="flex items-center gap-2 mb-3">
-            <div className="w-8 h-8 rounded-full bg-muted" />
-            <div>
-              <div className="h-2.5 w-16 bg-muted rounded-full" />
-              <div className="h-2 w-10 bg-muted rounded-full mt-1" />
-            </div>
-          </div>
-          <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: 0.3, type: 'spring' }}
-            className="flex items-center justify-center gap-1.5 bg-accent rounded-full px-3 py-1.5 mx-auto w-fit"
-          >
-            <Sparkles size={12} className="text-hinge-gold" />
-            <span className="text-[11px] font-semibold text-foreground">
-              {isPaid ? 'Shared Conversation Style' : 'Vibe Sync ✓'}
-            </span>
-          </motion.div>
-        </div>
-        <p className="text-[11px] text-muted-foreground text-center max-w-[200px]">
-          {isPaid
-            ? 'See exactly how you match — conversation style, reply pace, and depth.'
-            : 'Badges appear on compatible profiles. Upgrade for detailed labels.'}
+        {/* Why Vibe Sync */}
+        <p className="text-[11px] text-muted-foreground text-center max-w-[240px] mb-1">
+          Vibe Sync analyzes how you and a match communicate — reply speed, message length, and shared values — then surfaces a badge so you know <em>why</em> you click.
         </p>
+
+        {/* Example badges */}
+        <div className="flex flex-col gap-2 w-full max-w-[240px]">
+          {[
+            { label: 'Shared Conversation Style', desc: isPaid ? 'You both send 3+ sentences per message' : 'You both write longer texts' },
+            { label: 'Fast-Paced Match', desc: isPaid ? 'You both reply within 2 hours' : 'You both reply fast' },
+            { label: 'Deep Common Ground', desc: isPaid ? 'High overlap in core value answers' : 'You share core values' },
+          ].map((badge, i) => (
+            <motion.div
+              key={badge.label}
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.15 * i }}
+              className="bg-muted rounded-xl px-3 py-2.5"
+            >
+              <div className="flex items-center gap-1.5 mb-1">
+                {/* Interlocking circles like the real badge */}
+                <div className="flex items-center -space-x-0.5">
+                  <div className="w-2.5 h-2.5 rounded-full border-[1.5px] border-purple-300 bg-transparent" />
+                  <div className="w-2.5 h-2.5 rounded-full border-[1.5px] border-purple-300 bg-transparent" />
+                </div>
+                <span className="text-[11px] font-bold text-foreground">{badge.label}</span>
+              </div>
+              <p className="text-[10px] text-muted-foreground">{badge.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* How it looks on a profile */}
+        <div className="w-full max-w-[240px] mt-1">
+          <p className="text-[9px] uppercase tracking-wider text-muted-foreground mb-1.5 text-center">How it appears</p>
+          <div className="bg-card rounded-2xl border border-border p-3 shadow-sm">
+            <div className="flex items-center gap-2 mb-2">
+              <div className="w-7 h-7 rounded-full bg-muted" />
+              <div>
+                <div className="h-2.5 w-14 bg-muted rounded-full" />
+                <div className="h-2 w-9 bg-muted rounded-full mt-1" />
+              </div>
+            </div>
+            <motion.div
+              initial={{ scale: 0.85, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: 0.5, type: 'spring' }}
+              className="inline-flex items-center gap-1 bg-purple-900 rounded-full px-2 py-0.5"
+            >
+              <div className="flex items-center -space-x-0.5">
+                <div className="w-2.5 h-2.5 rounded-full border-[1.5px] border-white bg-transparent" />
+                <div className="w-2.5 h-2.5 rounded-full border-[1.5px] border-white bg-transparent" />
+              </div>
+              <span className="text-[10px] font-bold text-white">
+                {isPaid ? 'Shared Conversation Style' : 'Vibe Sync ✓'}
+              </span>
+            </motion.div>
+          </div>
+        </div>
       </div>
     ),
   },
   {
     id: 'bridge-builder',
     title: 'Bridge Builder',
-    icon: <Heart size={28} className="text-hinge-rose" />,
-    color: 'hsl(340, 70%, 50%)',
+    icon: <Sparkles size={28} className="text-hinge-rose" />,
     freeTag: '2 PROFILES',
     paidTag: 'UNLIMITED',
     visual: (isPaid: boolean) => (
@@ -66,17 +128,26 @@ const FEATURES = [
               ],
             }}
             transition={{ duration: 2, repeat: Infinity }}
-            className="bg-card rounded-2xl p-4 border border-border"
+            className="bg-card rounded-2xl p-4 border border-border relative overflow-visible"
             style={{ borderColor: 'hsla(340, 70%, 50%, 0.4)' }}
           >
+            {/* Shared interest chip */}
+            <div className="flex items-center gap-1 mb-2">
+              <Sparkles size={11} className="text-hinge-gold" />
+              <span className="text-[10px] font-medium text-hinge-orange">You both love: cooking, travel</span>
+            </div>
             <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider mb-1.5">
               A life goal of mine
             </p>
             <p className="text-foreground font-hinge-serif text-sm leading-relaxed">
               Travel to Japan and learn to cook authentic ramen 🍜
             </p>
+            {/* Like button like the real card */}
+            <div className="absolute bottom-2.5 right-2.5 bg-muted rounded-full p-1.5">
+              <Heart size={14} strokeWidth={2.5} className="text-foreground" />
+            </div>
             {/* Floating stars */}
-            {['top-1 left-2', 'top-0 right-4', 'bottom-2 left-6', 'bottom-1 right-2', 'top-3 right-1'].map((pos, i) => (
+            {['top-1 left-2', 'top-0 right-4', 'bottom-2 left-6', 'bottom-1 right-2', 'top-3 right-1', '-top-1 left-8'].map((pos, i) => (
               <motion.span
                 key={i}
                 className={`absolute ${pos} text-hinge-rose text-[10px] pointer-events-none`}
@@ -110,12 +181,43 @@ const FEATURES = [
   {
     id: 'bandwidth',
     title: 'Bandwidth',
-    icon: <Radio size={28} className="text-primary" />,
-    color: 'hsl(var(--primary))',
+    icon: (
+      <span className="text-primary">
+        <BandwidthIcon size={28} />
+      </span>
+    ),
     freeTag: 'HIDDEN',
     paidTag: 'VISIBLE',
     visual: (isPaid: boolean) => (
       <div className="flex flex-col items-center gap-3">
+        {/* How it looks on a profile */}
+        <div className="w-full max-w-[240px]">
+          <p className="text-[9px] uppercase tracking-wider text-muted-foreground mb-1.5 text-center">How it appears</p>
+          <div className="bg-card rounded-2xl border border-border p-3 shadow-sm mb-3">
+            <div className="flex items-center gap-2 mb-2">
+              <div className="w-7 h-7 rounded-full bg-muted" />
+              <div>
+                <div className="h-2.5 w-14 bg-muted rounded-full" />
+                <div className="h-2 w-9 bg-muted rounded-full mt-1" />
+              </div>
+            </div>
+            <motion.button
+              initial={{ scale: 0.85, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: 0.3, type: 'spring' }}
+              className="inline-flex items-center gap-1 bg-purple-900 rounded-full px-2 py-0.5"
+            >
+              <svg width="14" height="12" viewBox="0 0 18 14" fill="none" className="shrink-0">
+                <circle cx="6" cy="5" r="2" fill="white" />
+                <path d="M3 11C3 8.8 4.3 7.5 6 7.5C7.7 7.5 9 8.8 9 11" stroke="white" strokeWidth="1.2" strokeLinecap="round" fill="none" />
+                <path d="M11 7C12 5.8 12 4.2 11 3" stroke="white" strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.5" />
+                <path d="M13.5 8.5C15 6.5 15 3.5 13.5 1.5" stroke="white" strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.35" />
+              </svg>
+              <span className="text-[10px] font-bold text-white">Ready to Connect</span>
+            </motion.button>
+          </div>
+        </div>
+
         {/* Status pills demo */}
         <div className="flex flex-col gap-2 w-full max-w-[220px]">
           {[
@@ -150,7 +252,6 @@ const FEATURES = [
     id: 'effort-insurance',
     title: 'Effort Insurance',
     icon: <Undo2 size={28} className="text-primary" />,
-    color: 'hsl(var(--primary))',
     freeTag: '1 REFUND',
     paidTag: 'UNLIMITED',
     visual: (isPaid: boolean) => (
@@ -206,7 +307,7 @@ export function FeaturesWalkthrough({ isPaid }: FeaturesWalkthroughProps) {
   return (
     <div className="px-4 pt-2 pb-24">
       {/* Carousel */}
-      <div className="relative overflow-hidden rounded-2xl bg-card border border-border min-h-[360px]">
+      <div className="relative overflow-hidden rounded-2xl bg-card border border-border min-h-[380px]">
         <AnimatePresence mode="wait" custom={direction}>
           <motion.div
             key={feature.id}
