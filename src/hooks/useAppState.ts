@@ -52,7 +52,7 @@ export function useAppState() {
           ) {
             const profile = discoverProfiles.find((p) => p.id === like.toProfileId);
             if (profile) {
-              setShowRefundPopup({ profileName: profile.name });
+              setShowRefundPopup({ profileName: profile.name, likeTimestamp: like.timestamp });
               setLikesRemaining((r) => r + 1);
               if (!isPaid) setFreeRefundUsed(true);
               refundTriggered = true;
