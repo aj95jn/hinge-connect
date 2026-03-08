@@ -16,10 +16,13 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background max-w-md mx-auto relative">
       {/* Top bar */}
-      <div className="sticky top-0 z-40 bg-background/80 backdrop-blur-md border-b border-border px-4 py-3">
-        <h1 className="font-hinge-serif text-xl font-bold text-foreground tracking-tight">
-          hinge
-        </h1>
+      <div className="sticky top-0 z-40 bg-background/80 backdrop-blur-md border-b border-border px-4 py-3 flex items-center gap-3">
+        <SlidersHorizontal size={20} className="text-foreground shrink-0" />
+        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
+          <FilterPill label="Age" filled />
+          <FilterPill label="Height" />
+          <FilterPill label="Dating Intentions" filled />
+        </div>
       </div>
 
       {/* Content */}
