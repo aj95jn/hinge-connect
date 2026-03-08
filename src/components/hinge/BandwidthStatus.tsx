@@ -54,11 +54,14 @@ export function BandwidthStatusPill({ status, isPaid = false }: BandwidthStatusP
         onClick={(e) => { e.stopPropagation(); setShowTooltip((v) => !v); }}
         className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold ${config.color}`}
       >
-        <div className="flex items-end gap-[1.5px] h-2.5">
-          <div className="w-[2px] h-[40%] bg-white rounded-full" />
-          <div className="w-[2px] h-[65%] bg-white rounded-full" />
-          <div className="w-[2px] h-[90%] bg-white rounded-full" />
-        </div>
+        {/* Heart with signal waves */}
+        <svg width="12" height="12" viewBox="0 0 16 16" fill="none" className="shrink-0">
+          {/* Tiny heart */}
+          <path d="M8 12.5L2.5 7.5C1.5 6.5 1.5 4.5 3 3.5C4.5 2.5 6 3 7 4L8 5L9 4C10 3 11.5 2.5 13 3.5C14.5 4.5 14.5 6.5 13.5 7.5L8 12.5Z" fill="white" />
+          {/* Signal arcs radiating from heart */}
+          <path d="M1.5 8.5C0.3 6.5 0.8 3.8 2.5 2.2" stroke="white" strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.6" />
+          <path d="M14.5 8.5C15.7 6.5 15.2 3.8 13.5 2.2" stroke="white" strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.6" />
+        </svg>
         {config.label}
       </button>
 
