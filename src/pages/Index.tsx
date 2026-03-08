@@ -368,6 +368,16 @@ const Index = () => {
           </>
         )}
 
+        {state.activeTab === 'standouts' && (
+          <StandoutsScreen
+            profiles={standoutProfiles}
+            rosesRemaining={state.rosesRemaining}
+            onSendRose={(profileId, promptIndex, message) => {
+              // Uses rose from state
+            }}
+          />
+        )}
+
         {state.activeTab === 'likes' && (
           <LikesYouScreen
             likes={state.likesReceived}
