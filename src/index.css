@@ -128,9 +128,38 @@
     animation: twinkle 2s ease-in-out infinite 0.5s;
   }
 
+  .rose-glow-star {
+    position: absolute;
+    color: hsla(340, 70%, 55%, 0.75);
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  .rose-glow-star:nth-child(1) { top: -10px; left: 30%; font-size: 7px; animation: twinkle-drift-1 3s ease-in-out infinite; }
+  .rose-glow-star:nth-child(2) { top: 20%; right: -8px; font-size: 9px; animation: twinkle-drift-2 2.5s ease-in-out infinite 0.3s; }
+  .rose-glow-star:nth-child(3) { bottom: -8px; right: 40%; font-size: 6px; animation: twinkle-drift-3 3.5s ease-in-out infinite 0.7s; }
+  .rose-glow-star:nth-child(4) { top: 50%; left: -7px; font-size: 8px; animation: twinkle-drift-2 2.8s ease-in-out infinite 1s; }
+  .rose-glow-star:nth-child(5) { top: -6px; left: 60%; font-size: 5px; animation: twinkle-drift-1 2.2s ease-in-out infinite 0.5s; }
+  .rose-glow-star:nth-child(6) { bottom: -7px; right: 15%; font-size: 7px; animation: twinkle-drift-3 3s ease-in-out infinite 1.2s; }
+
   @keyframes twinkle {
     0%, 100% { opacity: 0.4; transform: scale(0.8); }
     50% { opacity: 1; transform: scale(1.1); }
+  }
+
+  @keyframes twinkle-drift-1 {
+    0%, 100% { opacity: 0.3; transform: scale(0.7) translate(0, 0); }
+    50% { opacity: 1; transform: scale(1.2) translate(3px, -3px); }
+  }
+
+  @keyframes twinkle-drift-2 {
+    0%, 100% { opacity: 0.35; transform: scale(0.8) translate(0, 0); }
+    50% { opacity: 0.95; transform: scale(1.15) translate(-2px, 2px); }
+  }
+
+  @keyframes twinkle-drift-3 {
+    0%, 100% { opacity: 0.25; transform: scale(0.75) translate(0, 0); }
+    50% { opacity: 1; transform: scale(1.1) translate(2px, 3px); }
   }
 
   @keyframes shimmer {
