@@ -145,6 +145,14 @@ export function UserProfileScreen({ profile, isPaid = false, onUpdateProfile, on
                   )}
                 </AnimatePresence>
               </div>
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-muted-foreground">{profile.bandwidthVisible ? 'Public' : 'Private'}</span>
+                <Switch
+                  checked={profile.bandwidthVisible}
+                  onCheckedChange={(checked) => onToggleBandwidthVisible(checked)}
+                />
+              </div>
+            </div>
             {!profile.bandwidthVisible && (
               <p className="text-[11px] text-muted-foreground mb-3">
                 Your status is hidden. Toggle to make it visible on your profile.
