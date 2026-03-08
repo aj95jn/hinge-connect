@@ -6,7 +6,7 @@ import { LikesYouScreen } from '@/components/hinge/LikesYouScreen';
 import { MessagingScreen } from '@/components/hinge/MessagingScreen';
 import { UserProfileScreen } from '@/components/hinge/UserProfileScreen';
 import { RefundPopup } from '@/components/hinge/RefundPopup';
-import { Heart } from 'lucide-react';
+import { Heart, SlidersHorizontal, ChevronDown } from 'lucide-react';
 
 const Index = () => {
   const state = useAppState();
