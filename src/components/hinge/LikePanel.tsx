@@ -64,7 +64,7 @@ export function LikePanel({ ghostText, rosesRemaining, onSend, onCancel }: LikeP
         </div>
 
         {/* Cancel */}
-        <div className="flex justify-end">
+        <div className="flex justify-center">
           <button
             onClick={onCancel}
             className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-muted transition-colors"
