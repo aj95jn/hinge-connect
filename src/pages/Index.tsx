@@ -262,6 +262,11 @@ const Index = () => {
               )}
             </AnimatePresence>
           </div>
+
+          {/* Active Now - partially visible, unclickable */}
+          <div className="shrink-0 opacity-50 pointer-events-none" style={{ clipPath: 'inset(0 40% 0 0)' }}>
+            <FilterPill label="Active Now" />
+          </div>
         </div>
       </div>
 
