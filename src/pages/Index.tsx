@@ -399,31 +399,33 @@ const Index = () => {
       <AnimatePresence>
         {showWhatsNew && state.activeTab === 'discover' && (
           <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-            className="fixed bottom-24 left-1/2 -translate-x-1/2 z-40"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 8 }}
+            transition={{ duration: 0.2 }}
+            className="fixed bottom-[72px] right-4 z-40 max-w-[200px]"
           >
             <div
               onClick={() => {
                 setShowWhatsNew(false);
                 state.setActiveTab('profile');
               }}
-              className="flex items-center gap-2 bg-foreground text-background pl-3 pr-2 py-2 rounded-full shadow-lg cursor-pointer hover:opacity-90 transition-opacity"
+              className="flex items-center gap-1.5 bg-foreground text-background pl-2.5 pr-1.5 py-1.5 rounded-lg shadow-md cursor-pointer hover:opacity-90 transition-opacity"
             >
-              <Zap size={14} className="text-primary-foreground" />
-              <span className="text-xs font-semibold whitespace-nowrap">Explore What's New</span>
+              <Zap size={11} />
+              <span className="text-[10px] font-semibold">What's New</span>
               <button
                 onClick={(e) => {
                   e.stopPropagation();
                   setShowWhatsNew(false);
                 }}
-                className="p-0.5 rounded-full hover:bg-background/20 transition-colors"
+                className="p-0.5 rounded-full hover:bg-background/20 transition-colors ml-0.5"
               >
-                <X size={12} />
+                <X size={10} />
               </button>
             </div>
+            {/* Arrow pointing to profile tab */}
+            <div className="absolute -bottom-1 right-6 w-2 h-2 bg-foreground rotate-45" />
           </motion.div>
         )}
       </AnimatePresence>
