@@ -168,7 +168,7 @@ export const discoverProfiles: Profile[] = [
     vibeData: { avgMessageLength: 3, avgReplyTimeMinutes: 5 },
   },
   {
-    id: 'mia', name: 'Mia', gender: 'Female', location: 'Greenwich Village, NY',
+    id: 'mia', name: 'Mia', gender: 'Female', location: 'Greenwich Village, NY', verified: true,
     photos: [
       { url: mia1, tags: ['books', 'city'] },
       { url: mia2, tags: ['books', 'intellectual'] },
