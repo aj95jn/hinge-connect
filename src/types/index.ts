@@ -7,6 +7,17 @@ export interface Prompt {
   bridgeGhostText?: string;
 }
 
+export interface ProfileVitals {
+  age?: number;
+  gender?: string;
+  orientation?: string;
+  religion?: string;
+  politics?: string;
+  ethnicity?: string;
+  datingGoals?: string;
+  relationshipType?: string;
+}
+
 export interface Profile {
   id: string;
   name: string;
@@ -23,6 +34,7 @@ export interface Profile {
     avgMessageLength: number;
     avgReplyTimeMinutes: number;
   };
+  vitals?: ProfileVitals;
 }
 
 export interface Like {
