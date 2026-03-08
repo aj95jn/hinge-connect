@@ -58,31 +58,31 @@ const Index = () => {
     }
   }, []);
 
-  // Show popup on discover tab: immediately + every 15s
+  // Show popup immediately + every 10s on any tab (except profile)
   useEffect(() => {
     if (hasSeenWhatsNew) return;
-
-    if (state.activeTab === 'discover') {
-      // Show immediately
-      setShowWhatsNew(true);
-      const dismissTimer = setTimeout(() => setShowWhatsNew(false), 3000);
-
-      // Then repeat every 10s
-      const interval = setInterval(() => {
-        if (hasSeenRef.current) return;
-        setShowWhatsNew(true);
-        setTimeout(() => setShowWhatsNew(false), 3000);
-      }, 10000);
-      whatsNewIntervalRef.current = interval;
-
-      return () => {
-        clearTimeout(dismissTimer);
-        clearInterval(interval);
-        whatsNewIntervalRef.current = null;
-      };
-    } else {
+    if (state.activeTab === 'profile') {
       setShowWhatsNew(false);
+      return;
     }
+
+    // Show immediately
+    setShowWhatsNew(true);
+    const dismissTimer = setTimeout(() => setShowWhatsNew(false), 3000);
+
+    // Then repeat every 10s
+    const interval = setInterval(() => {
+      if (hasSeenRef.current) return;
+      setShowWhatsNew(true);
+      setTimeout(() => setShowWhatsNew(false), 3000);
+    }, 10000);
+    whatsNewIntervalRef.current = interval;
+
+    return () => {
+      clearTimeout(dismissTimer);
+      clearInterval(interval);
+      whatsNewIntervalRef.current = null;
+    };
   }, [state.activeTab, hasSeenWhatsNew]);
 
   // Track likes — show popup every 3 likes
