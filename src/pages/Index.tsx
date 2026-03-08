@@ -7,7 +7,7 @@ import { LikesYouScreen } from '@/components/hinge/LikesYouScreen';
 import { MessagingScreen } from '@/components/hinge/MessagingScreen';
 import { UserProfileScreen } from '@/components/hinge/UserProfileScreen';
 import { RefundPopup } from '@/components/hinge/RefundPopup';
-import { Heart, SlidersHorizontal, ChevronDown, X } from 'lucide-react';
+import { Heart, SlidersHorizontal, ChevronDown, X, Zap } from 'lucide-react';
 
 // Filter options
 const AGE_OPTIONS = Array.from({ length: 43 }, (_, i) => i + 18); // 18-60
