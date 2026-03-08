@@ -96,7 +96,8 @@ export const discoverProfiles: Profile[] = [
     preferences: ['wine', 'art', 'music', 'romance'],
     bandwidthStatus: 'ready', showVibeSync: true,
     vitals: { age: 29, gender: 'Woman', orientation: 'Straight', religion: 'Spiritual', politics: 'Liberal' },
-    vibeData: { avgMessageLength: 5, avgReplyTimeMinutes: 0.8 },
+    vibeData: { avgMessageLength: 5, avgReplyTimeMinutes: 0.8, profileReadTimeSec: 22 },
+    coreValues: ['food', 'deep-conversations', 'philosophy', 'adventure'],
   },
   {
     id: 'lily', name: 'Lily', gender: 'Female', location: 'Midtown, NY',
