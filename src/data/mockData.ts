@@ -153,6 +153,7 @@ export const discoverProfiles: Profile[] = [
       { id: 'ap3', question: 'Something I\'ll never shut up about', answer: 'How underrated Harlem\'s food scene is. Fight me on it.', interests: ['food', 'community', 'culture'] },
     ],
     preferences: ['music', 'dancing', 'volunteering', 'food', 'community'],
+    vitals: { age: 28, gender: 'Woman', orientation: 'Queer', ethnicity: 'Black', religion: 'Christian', datingGoals: 'Looking for a relationship' },
     showVibeSync: true, bandwidthStatus: 'ready',
     vibeData: { avgMessageLength: 4, avgReplyTimeMinutes: 0.4 },
   },
