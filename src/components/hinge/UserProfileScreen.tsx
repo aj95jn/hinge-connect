@@ -20,9 +20,10 @@ interface UserProfileScreenProps {
   onUpdateProfile: (updates: Partial<Profile>) => void;
   onUpdateBandwidth: (status: BandwidthStatus) => void;
   onToggleBandwidthVisible: (visible: boolean) => void;
+  onViewWhatsNew?: () => void;
 }
 
-export function UserProfileScreen({ profile, isPaid = false, onUpdateProfile, onUpdateBandwidth, onToggleBandwidthVisible }: UserProfileScreenProps) {
+export function UserProfileScreen({ profile, isPaid = false, onUpdateProfile, onUpdateBandwidth, onToggleBandwidthVisible, onViewWhatsNew }: UserProfileScreenProps) {
   const [editingPrompt, setEditingPrompt] = useState<string | null>(null);
   const [editText, setEditText] = useState('');
   const [showInterestPicker, setShowInterestPicker] = useState(false);
@@ -83,7 +84,7 @@ export function UserProfileScreen({ profile, isPaid = false, onUpdateProfile, on
             Profile
           </button>
           <button
-            onClick={() => setActiveTab('features')}
+            onClick={() => { setActiveTab('features'); onViewWhatsNew?.(); }}
             className={`flex-1 py-2 rounded-lg text-xs font-semibold transition-all flex items-center justify-center gap-1.5 ${
               activeTab === 'features'
                 ? 'bg-background text-foreground shadow-sm'

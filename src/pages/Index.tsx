@@ -41,45 +41,64 @@ const Index = () => {
     intentions: string[];
   }>({ age: null, height: null, intentions: [] });
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const [hasVisitedProfile, setHasVisitedProfile] = useState(false);
+  const [hasSeenWhatsNew, setHasSeenWhatsNew] = useState(false);
   const [showWhatsNew, setShowWhatsNew] = useState(false);
-  const [whatsNewCount, setWhatsNewCount] = useState(0);
   const whatsNewTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const likesSincePopupRef = useRef(0);
 
-  // Track profile visits
+  // Stop popup forever once user views "What's New" tab in profile
+  const markWhatsNewSeen = useCallback(() => {
+    setHasSeenWhatsNew(true);
+    setShowWhatsNew(false);
+    if (whatsNewTimerRef.current) clearTimeout(whatsNewTimerRef.current);
+  }, []);
+
+  // Flash the popup briefly
+  const flashWhatsNew = useCallback(() => {
+    if (hasSeenWhatsNew) return;
+    setShowWhatsNew(true);
+    likesSincePopupRef.current = 0;
+    setTimeout(() => setShowWhatsNew(false), 3000);
+  }, [hasSeenWhatsNew]);
+
+  // Every 60s on discover tab, show popup
   useEffect(() => {
-    if (state.activeTab === 'profile') {
-      setHasVisitedProfile(true);
-      setShowWhatsNew(false);
+    if (state.activeTab !== 'discover' || hasSeenWhatsNew) {
       if (whatsNewTimerRef.current) clearTimeout(whatsNewTimerRef.current);
+      return;
     }
-  }, [state.activeTab]);
-
-  // Show "What's New" popup a few times on discover tab until user visits profile
-  const maxPopups = 3;
-  const scheduleWhatsNew = useCallback(() => {
-    if (hasVisitedProfile || whatsNewCount >= maxPopups) return;
-    const delay = 8000 + Math.random() * 20000; // 8–28s random
-    whatsNewTimerRef.current = setTimeout(() => {
-      if (!hasVisitedProfile && whatsNewCount < maxPopups) {
-        setShowWhatsNew(true);
-        setWhatsNewCount((c) => c + 1);
-        // Auto-dismiss after 3s
-        setTimeout(() => setShowWhatsNew(false), 3000);
-        // Schedule next appearance
-        scheduleWhatsNew();
-      }
-    }, delay);
-  }, [hasVisitedProfile, whatsNewCount]);
-
-  useEffect(() => {
-    if (state.activeTab === 'discover' && !hasVisitedProfile) {
-      scheduleWhatsNew();
-    }
+    const schedule = () => {
+      whatsNewTimerRef.current = setTimeout(() => {
+        flashWhatsNew();
+        schedule();
+      }, 60000);
+    };
+    schedule();
     return () => {
       if (whatsNewTimerRef.current) clearTimeout(whatsNewTimerRef.current);
     };
-  }, [state.activeTab, hasVisitedProfile, scheduleWhatsNew]);
+  }, [state.activeTab, hasSeenWhatsNew, flashWhatsNew]);
+
+  // Track likes — show popup every 3 likes
+  const handleLikeWithPopup = useCallback((params: {
+    targetType: 'photo' | 'prompt';
+    targetIndex: number;
+    message?: string;
+    isRose?: boolean;
+    isPriority?: boolean;
+  }) => {
+    const result = state.sendLike({
+      profileId: state.currentProfile!.id,
+      ...params,
+    });
+    if (!hasSeenWhatsNew) {
+      likesSincePopupRef.current += 1;
+      if (likesSincePopupRef.current >= 3) {
+        flashWhatsNew();
+      }
+    }
+    return result;
+  }, [state, hasSeenWhatsNew, flashWhatsNew]);
 
   const matchesUnread = state.matches.filter((m) => m.unread).length;
 
@@ -321,12 +340,7 @@ const Index = () => {
                 likesRemaining={state.likesRemaining}
                 rosesRemaining={state.rosesRemaining}
                 isPaid={state.isPaid}
-                onLike={(params) =>
-                  state.sendLike({
-                    profileId: state.currentProfile!.id,
-                    ...params,
-                  })
-                }
+                onLike={handleLikeWithPopup}
                 onSkip={state.skipProfile}
                 onGoBack={state.goBackProfile}
               />
@@ -386,6 +400,7 @@ const Index = () => {
             onToggleBandwidthVisible={(visible) => {
               state.updateUserProfile({ bandwidthVisible: visible });
             }}
+            onViewWhatsNew={markWhatsNewSeen}
           />
         )}
       </div>
