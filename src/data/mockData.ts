@@ -36,14 +36,14 @@ export const discoverProfiles: Profile[] = [
   {
     id: 'sarah', name: 'Sarah', gender: 'Female', location: 'Brooklyn, NY', verified: true,
     photos: [
-      { url: sarahProfile, tags: ['city', 'casual'] },
-      { url: sarah2, tags: ['food', 'outdoors'] },
+      { url: sarahProfile, tags: ['city', 'travel'] },
+      { url: sarah2, tags: ['food', 'cooking'] },
       { url: sarah3, tags: ['hiking', 'outdoors'] },
     ],
     prompts: [
-      { id: 'p1', question: 'A life goal of mine', answer: 'To visit every continent before 30. Just got back from Tokyo and it completely changed my perspective on life.', interests: ['travel', 'adventure', 'tokyo'] },
-      { id: 'p2', question: 'I get along best with people who', answer: 'Can debate philosophy over cheap wine and still laugh about it the next morning.', interests: ['philosophy', 'deep-conversations', 'humor'] },
-      { id: 'p3', question: 'My simple pleasures', answer: 'Sunday morning farmers markets, a good podcast on a rainy day, and homemade pasta.', interests: ['cooking', 'food', 'relaxation'] },
+      { id: 'p1', question: 'My biggest travel fail', answer: 'Getting lost in Tokyo without a map and loving it.', interests: ['travel', 'adventure'], isBridgeBuilder: true, bridgeGhostText: 'What\'s your best travel mishap?' },
+      { id: 'p2', question: 'The hallmark of a good relationship is', answer: 'Being able to sit in silence together and it feeling like the most interesting conversation.', interests: ['philosophy', 'deep-conversations'] },
+      { id: 'p3', question: 'I\'m weirdly attracted to', answer: 'People who can cook a full meal from whatever\'s left in the fridge. That\'s a superpower.', interests: ['cooking', 'food', 'humor'] },
     ],
     preferences: ['travel', 'philosophy', 'cooking', 'adventure'],
     bandwidthStatus: 'focusing', showVibeSync: true,
@@ -54,12 +54,12 @@ export const discoverProfiles: Profile[] = [
     id: 'maya', name: 'Maya', gender: 'Female', location: 'Manhattan, NY',
     photos: [
       { url: mayaProfile, tags: ['books', 'intellectual'] },
-      { url: maya2, tags: ['books', 'café'] },
+      { url: maya2, tags: ['books', 'deep-conversations'] },
     ],
     prompts: [
-      { id: 'p4', question: 'The way to win me over is', answer: 'Show up with a book recommendation and tell me why it matters to you.', interests: ['books', 'intellectual', 'deep-conversations'] },
-      { id: 'p5', question: 'My most irrational fear', answer: 'That my houseplants are secretly judging my life choices.', interests: ['humor', 'plants'] },
-      { id: 'p6', question: 'Typical Sunday', answer: 'Yoga at sunrise, brunch with friends, then getting lost in a museum.', interests: ['yoga', 'art', 'social'] },
+      { id: 'p4', question: 'Change my mind about', answer: 'Dog-earing pages. Some of us like our books to look lived-in, not pristine.', interests: ['books', 'humor'] },
+      { id: 'p5', question: 'Two truths and a lie', answer: 'I\'ve read War and Peace twice. I once meditated for 10 days straight. I can touch my nose with my tongue.', interests: ['books', 'yoga', 'humor'] },
+      { id: 'p6', question: 'A boundary of mine is', answer: 'No phones at dinner. If the food\'s good and the company\'s better, the screen can wait.', interests: ['mindfulness', 'food', 'deep-conversations'] },
     ],
     preferences: ['books', 'yoga', 'art', 'wellness'],
     bandwidthStatus: 'weekend', showVibeSync: false,
@@ -69,13 +69,13 @@ export const discoverProfiles: Profile[] = [
   {
     id: 'emma', name: 'Emma', gender: 'Female', location: 'Williamsburg, NY', verified: true,
     photos: [
-      { url: emmaProfile, tags: ['nightlife', 'social'] },
+      { url: emmaProfile, tags: ['music', 'social'] },
       { url: emma2, tags: ['music', 'karaoke'] },
     ],
     prompts: [
-      { id: 'p7', question: 'I\'m convinced that', answer: 'The best conversations happen after midnight with strangers who become friends.', interests: ['deep-conversations', 'social', 'nightlife'] },
-      { id: 'p8', question: 'Green flags I look for', answer: 'You remember the little things, you\'re kind to waiters, and you can laugh at yourself.', interests: ['kindness', 'humor', 'empathy'] },
-      { id: 'p9', question: 'My go-to karaoke song', answer: 'Don\'t Stop Believin\' — and yes, I do the air guitar.', interests: ['music', 'fun', 'karaoke'] },
+      { id: 'p7', question: 'The dorkiest thing about me', answer: 'I have a spreadsheet ranking every pizza place in Brooklyn. Currently at 47 entries.', interests: ['food', 'humor', 'organization'] },
+      { id: 'p8', question: 'I bet you can\'t', answer: 'Beat me at Scrabble. I have a winning streak going since 2019. It\'s a whole personality at this point.', interests: ['humor', 'games'] },
+      { id: 'p9', question: 'After work you can find me', answer: 'At whatever dive bar has the best jukebox. Bonus points if they serve tater tots.', interests: ['music', 'nightlife', 'food'] },
     ],
     preferences: ['music', 'nightlife', 'fashion', 'humor'],
     showVibeSync: true,
@@ -85,12 +85,12 @@ export const discoverProfiles: Profile[] = [
   {
     id: 'sophia', name: 'Sophia', gender: 'Female', location: 'West Village, NY', verified: true,
     photos: [
-      { url: sophiaProfile, tags: ['city', 'elegant'] },
+      { url: sophiaProfile, tags: ['art', 'music'] },
     ],
     prompts: [
-      { id: 'sp1', question: 'A perfect date looks like', answer: 'Wine tasting followed by a walk through the village, ending at a hidden jazz bar.', interests: ['wine', 'music', 'adventure'] },
-      { id: 'sp2', question: 'My creative outlet', answer: 'Painting. There\'s something about putting brush to canvas that quiets everything else.', interests: ['art', 'creative', 'mindfulness'] },
-      { id: 'sp3', question: 'I\'m looking for someone who', answer: 'Appreciates the little things — a good sunset, a handwritten note, an unexpected detour.', interests: ['romance', 'adventure', 'mindfulness'] },
+      { id: 'sp1', question: 'My therapist would say I', answer: 'Use cooking elaborate meals as a coping mechanism. And honestly? It works.', interests: ['cooking', 'food', 'humor'] },
+      { id: 'sp2', question: 'One thing I\'d love to know about you', answer: 'What you\'d choose for your last meal. It says everything about a person.', interests: ['food', 'deep-conversations', 'philosophy'] },
+      { id: 'sp3', question: 'Dating me is like', answer: 'Getting a personal tour guide to every hidden gem in the city. I know places Google doesn\'t.', interests: ['adventure', 'travel', 'exploration'] },
     ],
     preferences: ['wine', 'art', 'music', 'romance'],
     bandwidthStatus: 'ready', showVibeSync: true,
@@ -100,12 +100,12 @@ export const discoverProfiles: Profile[] = [
   {
     id: 'lily', name: 'Lily', gender: 'Female', location: 'Midtown, NY',
     photos: [
-      { url: lilyProfile, tags: ['city', 'casual'] },
+      { url: lilyProfile, tags: ['music', 'food'] },
     ],
     prompts: [
-      { id: 'lp1', question: 'The quickest way to my heart', answer: 'Take me to a hole-in-the-wall ramen spot and share your Spotify Wrapped.', interests: ['food', 'music', 'adventure'] },
-      { id: 'lp2', question: 'My hidden talent', answer: 'I can play three instruments but can\'t carry a tune to save my life.', interests: ['music', 'humor'] },
-      { id: 'lp3', question: 'I geek out on', answer: 'True crime podcasts, keyboard shortcuts, and perfectly organized spreadsheets.', interests: ['tech', 'podcasts', 'organization'] },
+      { id: 'lp1', question: 'My most controversial opinion', answer: 'Breakfast for dinner is superior to dinner for dinner. Every. Single. Time.', interests: ['food', 'humor'] },
+      { id: 'lp2', question: 'I want someone who', answer: 'Sends me songs at 2am with "this reminded me of you" and means it.', interests: ['music', 'romance', 'deep-conversations'] },
+      { id: 'lp3', question: 'This year I really want to', answer: 'Learn to DJ. I already have strong opinions about transitions, so I\'m halfway there.', interests: ['music', 'creative', 'ambition'] },
     ],
     preferences: ['food', 'music', 'tech', 'humor'],
     vitals: { age: 24, gender: 'Woman', orientation: 'Straight' },
@@ -115,12 +115,12 @@ export const discoverProfiles: Profile[] = [
   {
     id: 'ava', name: 'Ava', gender: 'Female', location: 'Harlem, NY', verified: true,
     photos: [
-      { url: avaProfile, tags: ['city', 'casual'] },
+      { url: avaProfile, tags: ['community', 'outdoors'] },
     ],
     prompts: [
-      { id: 'ap1', question: 'My happy place', answer: 'A live jazz session in a dim-lit bar where everyone\'s swaying and nobody\'s on their phone.', interests: ['music', 'dancing', 'nightlife'] },
-      { id: 'ap2', question: 'On weekends you\'ll find me', answer: 'At the community garden or teaching dance to kids at the rec center.', interests: ['volunteering', 'dancing', 'outdoors'] },
-      { id: 'ap3', question: 'Something I\'ll never shut up about', answer: 'How underrated Harlem\'s food scene is. Fight me on it.', interests: ['food', 'community', 'culture'] },
+      { id: 'ap1', question: 'I\'m the type of texter who', answer: 'Sends voice notes instead of typing because tone matters and autocorrect is not my friend.', interests: ['humor', 'deep-conversations'] },
+      { id: 'ap2', question: 'Together we could', answer: 'Start a supper club where the theme changes every month. This month: West African fusion.', interests: ['food', 'cooking', 'community'] },
+      { id: 'ap3', question: 'My real life superpower is', answer: 'Making strangers feel like old friends within 5 minutes. It\'s a gift and sometimes a curse.', interests: ['social', 'community', 'empathy'] },
     ],
     preferences: ['music', 'dancing', 'volunteering', 'food', 'community'],
     vitals: { age: 28, gender: 'Woman', orientation: 'Queer', ethnicity: 'Black', religion: 'Christian', datingGoals: 'Looking for a relationship' },
@@ -130,12 +130,12 @@ export const discoverProfiles: Profile[] = [
   {
     id: 'chloe', name: 'Chloe', gender: 'Female', location: 'Chelsea, NY',
     photos: [
-      { url: chloeProfile, tags: ['city', 'sporty'] },
+      { url: chloeProfile, tags: ['hiking', 'outdoors'] },
     ],
     prompts: [
-      { id: 'cp1', question: 'My biggest flex', answer: 'I can boulder a V6 and still make it to brunch by 11.', interests: ['fitness', 'climbing', 'social'] },
-      { id: 'cp2', question: 'Unpopular opinion', answer: 'Morning runs are better than evening ones. The city at 6am is a different world.', interests: ['fitness', 'outdoors', 'adventure'] },
-      { id: 'cp3', question: 'We\'ll get along if', answer: 'You can keep up on a hike and aren\'t afraid to try something new.', interests: ['hiking', 'adventure', 'outdoors'] },
+      { id: 'cp1', question: 'My non-negotiable', answer: 'Weekend mornings are sacred. Coffee, no phone, and at least 30 minutes of doing absolutely nothing.', interests: ['mindfulness', 'outdoors'] },
+      { id: 'cp2', question: 'I guarantee you that', answer: 'I will out-hike you. But I\'ll also carry the snacks, so it evens out.', interests: ['hiking', 'outdoors', 'humor'] },
+      { id: 'cp3', question: 'Proof I have good taste', answer: 'I\'ve found the best croissant in every neighborhood I\'ve lived in. Currently in Chelsea, it\'s Maman.', interests: ['food', 'adventure', 'exploration'] },
     ],
     vitals: { age: 26, gender: 'Woman', orientation: 'Straight', relationshipType: 'Open to options' },
     preferences: ['fitness', 'hiking', 'climbing', 'adventure', 'outdoors'],
@@ -145,12 +145,12 @@ export const discoverProfiles: Profile[] = [
   {
     id: 'mia', name: 'Mia', gender: 'Female', location: 'Greenwich Village, NY', verified: true,
     photos: [
-      { url: miaProfile, tags: ['books', 'city'] },
+      { url: miaProfile, tags: ['books', 'deep-conversations'] },
     ],
     prompts: [
-      { id: 'mp1', question: 'My love language is', answer: 'Recommending you a book and then texting you every chapter to see if you cried yet.', interests: ['books', 'deep-conversations', 'humor'] },
-      { id: 'mp2', question: 'Best thing about me', answer: 'My cat already likes everyone, so you\'ve got that going for you.', interests: ['pets', 'humor'] },
-      { id: 'mp3', question: 'I\'m secretly really into', answer: 'Writing short stories about strangers I observe at cafés. You might already be a character.', interests: ['writing', 'creative', 'observation'] },
+      { id: 'mp1', question: 'A shower thought I had recently', answer: 'If our pets could talk, they\'d probably be disappointed in how much screen time we have.', interests: ['humor', 'pets', 'philosophy'] },
+      { id: 'mp2', question: 'The key to my heart is', answer: 'Remembering the name of a book I mentioned once in passing and actually reading it.', interests: ['books', 'deep-conversations', 'romance'] },
+      { id: 'mp3', question: 'I\'ll fall for you if', answer: 'You can make me laugh at a funeral. Too dark? Maybe. But life\'s too short for boring humor.', interests: ['humor', 'deep-conversations'] },
     ],
     preferences: ['books', 'writing', 'pets', 'deep-conversations'],
     showVibeSync: true, bandwidthStatus: 'ready',
