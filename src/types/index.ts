@@ -29,6 +29,7 @@ export interface Profile {
   prompts: Prompt[];
   preferences: string[]; // user's interests/preferences
   bandwidthStatus?: BandwidthStatus;
+  bandwidthVisible?: boolean;
   showVibeSync?: boolean; // whether to show vibe sync badge
   vibeData: {
     avgMessageLength: number;

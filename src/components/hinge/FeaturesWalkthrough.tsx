@@ -1,9 +1,14 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Sparkles, Heart, Undo2, Crown } from 'lucide-react';
+import { BandwidthStatus } from '@/types';
 
 interface FeaturesWalkthroughProps {
   isPaid: boolean;
+  bandwidthVisible?: boolean;
+  bandwidthStatus?: BandwidthStatus;
+  onToggleBandwidthVisible?: (visible: boolean) => void;
+  onUpdateBandwidth?: (status: BandwidthStatus) => void;
 }
 
 /* Matching the interlocking-circles icon from VibeSync.tsx */
