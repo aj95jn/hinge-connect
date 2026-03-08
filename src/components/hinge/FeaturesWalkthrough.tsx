@@ -149,14 +149,13 @@ const FEATURES = [
             transition={{ delay: 0.6 }}
             className="mt-2 bg-muted rounded-xl px-3 py-2"
           >
-            <p className="text-[9px] text-muted-foreground mb-0.5 font-medium">💡 Starter idea — you type your own message</p>
             <p className="text-[10px] text-muted-foreground italic">
               "I'd love to swap ramen spots — have you tried making it from scratch?"
             </p>
           </motion.div>
         </div>
-        <p className="text-[11px] text-muted-foreground text-center max-w-[220px]">
-          Prompts glow when you share interests with a match.
+        <p className="text-[11px] text-muted-foreground text-center max-w-[240px]">
+          Prompts glow when you share interests with a profile. 💡 Starter idea — you type your own message.
         </p>
       </div>
     ),
