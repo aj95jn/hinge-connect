@@ -3,9 +3,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { BandwidthStatus as BandwidthType } from '@/types';
 
 const statusConfig: Record<BandwidthType, { label: string; color: string; description: string }> = {
-  ready: { label: 'Ready to Connect', color: 'bg-foreground/10 text-foreground', description: 'Open to chatting' },
-  focusing: { label: 'Focusing on Matches', color: 'bg-hinge-rose/15 text-hinge-rose', description: 'Prioritizing existing' },
-  weekend: { label: 'Weekend Spark ✨', color: 'bg-hinge-rose/10 text-hinge-rose', description: 'Active on weekends' },
+  ready: { label: 'Ready to Connect', color: 'bg-purple-700 text-white', description: 'Open to chatting' },
+  focusing: { label: 'Focusing on Matches', color: 'bg-purple-700 text-white', description: 'Prioritizing existing' },
+  weekend: { label: 'Weekend Spark ✨', color: 'bg-purple-700 text-white', description: 'Active on weekends' },
 };
 
 interface BandwidthStatusProps {
@@ -20,7 +20,7 @@ export function BandwidthStatusPill({ status }: BandwidthStatusProps) {
     <div className="relative">
       <button
         onClick={() => setShowTooltip(!showTooltip)}
-        className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium ${config.color}`}
+        className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold ${config.color}`}
       >
         {config.label}
       </button>
