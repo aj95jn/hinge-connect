@@ -54,9 +54,9 @@ const FEATURES = [
         {/* Example badges — centered, styled like real purple pills */}
         <div className="flex flex-col items-center gap-4 w-full max-w-[280px]">
           {[
-            { label: 'Shared Conversation Style', desc: 'You both write thoughtful, longer messages', side: 'right' as const },
-            { label: 'Fast-Paced Match', desc: 'You both tend to reply quickly', side: 'left' as const },
-            { label: 'Deep Common Ground', desc: 'You share core values and interests', side: 'right' as const },
+            { label: 'Shared Conversation Style', desc: 'Similar texters', side: 'right' as const },
+            { label: 'Fast-Paced Match', desc: 'Quick replies', side: 'left' as const },
+            { label: 'Deep Common Ground', desc: 'Shared values', side: 'right' as const },
           ].map((badge, i) => (
             <motion.div
               key={badge.label}
