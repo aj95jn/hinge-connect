@@ -61,22 +61,25 @@ const Index = () => {
     setTimeout(() => setShowWhatsNew(false), 3000);
   }, [hasSeenWhatsNew]);
 
-  // Every 60s on discover tab, show popup
+  // Show immediately on mount, then every 15s on discover tab
   useEffect(() => {
-    if (state.activeTab !== 'discover' || hasSeenWhatsNew) {
-      if (whatsNewTimerRef.current) clearTimeout(whatsNewTimerRef.current);
+    if (hasSeenWhatsNew) {
+      setShowWhatsNew(false);
+      if (whatsNewTimerRef.current) clearInterval(whatsNewTimerRef.current);
       return;
     }
-    const schedule = () => {
-      whatsNewTimerRef.current = setTimeout(() => {
+    if (state.activeTab === 'discover') {
+      // Show immediately
+      flashWhatsNew();
+      // Then repeat every 15s
+      const interval = setInterval(() => {
         flashWhatsNew();
-        schedule();
-      }, 60000);
-    };
-    schedule();
-    return () => {
-      if (whatsNewTimerRef.current) clearTimeout(whatsNewTimerRef.current);
-    };
+      }, 15000);
+      whatsNewTimerRef.current = interval as unknown as ReturnType<typeof setTimeout>;
+      return () => clearInterval(interval);
+    } else {
+      setShowWhatsNew(false);
+    }
   }, [state.activeTab, hasSeenWhatsNew, flashWhatsNew]);
 
   // Track likes — show popup every 3 likes
