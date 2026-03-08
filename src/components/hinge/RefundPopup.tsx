@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
-import { ShieldCheck } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { motion, useMotionValue, useTransform, animate, PanInfo } from 'framer-motion';
 
 interface RefundPopupProps {
   profileName: string;
@@ -7,36 +7,61 @@ interface RefundPopupProps {
 }
 
 export function RefundPopup({ profileName, onClose }: RefundPopupProps) {
+  const [held, setHeld] = useState(false);
+  const y = useMotionValue(-120);
+  const opacity = useTransform(y, [-120, 0], [0, 1]);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const startDismissTimer = () => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(() => {
+      if (!held) {
+        animate(y, -120, { duration: 0.3 }).then(onClose);
+      }
+    }, 3000);
+  };
+
+  useEffect(() => {
+    // Slide in
+    animate(y, 0, { type: 'spring', stiffness: 300, damping: 30 });
+    startDismissTimer();
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, []);
+
+  const handleDragEnd = (_: any, info: PanInfo) => {
+    if (info.offset.y < -30) {
+      // Swiped up — dismiss
+      animate(y, -120, { duration: 0.2 }).then(onClose);
+    } else if (info.offset.y > 20) {
+      // Pulled down — keep visible, mark as held
+      setHeld(true);
+      if (timerRef.current) clearTimeout(timerRef.current);
+      animate(y, 0, { type: 'spring', stiffness: 300, damping: 30 });
+    } else {
+      // Snap back
+      animate(y, 0, { type: 'spring', stiffness: 300, damping: 30 });
+      if (!held) startDismissTimer();
+    }
+  };
+
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="fixed inset-0 bg-foreground/40 backdrop-blur-sm z-[100] flex items-center justify-center px-6"
-      onClick={onClose}
+      className="fixed top-0 left-0 right-0 z-[100] flex justify-center px-4 pt-3 pointer-events-none max-w-md mx-auto"
+      style={{ y, opacity }}
     >
       <motion.div
-        initial={{ scale: 0.9, y: 20 }}
-        animate={{ scale: 1, y: 0 }}
-        exit={{ scale: 0.9, y: 20 }}
-        onClick={(e) => e.stopPropagation()}
-        className="bg-card rounded-3xl p-6 max-w-sm w-full text-center shadow-2xl"
+        drag="y"
+        dragConstraints={{ top: -10, bottom: 20 }}
+        dragElastic={0.3}
+        onDragEnd={handleDragEnd}
+        className="pointer-events-auto bg-muted rounded-2xl px-5 py-4 shadow-lg w-full cursor-grab active:cursor-grabbing"
       >
-        <div className="w-14 h-14 rounded-full bg-hinge-success/15 flex items-center justify-center mx-auto mb-4">
-          <ShieldCheck size={28} className="text-hinge-success" />
-        </div>
-        <h3 className="font-hinge-serif text-xl font-semibold text-foreground mb-2">
-          Like Returned
-        </h3>
-        <p className="text-sm text-muted-foreground mb-5 leading-relaxed">
-          {profileName} stayed busy, we've returned your Like so you can find a new connection.
+        <div className="w-8 h-1 bg-border rounded-full mx-auto mb-3" />
+        <p className="text-sm text-muted-foreground leading-relaxed text-center">
+          {profileName} stayed busy, so we've returned your Like so you can find a new connection
         </p>
-        <button
-          onClick={onClose}
-          className="w-full bg-primary text-primary-foreground rounded-full py-3 text-sm font-semibold hover:opacity-90 transition-opacity"
-        >
-          Got it
-        </button>
       </motion.div>
     </motion.div>
   );
