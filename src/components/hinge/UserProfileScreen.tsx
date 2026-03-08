@@ -139,10 +139,10 @@ export function UserProfileScreen({ profile, isPaid = false, onUpdateProfile, on
                   {showBandwidthInfo && (
                     <motion.div
                       ref={bandwidthInfoRef}
-                      initial={{ opacity: 0, scale: 0.9, y: 4 }}
+                      initial={{ opacity: 0, scale: 0.9, y: -4 }}
                       animate={{ opacity: 1, scale: 1, y: 0 }}
-                      exit={{ opacity: 0, scale: 0.9, y: 4 }}
-                      className="absolute top-7 left-0 z-50 w-64 bg-card rounded-xl p-3 shadow-lg border border-border"
+                      exit={{ opacity: 0, scale: 0.9, y: -4 }}
+                      className="absolute bottom-7 left-0 z-50 w-64 bg-card rounded-xl p-3 shadow-lg border border-border"
                     >
                       <button
                         onClick={() => setShowBandwidthInfo(false)}
