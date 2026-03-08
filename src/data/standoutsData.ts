@@ -47,7 +47,7 @@ export const standoutProfiles: Profile[] = [
     verified: true,
     photos: [{ url: sarah4, tags: ['music', 'creative'] }],
     prompts: [
-      { id: 'sz1', question: "We're the same type of weird if", answer: "You have a playlist for every possible mood including 'dramatic walk to the grocery store.'", interests: ['music', 'humor'] },
+      { id: 'sz1', question: 'I go crazy for', answer: "Hole-in-the-wall restaurants where the menu is handwritten and the portions are enormous.", interests: ['food', 'adventure'] },
       { id: 'sz2', question: 'I go crazy for', answer: "Hole-in-the-wall restaurants where the menu is handwritten and the portions are enormous.", interests: ['food', 'adventure'] },
     ],
     preferences: ['music', 'art', 'nightlife'],
