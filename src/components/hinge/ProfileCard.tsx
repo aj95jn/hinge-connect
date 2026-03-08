@@ -105,35 +105,27 @@ export function ProfileCard({
         transition={{ duration: 0.4, ease: 'easeOut' }}
         className="pb-24 relative"
       >
-        {/* Header */}
-        <div className="px-4 pt-4 pb-2 flex items-center justify-between">
+        {/* Animated Profile Header */}
+        <div className="px-4 pt-4 pb-2">
+          <AnimatedProfileHeader
+            name={profile.name}
+            gender={profile.gender}
+            location={profile.location}
+          />
+        </div>
+
+        <div className="px-4 pb-2 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center">
-              <User size={20} className="text-muted-foreground" />
-            </div>
-            <div>
-              <h1 className="font-hinge-serif text-2xl font-semibold text-foreground">
-                {profile.name}
-              </h1>
-              <span className="text-xs text-muted-foreground">{profile.gender}</span>
-            </div>
+            {profile.bandwidthStatus && (
+              <BandwidthStatusPill status={profile.bandwidthStatus} />
+            )}
+            {profile.showVibeSync && vibeSync.hasSync && (
+              <VibeSync result={vibeSync} />
+            )}
           </div>
           <div className="text-xs text-muted-foreground">{likesRemaining} likes left</div>
         </div>
 
-        <div className="px-4 pb-2 flex items-center gap-2">
-          <span className="text-sm text-muted-foreground">{profile.location}</span>
-          {profile.bandwidthStatus && (
-            <BandwidthStatusPill status={profile.bandwidthStatus} />
-          )}
-        </div>
-
-        {/* Vibe Sync badge */}
-        {profile.showVibeSync && vibeSync.hasSync && (
-          <div className="px-4 pb-2">
-            <VibeSync result={vibeSync} />
-          </div>
-        )}
 
         {/* Prompts only */}
         <div className="space-y-3 px-4">
