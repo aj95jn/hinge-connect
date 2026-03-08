@@ -156,8 +156,9 @@ export const discoverProfiles: Profile[] = [
       { id: 'mp3', question: 'I\'ll fall for you if', answer: 'You can make me laugh at a funeral. Too dark? Maybe. But life\'s too short for boring humor.', interests: ['humor', 'deep-conversations'] },
     ],
     preferences: ['books', 'writing', 'pets', 'deep-conversations'],
-    showVibeSync: true, bandwidthStatus: 'ready',
-    vibeData: { avgMessageLength: 6, avgReplyTimeMinutes: 0.2 },
+    showVibeSync: true, bandwidthStatus: 'new_vibes',
+    vibeData: { avgMessageLength: 6, avgReplyTimeMinutes: 0.2, profileReadTimeSec: 35 },
+    coreValues: ['deep-conversations', 'philosophy', 'books'],
     vitals: { age: 25, gender: 'Woman', orientation: 'Bisexual', politics: 'Progressive', datingGoals: 'Something serious', relationshipType: 'Monogamy' },
   },
 ];
