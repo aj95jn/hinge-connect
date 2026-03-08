@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Edit3, Plus, X, Sparkles, Zap, Eye, MessageCircle, Shield, Lock, Crown } from 'lucide-react';
+import { MapPin, Edit3, Plus, X, Sparkles, Zap } from 'lucide-react';
 import { AnimatedAvatar } from './AnimatedAvatar';
 import { Profile, BandwidthStatus } from '@/types';
 import { BandwidthStatusPill } from './BandwidthStatus';
+import { FeaturesWalkthrough } from './FeaturesWalkthrough';
 
 const ALL_INTERESTS = [
   'travel', 'philosophy', 'cooking', 'hiking', 'music',
@@ -24,6 +25,7 @@ export function UserProfileScreen({ profile, isPaid = false, onUpdateProfile, on
   const [editingPrompt, setEditingPrompt] = useState<string | null>(null);
   const [editText, setEditText] = useState('');
   const [showInterestPicker, setShowInterestPicker] = useState(false);
+  const [activeTab, setActiveTab] = useState<'profile' | 'features'>('profile');
 
   const handleSavePrompt = (promptId: string) => {
     const updatedPrompts = profile.prompts.map((p) =>
@@ -49,303 +51,215 @@ export function UserProfileScreen({ profile, isPaid = false, onUpdateProfile, on
   ];
 
   return (
-    <div className="px-4 pt-4 pb-24">
+    <div className="pb-24">
       {/* Profile Header */}
-      <div className="flex items-center gap-4 mb-6">
-        <AnimatedAvatar name={profile.name} gender={profile.gender} size="lg" />
-        <div>
-          <h2 className="font-hinge-serif text-2xl font-semibold text-foreground">
-            {profile.name}
-          </h2>
-          <span className="text-sm text-muted-foreground">{profile.gender}</span>
-          <div className="flex items-center gap-1 text-sm text-muted-foreground mt-0.5">
-            <MapPin size={14} />
-            <span>{profile.location}</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Bandwidth Status */}
-      <div className="mb-6">
-        <h3 className="text-sm font-semibold text-foreground mb-3">Your Status</h3>
-        <div className="flex flex-wrap gap-2">
-          {bandwidthOptions.map((opt) => (
-            <button
-              key={opt.value}
-              onClick={() => onUpdateBandwidth(opt.value)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                profile.bandwidthStatus === opt.value
-                  ? 'bg-primary text-primary-foreground'
-                  : 'bg-muted text-muted-foreground hover:bg-accent'
-              }`}
-            >
-              {opt.label}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Smart Features Overview */}
-      <div className="mb-6">
-        <h3 className="text-sm font-semibold text-foreground mb-3 flex items-center gap-1.5">
-          <Zap size={14} className="text-hinge-gold" />
-          Smart Features
-        </h3>
-        <div className="space-y-3">
-          {/* Vibe Sync */}
-          <div className="bg-card rounded-2xl p-4 border border-border">
-            <div className="flex items-start gap-3">
-              <div className="w-9 h-9 rounded-xl bg-accent flex items-center justify-center flex-shrink-0">
-                <Sparkles size={18} className="text-hinge-gold" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="text-sm font-semibold text-foreground">Vibe Sync</span>
-                  {isPaid ? (
-                    <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-primary text-primary-foreground">ACTIVE</span>
-                  ) : (
-                    <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-muted text-muted-foreground">BASIC</span>
-                  )}
-                </div>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  {isPaid
-                    ? 'Full behavioral matching — see detailed Vibe Sync labels like "Shared Conversation Style" and "Deep Common Ground" on compatible profiles.'
-                    : 'You see simplified Vibe Sync badges. Upgrade to unlock detailed compatibility breakdowns based on messaging habits, reply patterns, and shared interests.'}
-                </p>
-                {!isPaid && (
-                  <button className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline">
-                    <Crown size={12} />
-                    Unlock full Vibe Sync
-                  </button>
-                )}
-              </div>
-            </div>
-          </div>
-
-          {/* Rose Glow */}
-          <div className="bg-card rounded-2xl p-4 border border-border">
-            <div className="flex items-start gap-3">
-              <div className="w-9 h-9 rounded-xl bg-accent flex items-center justify-center flex-shrink-0">
-                <Eye size={18} className="text-hinge-rose" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="text-sm font-semibold text-foreground">Rose Glow</span>
-                  {isPaid ? (
-                    <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-primary text-primary-foreground">UNLIMITED</span>
-                  ) : (
-                    <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-muted text-muted-foreground">2 PROFILES</span>
-                  )}
-                </div>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  {isPaid
-                    ? 'Unlimited glowing highlights on prompts & photos that match your interests. AI-powered conversation starters on every glowing prompt.'
-                    : 'Prompts and photos that match your interests glow pink with ✦ stars. Free users see this on up to 2 profiles — upgrade for unlimited.'}
-                </p>
-                {!isPaid && (
-                  <button className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline">
-                    <Crown size={12} />
-                    Get unlimited Rose Glow
-                  </button>
-                )}
-              </div>
-            </div>
-          </div>
-
-          {/* AI Bridge Text */}
-          <div className="bg-card rounded-2xl p-4 border border-border">
-            <div className="flex items-start gap-3">
-              <div className="w-9 h-9 rounded-xl bg-accent flex items-center justify-center flex-shrink-0">
-                <MessageCircle size={18} className="text-primary" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="text-sm font-semibold text-foreground">AI Bridge Text</span>
-                  <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-primary text-primary-foreground">
-                    {isPaid ? 'ENHANCED' : 'ACTIVE'}
-                  </span>
-                </div>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  {isPaid
-                    ? 'Curated conversation starters based on shared habits, behaviors, and commonalities. Suggestions are tailored to each prompt and stay consistent.'
-                    : 'Get AI-suggested openers on glowing prompts based on what you have in common. Upgrade for richer, more personalized suggestions.'}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Bandwidth Status */}
-          <div className="bg-card rounded-2xl p-4 border border-border">
-            <div className="flex items-start gap-3">
-              <div className="w-9 h-9 rounded-xl bg-accent flex items-center justify-center flex-shrink-0">
-                <Shield size={18} className="text-primary" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="text-sm font-semibold text-foreground">Bandwidth Status</span>
-                  {isPaid ? (
-                    <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-primary text-primary-foreground">VISIBLE</span>
-                  ) : (
-                    <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-muted text-muted-foreground">HIDDEN</span>
-                  )}
-                </div>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  {isPaid
-                    ? 'Your availability status is visible to others. See other people\'s bandwidth status to know when they\'re most receptive.'
-                    : 'Set your availability status. Upgrade to make it visible on your profile and see others\' bandwidth status.'}
-                </p>
-                {!isPaid && (
-                  <button className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline">
-                    <Crown size={12} />
-                    Show your status
-                  </button>
-                )}
-              </div>
+      <div className="px-4 pt-4">
+        <div className="flex items-center gap-4 mb-4">
+          <AnimatedAvatar name={profile.name} gender={profile.gender} size="lg" />
+          <div>
+            <h2 className="font-hinge-serif text-2xl font-semibold text-foreground">
+              {profile.name}
+            </h2>
+            <span className="text-sm text-muted-foreground">{profile.gender}</span>
+            <div className="flex items-center gap-1 text-sm text-muted-foreground mt-0.5">
+              <MapPin size={14} />
+              <span>{profile.location}</span>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Preferences / Interests */}
-      <div className="mb-6">
-        <div className="flex items-center justify-between mb-3">
-          <h3 className="text-sm font-semibold text-foreground flex items-center gap-1.5">
-            <Sparkles size={14} className="text-hinge-gold" />
-            Your Interests
-          </h3>
+        {/* Tab Switcher */}
+        <div className="flex gap-1 bg-muted rounded-xl p-1 mb-4">
           <button
-            onClick={() => setShowInterestPicker(!showInterestPicker)}
-            className="text-xs text-primary font-medium"
+            onClick={() => setActiveTab('profile')}
+            className={`flex-1 py-2 rounded-lg text-xs font-semibold transition-all ${
+              activeTab === 'profile'
+                ? 'bg-background text-foreground shadow-sm'
+                : 'text-muted-foreground hover:text-foreground'
+            }`}
           >
-            {showInterestPicker ? 'Done' : 'Edit'}
+            Profile
+          </button>
+          <button
+            onClick={() => setActiveTab('features')}
+            className={`flex-1 py-2 rounded-lg text-xs font-semibold transition-all flex items-center justify-center gap-1.5 ${
+              activeTab === 'features'
+                ? 'bg-background text-foreground shadow-sm'
+                : 'text-muted-foreground hover:text-foreground'
+            }`}
+          >
+            <Zap size={12} />
+            What's New
           </button>
         </div>
-        <p className="text-xs text-muted-foreground mb-3">
-          These are used to find common ground and highlight matching prompts with a rose glow.
-        </p>
-        <div className="flex flex-wrap gap-2">
-          {profile.preferences.map((interest) => (
-            <motion.span
-              key={interest}
-              layout
-              className="inline-flex items-center gap-1 px-3 py-1.5 bg-secondary text-secondary-foreground rounded-full text-xs font-medium"
-            >
-              {interest}
-              {showInterestPicker && (
-                <button onClick={() => toggleInterest(interest)}>
-                  <X size={12} className="text-muted-foreground hover:text-destructive" />
-                </button>
-              )}
-            </motion.span>
-          ))}
-        </div>
+      </div>
 
-        {showInterestPicker && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            className="mt-3 pt-3 border-t border-border"
-          >
-            <p className="text-xs text-muted-foreground mb-2">Add more interests:</p>
+      {activeTab === 'features' ? (
+        <FeaturesWalkthrough isPaid={isPaid} />
+      ) : (
+        <div className="px-4">
+          {/* Bandwidth Status */}
+          <div className="mb-6">
+            <h3 className="text-sm font-semibold text-foreground mb-3">Your Status</h3>
             <div className="flex flex-wrap gap-2">
-              {ALL_INTERESTS.filter((i) => !profile.preferences.includes(i)).map((interest) => (
+              {bandwidthOptions.map((opt) => (
                 <button
-                  key={interest}
-                  onClick={() => toggleInterest(interest)}
-                  className="inline-flex items-center gap-1 px-3 py-1.5 bg-muted text-muted-foreground rounded-full text-xs font-medium hover:bg-accent hover:text-accent-foreground transition-colors"
+                  key={opt.value}
+                  onClick={() => onUpdateBandwidth(opt.value)}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                    profile.bandwidthStatus === opt.value
+                      ? 'bg-primary text-primary-foreground'
+                      : 'bg-muted text-muted-foreground hover:bg-accent'
+                  }`}
                 >
-                  <Plus size={12} />
-                  {interest}
+                  {opt.label}
                 </button>
               ))}
             </div>
-          </motion.div>
-        )}
-      </div>
+          </div>
 
-      {/* Your Prompts */}
-      <div className="mb-6">
-        <h3 className="text-sm font-semibold text-foreground mb-3">Your Prompts</h3>
-        <div className="space-y-3">
-          {profile.prompts.map((prompt) => (
-            <div key={prompt.id} className="bg-card rounded-2xl p-4 border border-border">
-              <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2">
-                {prompt.question}
-              </p>
-
-              {editingPrompt === prompt.id ? (
-                <div className="space-y-2">
-                  <textarea
-                    value={editText}
-                    onChange={(e) => setEditText(e.target.value)}
-                    className="w-full bg-muted rounded-xl p-3 text-sm text-foreground resize-none h-20 focus:outline-none focus:ring-2 focus:ring-primary/20"
-                  />
-                  <div className="flex gap-2">
-                    <button
-                      onClick={() => handleSavePrompt(prompt.id)}
-                      className="px-4 py-1.5 bg-primary text-primary-foreground rounded-full text-xs font-medium"
-                    >
-                      Save
+          {/* Preferences / Interests */}
+          <div className="mb-6">
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-sm font-semibold text-foreground flex items-center gap-1.5">
+                <Sparkles size={14} className="text-hinge-gold" />
+                Your Interests
+              </h3>
+              <button
+                onClick={() => setShowInterestPicker(!showInterestPicker)}
+                className="text-xs text-primary font-medium"
+              >
+                {showInterestPicker ? 'Done' : 'Edit'}
+              </button>
+            </div>
+            <p className="text-xs text-muted-foreground mb-3">
+              These are used to find common ground and highlight matching prompts with a rose glow.
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {profile.preferences.map((interest) => (
+                <motion.span
+                  key={interest}
+                  layout
+                  className="inline-flex items-center gap-1 px-3 py-1.5 bg-secondary text-secondary-foreground rounded-full text-xs font-medium"
+                >
+                  {interest}
+                  {showInterestPicker && (
+                    <button onClick={() => toggleInterest(interest)}>
+                      <X size={12} className="text-muted-foreground hover:text-destructive" />
                     </button>
-                    <button
-                      onClick={() => setEditingPrompt(null)}
-                      className="px-4 py-1.5 bg-muted text-muted-foreground rounded-full text-xs font-medium"
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                </div>
-              ) : (
-                <div className="flex items-start justify-between gap-2">
-                  <p className="text-foreground font-hinge-serif text-base leading-relaxed">
-                    {prompt.answer}
-                  </p>
-                  <button
-                    onClick={() => {
-                      setEditingPrompt(prompt.id);
-                      setEditText(prompt.answer);
-                    }}
-                    className="p-1.5 rounded-full hover:bg-muted transition-colors flex-shrink-0"
-                  >
-                    <Edit3 size={14} className="text-muted-foreground" />
-                  </button>
-                </div>
-              )}
+                  )}
+                </motion.span>
+              ))}
+            </div>
 
-              {prompt.interests && prompt.interests.length > 0 && (
-                <div className="flex flex-wrap gap-1 mt-2">
-                  {prompt.interests.map((tag) => (
-                    <span key={tag} className="text-[10px] px-2 py-0.5 bg-muted rounded-full text-muted-foreground">
-                      {tag}
-                    </span>
+            {showInterestPicker && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                className="mt-3 pt-3 border-t border-border"
+              >
+                <p className="text-xs text-muted-foreground mb-2">Add more interests:</p>
+                <div className="flex flex-wrap gap-2">
+                  {ALL_INTERESTS.filter((i) => !profile.preferences.includes(i)).map((interest) => (
+                    <button
+                      key={interest}
+                      onClick={() => toggleInterest(interest)}
+                      className="inline-flex items-center gap-1 px-3 py-1.5 bg-muted text-muted-foreground rounded-full text-xs font-medium hover:bg-accent hover:text-accent-foreground transition-colors"
+                    >
+                      <Plus size={12} />
+                      {interest}
+                    </button>
                   ))}
                 </div>
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
+              </motion.div>
+            )}
+          </div>
 
-      {/* Vibe Stats */}
-      <div>
-        <h3 className="text-sm font-semibold text-foreground mb-3">Your Vibe Stats</h3>
-        <div className="grid grid-cols-2 gap-3">
-          <div className="bg-card rounded-2xl p-4 border border-border text-center">
-            <p className="text-2xl font-hinge-serif font-semibold text-primary">
-              {profile.vibeData.avgMessageLength}
-            </p>
-            <p className="text-xs text-muted-foreground mt-1">Avg. sentence length</p>
+          {/* Your Prompts */}
+          <div className="mb-6">
+            <h3 className="text-sm font-semibold text-foreground mb-3">Your Prompts</h3>
+            <div className="space-y-3">
+              {profile.prompts.map((prompt) => (
+                <div key={prompt.id} className="bg-card rounded-2xl p-4 border border-border">
+                  <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2">
+                    {prompt.question}
+                  </p>
+
+                  {editingPrompt === prompt.id ? (
+                    <div className="space-y-2">
+                      <textarea
+                        value={editText}
+                        onChange={(e) => setEditText(e.target.value)}
+                        className="w-full bg-muted rounded-xl p-3 text-sm text-foreground resize-none h-20 focus:outline-none focus:ring-2 focus:ring-primary/20"
+                      />
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => handleSavePrompt(prompt.id)}
+                          className="px-4 py-1.5 bg-primary text-primary-foreground rounded-full text-xs font-medium"
+                        >
+                          Save
+                        </button>
+                        <button
+                          onClick={() => setEditingPrompt(null)}
+                          className="px-4 py-1.5 bg-muted text-muted-foreground rounded-full text-xs font-medium"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="flex items-start justify-between gap-2">
+                      <p className="text-foreground font-hinge-serif text-base leading-relaxed">
+                        {prompt.answer}
+                      </p>
+                      <button
+                        onClick={() => {
+                          setEditingPrompt(prompt.id);
+                          setEditText(prompt.answer);
+                        }}
+                        className="p-1.5 rounded-full hover:bg-muted transition-colors flex-shrink-0"
+                      >
+                        <Edit3 size={14} className="text-muted-foreground" />
+                      </button>
+                    </div>
+                  )}
+
+                  {prompt.interests && prompt.interests.length > 0 && (
+                    <div className="flex flex-wrap gap-1 mt-2">
+                      {prompt.interests.map((tag) => (
+                        <span key={tag} className="text-[10px] px-2 py-0.5 bg-muted rounded-full text-muted-foreground">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="bg-card rounded-2xl p-4 border border-border text-center">
-            <p className="text-2xl font-hinge-serif font-semibold text-primary">
-              {profile.vibeData.avgReplyTimeMinutes < 1
-                ? `${Math.round(profile.vibeData.avgReplyTimeMinutes * 60)}s`
-                : `${profile.vibeData.avgReplyTimeMinutes}m`}
-            </p>
-            <p className="text-xs text-muted-foreground mt-1">Avg. reply time</p>
+
+          {/* Vibe Stats */}
+          <div>
+            <h3 className="text-sm font-semibold text-foreground mb-3">Your Vibe Stats</h3>
+            <div className="grid grid-cols-2 gap-3">
+              <div className="bg-card rounded-2xl p-4 border border-border text-center">
+                <p className="text-2xl font-hinge-serif font-semibold text-primary">
+                  {profile.vibeData.avgMessageLength}
+                </p>
+                <p className="text-xs text-muted-foreground mt-1">Avg. sentence length</p>
+              </div>
+              <div className="bg-card rounded-2xl p-4 border border-border text-center">
+                <p className="text-2xl font-hinge-serif font-semibold text-primary">
+                  {profile.vibeData.avgReplyTimeMinutes < 1
+                    ? `${Math.round(profile.vibeData.avgReplyTimeMinutes * 60)}s`
+                    : `${profile.vibeData.avgReplyTimeMinutes}m`}
+                </p>
+                <p className="text-xs text-muted-foreground mt-1">Avg. reply time</p>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
