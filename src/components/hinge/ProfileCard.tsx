@@ -170,9 +170,16 @@ export function ProfileCard({
           </div>
         )}
 
-        {/* Interleaved photos and prompts */}
+        {/* Interleaved photos, prompts, and info pane */}
         <div className="space-y-3 px-4">
           {(() => {
+            const items: React.ReactNode[] = [];
+            const remainingPhotos = profile.photos.slice(1);
+            const prompts = profile.prompts;
+            let photoIdx = 0;
+            let promptIdx = 0;
+            let infoPaneInserted = false;
+            const insertInfoPaneAfterIndex = Math.min(1, prompts.length); // After first prompt
             const items: React.ReactNode[] = [];
             const remainingPhotos = profile.photos.slice(1);
             const prompts = profile.prompts;
