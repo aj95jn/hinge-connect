@@ -72,21 +72,20 @@ export function ProfileCard({
         {/* Name, gender, badges, and actions — above the image */}
         <div className="px-4 pt-4 pb-2">
           <div className="flex items-center justify-between gap-2">
-            {/* Left: name + gender + badges */}
-            <div className="flex items-center gap-3 min-w-0">
-              <div className="min-w-0">
-                <h1 className="font-hinge-serif text-2xl font-semibold text-foreground">{profile.name}</h1>
-                <span className="text-sm text-muted-foreground">
-                  {profile.gender?.toLowerCase() === 'female' ? 'she/her' : profile.gender?.toLowerCase() === 'male' ? 'he/him' : profile.gender}
-                </span>
-              </div>
-              <div className="flex flex-col gap-1">
-                {profile.bandwidthStatus && <BandwidthStatusPill status={profile.bandwidthStatus} />}
-                {profile.showVibeSync && vibeSync.hasSync && <VibeSync result={vibeSync} />}
-              </div>
+            {/* Left: name + gender */}
+            <div className="min-w-0 flex-shrink-0">
+              <h1 className="font-hinge-serif text-2xl font-semibold text-foreground">{profile.name}</h1>
+              <span className="text-sm text-muted-foreground">
+                {profile.gender?.toLowerCase() === 'female' ? 'she/her' : profile.gender?.toLowerCase() === 'male' ? 'he/him' : profile.gender}
+              </span>
+            </div>
+            {/* Center: badges */}
+            <div className="flex flex-col items-center gap-1 flex-1">
+              {profile.bandwidthStatus && <BandwidthStatusPill status={profile.bandwidthStatus} />}
+              {profile.showVibeSync && vibeSync.hasSync && <VibeSync result={vibeSync} />}
             </div>
             {/* Right: back arrow + dots */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-shrink-0">
               <button
                 onClick={() => {
                   if (isPaid) {
