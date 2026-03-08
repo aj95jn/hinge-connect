@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { MapPin, Edit3, Plus, X, Sparkles, Zap } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { MapPin, Edit3, Plus, X, Sparkles, Zap, Info } from 'lucide-react';
 import { AnimatedAvatar } from './AnimatedAvatar';
 import { Profile, BandwidthStatus } from '@/types';
 import { BandwidthStatusPill } from './BandwidthStatus';
@@ -27,6 +27,7 @@ export function UserProfileScreen({ profile, isPaid = false, onUpdateProfile, on
   const [editText, setEditText] = useState('');
   const [showInterestPicker, setShowInterestPicker] = useState(false);
   const [activeTab, setActiveTab] = useState<'profile' | 'features'>('profile');
+  const [showBandwidthInfo, setShowBandwidthInfo] = useState(false);
 
   const handleSavePrompt = (promptId: string) => {
     const updatedPrompts = profile.prompts.map((p) =>
@@ -108,7 +109,15 @@ export function UserProfileScreen({ profile, isPaid = false, onUpdateProfile, on
           {/* Bandwidth Status */}
           <div className="mb-6">
             <div className="flex items-center justify-between mb-3">
-              <h3 className="text-sm font-semibold text-foreground">Your Bandwidth Status</h3>
+              <div className="flex items-center gap-1.5">
+                <h3 className="text-sm font-semibold text-foreground">Your Bandwidth Status</h3>
+                <button
+                  onClick={() => setShowBandwidthInfo(!showBandwidthInfo)}
+                  className="p-0.5 rounded-full hover:bg-muted transition-colors"
+                >
+                  <Info size={14} className="text-muted-foreground" />
+                </button>
+              </div>
               <button
                 onClick={() => onToggleBandwidthVisible(!profile.bandwidthVisible)}
                 className={`text-xs font-medium px-3 py-1 rounded-full transition-all ${
@@ -120,6 +129,21 @@ export function UserProfileScreen({ profile, isPaid = false, onUpdateProfile, on
                 {profile.bandwidthVisible ? 'Visible' : 'Hidden'}
               </button>
             </div>
+            <AnimatePresence>
+              {showBandwidthInfo && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  className="overflow-hidden mb-3"
+                >
+                  <div className="bg-muted rounded-xl p-3 text-[11px] text-muted-foreground leading-relaxed">
+                    <p className="font-semibold text-foreground text-xs mb-1">What is Bandwidth?</p>
+                    <p>Bandwidth lets others know how available you are to chat. Choose a status and make it visible on your profile so matches can see when you're most responsive.</p>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
             {!profile.bandwidthVisible && (
               <p className="text-[11px] text-muted-foreground mb-3">
                 Your status is hidden. Toggle to make it visible on your profile.

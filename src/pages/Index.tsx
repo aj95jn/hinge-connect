@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useAppState } from '@/hooks/useAppState';
 import { BottomNav } from '@/components/hinge/BottomNav';
@@ -7,7 +7,7 @@ import { LikesYouScreen } from '@/components/hinge/LikesYouScreen';
 import { MessagingScreen } from '@/components/hinge/MessagingScreen';
 import { UserProfileScreen } from '@/components/hinge/UserProfileScreen';
 import { RefundPopup } from '@/components/hinge/RefundPopup';
-import { Heart, SlidersHorizontal, ChevronDown, X } from 'lucide-react';
+import { Heart, SlidersHorizontal, ChevronDown, X, Zap } from 'lucide-react';
 
 // Filter options
 const AGE_OPTIONS = Array.from({ length: 43 }, (_, i) => i + 18); // 18-60
@@ -41,6 +41,42 @@ const Index = () => {
     intentions: string[];
   }>({ age: null, height: null, intentions: [] });
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const [hasVisitedProfile, setHasVisitedProfile] = useState(false);
+  const [showWhatsNew, setShowWhatsNew] = useState(false);
+  const whatsNewTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Track profile visits
+  useEffect(() => {
+    if (state.activeTab === 'profile') {
+      setHasVisitedProfile(true);
+      setShowWhatsNew(false);
+      if (whatsNewTimerRef.current) clearTimeout(whatsNewTimerRef.current);
+    }
+  }, [state.activeTab]);
+
+  // Show "What's New" popup randomly on discover tab until user visits profile
+  const scheduleWhatsNew = useCallback(() => {
+    if (hasVisitedProfile) return;
+    const delay = 3000 + Math.random() * 8000; // 3–11s random
+    whatsNewTimerRef.current = setTimeout(() => {
+      if (!hasVisitedProfile) {
+        setShowWhatsNew(true);
+        // Auto-dismiss after 2.5s
+        setTimeout(() => setShowWhatsNew(false), 2500);
+        // Schedule next appearance
+        scheduleWhatsNew();
+      }
+    }, delay);
+  }, [hasVisitedProfile]);
+
+  useEffect(() => {
+    if (state.activeTab === 'discover' && !hasVisitedProfile) {
+      scheduleWhatsNew();
+    }
+    return () => {
+      if (whatsNewTimerRef.current) clearTimeout(whatsNewTimerRef.current);
+    };
+  }, [state.activeTab, hasVisitedProfile, scheduleWhatsNew]);
 
   const matchesUnread = state.matches.filter((m) => m.unread).length;
 
@@ -359,7 +395,39 @@ const Index = () => {
         matchesUnread={matchesUnread}
       />
 
-      {/* Refund Popup */}
+      {/* What's New Popup */}
+      <AnimatePresence>
+        {showWhatsNew && state.activeTab === 'discover' && (
+          <motion.div
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+            className="fixed bottom-24 left-1/2 -translate-x-1/2 z-40"
+          >
+            <div
+              onClick={() => {
+                setShowWhatsNew(false);
+                state.setActiveTab('profile');
+              }}
+              className="flex items-center gap-2 bg-foreground text-background pl-3 pr-2 py-2 rounded-full shadow-lg cursor-pointer hover:opacity-90 transition-opacity"
+            >
+              <Zap size={14} className="text-primary-foreground" />
+              <span className="text-xs font-semibold whitespace-nowrap">Explore What's New</span>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowWhatsNew(false);
+                }}
+                className="p-0.5 rounded-full hover:bg-background/20 transition-colors"
+              >
+                <X size={12} />
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <AnimatePresence>
         {state.showRefundPopup && (
           <RefundPopup
