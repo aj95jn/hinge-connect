@@ -186,11 +186,11 @@ export const discoverProfiles: Profile[] = [
       { id: 'mp1', question: 'My love language is', answer: 'Recommending you a book and then texting you every chapter to see if you cried yet.', interests: ['books', 'deep-conversations', 'humor'] },
       { id: 'mp2', question: 'Best thing about me', answer: 'My cat already likes everyone, so you\'ve got that going for you.', interests: ['pets', 'humor'] },
       { id: 'mp3', question: 'I\'m secretly really into', answer: 'Writing short stories about strangers I observe at cafés. You might already be a character.', interests: ['writing', 'creative', 'observation'] },
-    vitals: { age: 25, gender: 'Woman', orientation: 'Bisexual', politics: 'Progressive', datingGoals: 'Something serious', relationshipType: 'Monogamy' },
     ],
     preferences: ['books', 'writing', 'pets', 'deep-conversations'],
     showVibeSync: true, bandwidthStatus: 'ready',
     vibeData: { avgMessageLength: 6, avgReplyTimeMinutes: 0.2 },
+    vitals: { age: 25, gender: 'Woman', orientation: 'Bisexual', politics: 'Progressive', datingGoals: 'Something serious', relationshipType: 'Monogamy' },
   },
 ];
 
