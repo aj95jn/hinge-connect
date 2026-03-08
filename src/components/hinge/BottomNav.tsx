@@ -1,6 +1,5 @@
-import { Heart, MessageCircle, Search, User } from 'lucide-react';
+import { Heart, MessageSquare, Star, User } from 'lucide-react';
 import { AppTab } from '@/types';
-import { motion } from 'framer-motion';
 
 interface BottomNavProps {
   activeTab: AppTab;
@@ -9,51 +8,59 @@ interface BottomNavProps {
   matchesUnread: number;
 }
 
+function HingeLogo({ active }: { active: boolean }) {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"
+      className={active ? 'text-white' : 'text-white/40'}
+    >
+      <path d="M4 4v16" />
+      <path d="M4 12h8" />
+      <path d="M20 4v16" />
+    </svg>
+  );
+}
+
 export function BottomNav({ activeTab, onTabChange, likesCount, matchesUnread }: BottomNavProps) {
-  const tabs: { key: AppTab; icon: typeof Search; label: string; badge?: number }[] = [
-    { key: 'discover', icon: Search, label: 'Discover' },
-    { key: 'likes', icon: Heart, label: 'Likes', badge: likesCount },
-    { key: 'matches', icon: MessageCircle, label: 'Matches', badge: matchesUnread },
-    { key: 'profile', icon: User, label: 'Profile' },
+  const tabs: { key: AppTab; label: string }[] = [
+    { key: 'discover', label: 'Discover' },
+    { key: 'likes', label: 'Likes' },
+    { key: 'matches', label: 'Matches' },
+    { key: 'profile', label: 'Profile' },
   ];
 
+  const renderIcon = (key: AppTab, active: boolean) => {
+    const cls = active ? 'text-white' : 'text-white/40';
+    switch (key) {
+      case 'discover':
+        return <HingeLogo active={active} />;
+      case 'likes':
+        return <Star size={24} className={cls} fill={active ? 'currentColor' : 'none'} />;
+      case 'matches':
+        return <Heart size={24} className={cls} fill={active ? 'currentColor' : 'none'} />;
+      case 'profile':
+        return <MessageSquare size={24} className={cls} fill={active ? 'currentColor' : 'none'} />;
+    }
+  };
+
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-card border-t border-border z-50 max-w-md mx-auto">
-      <div className="flex items-center justify-around py-2">
+    <div className="fixed bottom-0 left-0 right-0 z-50 max-w-md mx-auto">
+      <div className="bg-[hsl(0,0%,15%)] rounded-t-2xl flex items-center justify-around py-4 px-2">
         {tabs.map((tab) => (
           <button
             key={tab.key}
             onClick={() => onTabChange(tab.key)}
-            className="relative flex flex-col items-center gap-0.5 px-4 py-1"
+            className="relative flex items-center justify-center w-12 h-8"
           >
-            <div className="relative">
-              <tab.icon
-                size={22}
-                className={activeTab === tab.key ? 'text-primary' : 'text-muted-foreground'}
-                fill={activeTab === tab.key && tab.key !== 'profile' ? 'currentColor' : 'none'}
-              />
-              {tab.badge && tab.badge > 0 && (
-                <motion.span
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  className="absolute -top-1.5 -right-2 bg-hinge-rose text-primary-foreground text-[10px] font-semibold w-4 h-4 rounded-full flex items-center justify-center"
-                >
-                  {tab.badge}
-                </motion.span>
-              )}
-            </div>
-            <span
-              className={`text-[10px] font-medium ${
-                activeTab === tab.key ? 'text-primary' : 'text-muted-foreground'
-              }`}
-            >
-              {tab.label}
-            </span>
-            {activeTab === tab.key && (
-              <motion.div
-                layoutId="activeTab"
-                className="absolute -bottom-2 w-1 h-1 rounded-full bg-primary"
-              />
+            {renderIcon(tab.key, activeTab === tab.key)}
+            {tab.key === 'likes' && likesCount > 0 && (
+              <span className="absolute -top-1 -right-0.5 bg-hinge-rose text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                {likesCount}
+              </span>
+            )}
+            {tab.key === 'matches' && matchesUnread > 0 && (
+              <span className="absolute -top-1 -right-0.5 bg-hinge-rose text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                {matchesUnread}
+              </span>
             )}
           </button>
         ))}
