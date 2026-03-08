@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useAppState } from '@/hooks/useAppState';
 import { BottomNav } from '@/components/hinge/BottomNav';
