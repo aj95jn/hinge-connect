@@ -103,6 +103,7 @@ export const discoverProfiles: Profile[] = [
     ],
     preferences: ['music', 'nightlife', 'fashion', 'humor'],
     showVibeSync: true,
+    vitals: { age: 26, gender: 'Woman', orientation: 'Straight', ethnicity: 'Mixed', datingGoals: 'Looking for a relationship', relationshipType: 'Monogamy' },
     vibeData: { avgMessageLength: 5, avgReplyTimeMinutes: 0.3 },
   },
   {
