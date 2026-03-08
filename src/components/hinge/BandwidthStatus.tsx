@@ -6,25 +6,25 @@ const statusConfig: Record<BandwidthType, { label: string; color: string; freeDe
   ready: {
     label: 'Ready to Connect',
     color: 'bg-purple-900 text-white',
-    freeDesc: 'Open to chat',
+    freeDesc: 'Open & active today',
     paidDesc: 'Has <3 active chats and was active today',
   },
   focusing: {
     label: 'Focusing on Matches',
     color: 'bg-purple-900 text-white',
-    freeDesc: 'Prioritizing current',
+    freeDesc: 'Busy with other chats',
     paidDesc: 'In deep conversations with current matches right now',
   },
   weekend: {
     label: 'Weekend Spark ✨',
     color: 'bg-purple-900 text-white',
-    freeDesc: 'Active weekends',
+    freeDesc: 'More active on weekends',
     paidDesc: 'Active but hasn\'t started a new chat in 48-72 hours',
   },
   new_vibes: {
     label: 'Opening for New Vibes',
     color: 'bg-purple-900 text-white',
-    freeDesc: 'Fresh & open',
+    freeDesc: 'New & ready to meet',
     paidDesc: 'New user or empty queue — wide open for connections',
   },
 };
