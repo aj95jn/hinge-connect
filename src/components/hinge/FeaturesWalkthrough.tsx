@@ -52,27 +52,33 @@ const FEATURES = [
         </p>
 
         {/* Example badges — centered, styled like real purple pills */}
-        <div className="flex flex-col items-center gap-3 w-full max-w-[270px]">
+        <div className="flex flex-col items-center gap-4 w-full max-w-[280px]">
           {[
-            { label: 'Shared Conversation Style', desc: 'You both write thoughtful, longer messages' },
-            { label: 'Fast-Paced Match', desc: 'You both tend to reply quickly' },
-            { label: 'Deep Common Ground', desc: 'You share core values and interests' },
+            { label: 'Shared Conversation Style', desc: 'You both write thoughtful, longer messages', side: 'right' as const },
+            { label: 'Fast-Paced Match', desc: 'You both tend to reply quickly', side: 'left' as const },
+            { label: 'Deep Common Ground', desc: 'You share core values and interests', side: 'right' as const },
           ].map((badge, i) => (
             <motion.div
               key={badge.label}
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.15 * i, type: 'spring' }}
-              className="flex flex-col items-center gap-1"
+              className={`flex items-center gap-2 w-full ${badge.side === 'left' ? 'flex-row-reverse' : 'flex-row'}`}
             >
-              <div className="inline-flex items-center gap-1.5 bg-purple-900 rounded-full px-3 py-1.5 shadow-[0_2px_8px_-2px_rgba(76,29,149,0.4)]">
+              {/* Badge pill */}
+              <div className="inline-flex items-center gap-1.5 bg-purple-900 rounded-full px-3 py-1.5 shadow-[0_2px_8px_-2px_rgba(76,29,149,0.4)] flex-shrink-0">
                 <div className="flex items-center -space-x-0.5">
                   <div className="w-3 h-3 rounded-full border-[1.5px] border-white bg-transparent" />
                   <div className="w-3 h-3 rounded-full border-[1.5px] border-white bg-transparent" />
                 </div>
-                <span className="text-[11px] font-bold text-white whitespace-nowrap">{badge.label}</span>
+                <span className="text-[10px] font-bold text-white whitespace-nowrap">{badge.label}</span>
               </div>
-              <p className="text-[10px] text-muted-foreground text-center">{badge.desc}</p>
+              {/* Tooltip box */}
+              <div className="relative bg-foreground rounded-lg px-2.5 py-1.5 shadow-sm">
+                <p className="text-[9px] font-medium text-background leading-tight">{badge.desc}</p>
+                {/* Arrow pointing toward badge */}
+                <div className={`absolute top-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-foreground rotate-45 ${badge.side === 'right' ? '-left-0.5' : '-right-0.5'}`} />
+              </div>
             </motion.div>
           ))}
         </div>
