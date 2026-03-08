@@ -132,7 +132,7 @@ export const discoverProfiles: Profile[] = [
     coreValues: ['food', 'community', 'deep-conversations'],
   },
   {
-    id: 'chloe', name: 'Chloe', gender: 'Female', location: 'Chelsea, NY',
+    id: 'chloe', name: 'Chloe', gender: 'Female', location: 'Chelsea, NY', activityTag: 'active_today' as const,
     photos: [
       { url: chloeProfile, tags: ['hiking', 'outdoors'] },
     ],
