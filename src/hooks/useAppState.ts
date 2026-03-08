@@ -29,6 +29,9 @@ export function useAppState() {
   const [showRefundPopup, setShowRefundPopup] = useState<{ profileName: string } | null>(null);
   const [activeChatMatchId, setActiveChatMatchId] = useState<string | null>(null);
   const [userProfile, setUserProfile] = useState<Profile>(initialUserProfile);
+  const [glowProfilesSeen, setGlowProfilesSeen] = useState<Set<string>>(new Set());
+  
+  const FREE_GLOW_LIMIT = 2;
 
   // Effort Insurance: check for unreplied likes after timeout
   useEffect(() => {
