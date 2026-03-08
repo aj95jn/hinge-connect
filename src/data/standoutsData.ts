@@ -62,7 +62,7 @@ export const standoutProfiles: Profile[] = [
     verified: true,
     photos: [{ url: maya3, tags: ['outdoors', 'wellness'] }],
     prompts: [
-      { id: 'sl1', question: "We're the same type of weird if", answer: "You've ever had a full conversation with a dog and felt like they truly understood you.", interests: ['pets', 'humor'] },
+      { id: 'sl1', question: 'My simple pleasures', answer: "Morning yoga with the windows open, a homemade latte, and absolutely zero notifications.", interests: ['wellness', 'mindfulness'] },
       { id: 'sl2', question: 'The way to win me over is', answer: "Remember something small I said three weeks ago. That's the real flex.", interests: ['romance', 'deep-conversations'] },
     ],
     preferences: ['wellness', 'hiking', 'pets'],
