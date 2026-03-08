@@ -1,5 +1,21 @@
 import { Profile, Like, Match, ChatMessage } from '@/types';
 
+import sarah1 from '@/assets/sarah-1.jpg';
+import sarah2 from '@/assets/sarah-2.jpg';
+import sarah3 from '@/assets/sarah-3.jpg';
+import sarah4 from '@/assets/sarah-4.jpg';
+import sarah5 from '@/assets/sarah-5.jpg';
+import sarah6 from '@/assets/sarah-6.jpg';
+import maya1 from '@/assets/maya-1.jpg';
+import maya2 from '@/assets/maya-2.jpg';
+import maya3 from '@/assets/maya-3.jpg';
+import maya4 from '@/assets/maya-4.jpg';
+import emma1 from '@/assets/emma-1.jpg';
+import emma2 from '@/assets/emma-2.jpg';
+import emma3 from '@/assets/emma-3.jpg';
+import jessica1 from '@/assets/jessica-1.jpg';
+import olivia1 from '@/assets/olivia-1.jpg';
+
 export const userProfile: Profile = {
   id: 'aman',
   name: 'Aman',
@@ -20,14 +36,7 @@ export const discoverProfiles: Profile[] = [
     name: 'Sarah',
     age: 25,
     location: 'Brooklyn, NY',
-    photos: [
-      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&h=800&fit=crop',
-      'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&h=800&fit=crop',
-      'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600&h=800&fit=crop',
-      'https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=600&h=800&fit=crop',
-      'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&h=800&fit=crop',
-      'https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?w=600&h=800&fit=crop',
-    ],
+    photos: [sarah1, sarah2, sarah3, sarah4, sarah5, sarah6],
     prompts: [
       {
         id: 'p1',
@@ -58,12 +67,7 @@ export const discoverProfiles: Profile[] = [
     name: 'Maya',
     age: 26,
     location: 'Manhattan, NY',
-    photos: [
-      'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=600&h=800&fit=crop',
-      'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&h=800&fit=crop',
-      'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&h=800&fit=crop',
-      'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=600&h=800&fit=crop',
-    ],
+    photos: [maya1, maya2, maya3, maya4],
     prompts: [
       {
         id: 'p4',
@@ -94,11 +98,7 @@ export const discoverProfiles: Profile[] = [
     name: 'Emma',
     age: 24,
     location: 'Williamsburg, NY',
-    photos: [
-      'https://images.unsplash.com/photo-1521310192545-4ac7951413f0?w=600&h=800&fit=crop',
-      'https://images.unsplash.com/photo-1519699047748-de8e457a634e?w=600&h=800&fit=crop',
-      'https://images.unsplash.com/photo-1524638431109-93d95c968f03?w=600&h=800&fit=crop',
-    ],
+    photos: [emma1, emma2, emma3],
     prompts: [
       {
         id: 'p7',
@@ -146,9 +146,7 @@ export const likesReceivedProfiles: Profile[] = [
     name: 'Jessica',
     age: 26,
     location: 'SoHo, NY',
-    photos: [
-      'https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?w=600&h=800&fit=crop',
-    ],
+    photos: [jessica1],
     prompts: [
       {
         id: 'jp1',
@@ -182,9 +180,7 @@ export const matchProfiles: Profile[] = [
     name: 'Olivia',
     age: 25,
     location: 'Upper East Side, NY',
-    photos: [
-      'https://images.unsplash.com/photo-1506863530036-1efeddceb993?w=600&h=800&fit=crop',
-    ],
+    photos: [olivia1],
     prompts: [],
     bandwidthStatus: 'ready',
     vibeData: {
