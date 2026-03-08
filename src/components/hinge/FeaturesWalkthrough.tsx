@@ -207,7 +207,7 @@ const FEATURES = [
           />
           <div className="flex justify-between mt-1.5">
             <span className="text-[9px] text-muted-foreground">Sent</span>
-            <span className="text-[9px] text-muted-foreground">14 days</span>
+            <span className="text-[9px] text-muted-foreground">3–4 days</span>
           </div>
         </div>
         <p className="text-[11px] text-muted-foreground text-center max-w-[200px]">
