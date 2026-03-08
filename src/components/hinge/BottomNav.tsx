@@ -23,11 +23,15 @@ function HingeLogo({ active }: { active: boolean }) {
 export function BottomNav({ activeTab, onTabChange, likesCount, matchesUnread }: BottomNavProps) {
   const tabs: AppTab[] = ['discover', 'likes', 'matches', 'chat', 'profile'];
 
+  const hasNotification = (key: AppTab) => {
+    return (key === 'likes' && likesCount > 0) || (key === 'chat' && matchesUnread > 0);
+  };
+
   const renderIcon = (key: AppTab, active: boolean) => {
-    const cls = active ? 'text-white' : 'text-white/40';
+    const cls = active ? 'text-white' : hasNotification(key) ? 'text-white/60' : 'text-white/40';
     switch (key) {
       case 'discover':
-        return <HingeLogo active={active} />;
+        return <HingeLogo active={active} hasNotification={false} />;
       case 'likes':
         return <Star size={24} className={cls} fill={active ? 'currentColor' : 'none'} />;
       case 'matches':
