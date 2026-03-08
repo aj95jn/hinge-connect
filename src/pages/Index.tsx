@@ -406,7 +406,7 @@ const Index = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 8 }}
             transition={{ duration: 0.2 }}
-            className="fixed bottom-[72px] right-4 z-40 max-w-[200px]"
+            className="fixed bottom-[72px] right-[calc(50%-200px+20px)] z-40 max-w-[160px]"
           >
             <div
               onClick={() => {
