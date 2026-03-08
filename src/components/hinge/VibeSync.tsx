@@ -4,19 +4,19 @@ import { VibeSyncResult } from '@/types';
 
 const labelDescriptions: Record<string, { free: string; paid: string }> = {
   'Shared Conversation Style': {
-    free: 'Similar texters',
+    free: 'You both write longer texts',
     paid: 'You both typically send 3+ sentences per message',
   },
   'Fast-Paced Match': {
-    free: 'Quick replies',
+    free: 'You both reply fast',
     paid: 'You both typically reply within 2 hours',
   },
   'Both Thoughtful Sharers': {
-    free: 'Thoughtful readers',
+    free: 'You both read profiles carefully',
     paid: 'You both spend time reading profiles before liking',
   },
   'Deep Common Ground': {
-    free: 'Shared values',
+    free: 'You share core values',
     paid: 'High overlap in your core value prompt answers',
   },
 };
