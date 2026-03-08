@@ -313,3 +313,18 @@ function PromptCard({
     </div>
   );
 }
+
+function ActivityTag({ tag }: { tag: 'active_now' | 'new_user' | 'active_today' }) {
+  const config = {
+    active_now: { label: 'Active Now', showDot: true },
+    new_user: { label: 'New User', showDot: false },
+    active_today: { label: 'Active Today', showDot: false },
+  };
+  const { label, showDot } = config[tag];
+  return (
+    <span className="inline-flex items-center gap-1 bg-purple-900 text-white rounded-full px-2 py-0.5 text-[10px] font-bold">
+      {showDot && <span className="w-1.5 h-1.5 rounded-full bg-green-400" />}
+      {label}
+    </span>
+  );
+}

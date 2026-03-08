@@ -36,6 +36,7 @@ export const discoverProfiles: Profile[] = [
   {
     id: 'sarah', name: 'Sarah', gender: 'Female', location: 'Brooklyn, NY', verified: true,
     photos: [
+
       { url: sarahProfile, tags: ['city', 'travel'] },
       { url: sarah2, tags: ['food', 'cooking'] },
       { url: sarah3, tags: ['hiking', 'outdoors'] },
