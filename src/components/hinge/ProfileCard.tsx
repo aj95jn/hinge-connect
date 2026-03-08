@@ -39,6 +39,7 @@ export function ProfileCard({
     type: 'photo' | 'prompt';
     index: number;
   } | null>(null);
+  const [showUpgradeModal, setShowUpgradeModal] = useState(false);
 
   const isPromptGlowing = (promptId: string) => {
     return glowResults.promptGlows[promptId]?.glow ?? false;
