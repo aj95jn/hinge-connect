@@ -173,29 +173,33 @@ export function useAppState() {
   const getVibeSync = useCallback(
     (profileId: string) => {
       const profile = discoverProfiles.find((p) => p.id === profileId);
-      if (!profile) return { hasSync: false, label: '' };
+      if (!profile || !profile.showVibeSync) return { hasSync: false, label: '' };
 
       const userVibe = userProfile.vibeData;
       const theirVibe = profile.vibeData;
 
-      const msgMatch = userVibe.avgMessageLength >= 1 && theirVibe.avgMessageLength >= 1;
       const replyMatch = userVibe.avgReplyTimeMinutes <= 1 && theirVibe.avgReplyTimeMinutes <= 1;
+      const isWeekend = profile.bandwidthStatus === 'weekend' || userProfile.bandwidthStatus === 'weekend';
 
-      if (msgMatch && replyMatch) {
+      if (replyMatch) {
         return {
           hasSync: true,
           label: 'Fast-Paced Match',
           detail: isPaid ? 'Both reply in <1min' : undefined,
         };
       }
-      if (msgMatch) {
+      if (isWeekend) {
         return {
           hasSync: true,
-          label: 'Shared Style',
-          detail: isPaid ? 'Both write thoughtful messages' : undefined,
+          label: 'Weekend Spark',
+          detail: isPaid ? 'Active on weekends' : undefined,
         };
       }
-      return { hasSync: false, label: '' };
+      return {
+        hasSync: true,
+        label: 'Shared Style',
+        detail: isPaid ? 'Similar messaging style' : undefined,
+      };
     },
     [isPaid, userProfile]
   );
