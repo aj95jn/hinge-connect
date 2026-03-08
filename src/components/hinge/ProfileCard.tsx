@@ -234,8 +234,8 @@ export function ProfileCard({
           })()}
         </div>
 
-        {/* Skip button - sticky at bottom */}
-        <div className="sticky bottom-20 z-30 flex justify-center py-4">
+        {/* Skip button - fixed above bottom nav, left side */}
+        <div className="fixed bottom-20 left-4 z-30">
           <button
             onClick={onSkip}
             className="w-12 h-12 rounded-full border-2 border-border bg-background shadow-lg flex items-center justify-center hover:bg-muted transition-colors"
