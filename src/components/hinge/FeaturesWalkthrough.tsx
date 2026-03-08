@@ -247,22 +247,27 @@ export function FeaturesWalkthrough({ isPaid, bandwidthVisible = false, bandwidt
       </p>
 
       {/* Example badges with tooltips — same style as Vibe Sync */}
-      <div className="flex flex-col items-center gap-4 w-full max-w-[280px]">
+      <div className="flex flex-col items-center gap-5 w-full max-w-[280px]">
         {[
-          { label: 'Ready to Connect', desc: 'Open & active today', side: 'right' as const },
-          { label: 'Focusing on Matches', desc: 'Busy with other chats', side: 'left' as const },
-          { label: 'Weekend Spark ✨', desc: 'More active on weekends', side: 'right' as const },
-          { label: 'Open to New Vibes', desc: 'New & ready to meet', side: 'left' as const },
+          { label: 'Ready to Connect', desc: 'Open & active today' },
+          { label: 'Focusing on Matches', desc: 'Busy with other chats' },
+          { label: 'Weekend Spark ✨', desc: 'More active on weekends' },
+          { label: 'Open to New Vibes', desc: 'New & ready to meet' },
         ].map((badge, i) => (
           <motion.div
             key={badge.label}
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.15 * i, type: 'spring' }}
-            className={`flex items-center gap-2 w-full ${badge.side === 'left' ? 'flex-row-reverse' : 'flex-row'}`}
+            className="flex flex-col items-center gap-1.5"
           >
+            {/* Tooltip box on top */}
+            <div className="relative bg-foreground rounded-md px-2 py-1 shadow-sm">
+              <p className="text-[8px] font-medium text-background leading-tight">{badge.desc}</p>
+              <div className="absolute left-1/2 -translate-x-1/2 -bottom-[3px] w-1.5 h-1.5 bg-foreground rotate-45" />
+            </div>
             {/* Badge pill */}
-            <div className="inline-flex items-center gap-1.5 bg-purple-900 rounded-full px-3 py-1.5 shadow-[0_2px_8px_-2px_rgba(76,29,149,0.4)] flex-shrink-0">
+            <div className="inline-flex items-center gap-1.5 bg-purple-900 rounded-full px-3 py-1.5 shadow-[0_2px_8px_-2px_rgba(76,29,149,0.4)]">
               <svg width="14" height="12" viewBox="0 0 18 14" fill="none" className="shrink-0">
                 <circle cx="6" cy="5" r="2" fill="white" />
                 <path d="M3 11C3 8.8 4.3 7.5 6 7.5C7.7 7.5 9 8.8 9 11" stroke="white" strokeWidth="1.2" strokeLinecap="round" fill="none" />
@@ -270,11 +275,6 @@ export function FeaturesWalkthrough({ isPaid, bandwidthVisible = false, bandwidt
                 <path d="M13.5 8.5C15 6.5 15 3.5 13.5 1.5" stroke="white" strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.35" />
               </svg>
               <span className="text-[10px] font-bold text-white whitespace-nowrap">{badge.label}</span>
-            </div>
-            {/* Tooltip box */}
-            <div className="relative bg-foreground rounded-lg px-2.5 py-1.5 shadow-sm">
-              <p className="text-[9px] font-medium text-background leading-tight">{badge.desc}</p>
-              <div className={`absolute top-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-foreground rotate-45 ${badge.side === 'right' ? '-left-0.5' : '-right-0.5'}`} />
             </div>
           </motion.div>
         ))}
