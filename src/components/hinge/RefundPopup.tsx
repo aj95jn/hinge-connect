@@ -7,7 +7,7 @@ interface RefundPopupProps {
   onClose: () => void;
 }
 
-export function RefundPopup({ profileName, onClose }: RefundPopupProps) {
+export function RefundPopup({ profileName, likeTimestamp, onClose }: RefundPopupProps) {
   const [held, setHeld] = useState(false);
   const y = useMotionValue(-120);
   const opacity = useTransform(y, [-120, 0], [0, 1]);
