@@ -64,7 +64,7 @@ export const discoverProfiles: Profile[] = [
     ],
     preferences: ['books', 'yoga', 'art', 'wellness'],
     bandwidthStatus: 'weekend', showVibeSync: false,
-    vibeData: { avgMessageLength: 2, avgReplyTimeMinutes: 30 },
+    vibeData: { avgMessageLength: 2, avgReplyTimeMinutes: 30, profileReadTimeSec: 30 },
     vitals: { age: 25, gender: 'Woman', orientation: 'Bisexual' },
   },
   {
