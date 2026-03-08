@@ -234,14 +234,16 @@ export function ProfileCard({
           })()}
         </div>
 
-        {/* Skip button - fixed above bottom nav, left side */}
-        <div className="fixed bottom-20 left-4 z-30">
-          <button
-            onClick={onSkip}
-            className="w-12 h-12 rounded-full border-2 border-border bg-background shadow-lg flex items-center justify-center hover:bg-muted transition-colors"
-          >
-            <X size={24} className="text-muted-foreground" />
-          </button>
+        {/* Skip button - fixed left, just above bottom nav */}
+        <div className="fixed bottom-[72px] left-0 z-30 max-w-md mx-auto w-full pointer-events-none" style={{ left: '50%', transform: 'translateX(-50%)' }}>
+          <div className="pointer-events-auto pl-3">
+            <button
+              onClick={onSkip}
+              className="w-11 h-11 rounded-full border-2 border-border bg-background shadow-lg flex items-center justify-center hover:bg-muted transition-colors"
+            >
+              <X size={22} className="text-muted-foreground" />
+            </button>
+          </div>
         </div>
 
         {/* Like Panel */}
