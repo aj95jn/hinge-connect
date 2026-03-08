@@ -77,7 +77,7 @@ export const standoutProfiles: Profile[] = [
     verified: false,
     photos: [{ url: emma3, tags: ['fashion', 'social'] }],
     prompts: [
-      { id: 'si1', question: "We're the same type of weird if", answer: "You rehearse your coffee order in your head before reaching the counter.", interests: ['humor', 'coffee'] },
+      { id: 'si1', question: "I'll fall for you if", answer: "You remember my coffee order after hearing it once. That's basically a proposal.", interests: ['romance', 'coffee'] },
       { id: 'si2', question: 'My biggest green flag is', answer: "I'll drive 40 minutes for the right croissant. That's dedication, not obsession.", interests: ['food', 'adventure'] },
     ],
     preferences: ['fashion', 'coffee', 'travel'],
