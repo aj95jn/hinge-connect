@@ -53,7 +53,7 @@ export const userProfile: Profile = {
 
 export const discoverProfiles: Profile[] = [
   {
-    id: 'sarah', name: 'Sarah', gender: 'Female', location: 'Brooklyn, NY',
+    id: 'sarah', name: 'Sarah', gender: 'Female', location: 'Brooklyn, NY', verified: true,
     photos: [
       { url: sarahProfile, tags: ['city', 'casual'] },
       { url: sarah2, tags: ['food', 'outdoors'] },
