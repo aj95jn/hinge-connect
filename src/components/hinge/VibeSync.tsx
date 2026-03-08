@@ -14,18 +14,16 @@ interface VibeSyncProps {
 
 export function VibeSync({ result }: VibeSyncProps) {
   const [showTooltip, setShowTooltip] = useState(false);
-
-  if (!result.hasSync) return null;
-
   const description = labelDescriptions[result.label] || result.label;
-
-  const dismiss = () => setShowTooltip(false);
+  const dismiss = useCallback(() => setShowTooltip(false), []);
 
   useEffect(() => {
     if (!showTooltip) return;
     const timer = setTimeout(dismiss, 2000);
     return () => clearTimeout(timer);
-  }, [showTooltip]);
+  }, [showTooltip, dismiss]);
+
+  if (!result.hasSync) return null;
 
   return (
     <div className="relative" onClick={dismiss}>
