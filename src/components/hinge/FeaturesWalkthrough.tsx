@@ -282,7 +282,7 @@ export function FeaturesWalkthrough({ isPaid }: FeaturesWalkthroughProps) {
   return (
     <div className="px-4 pt-2 pb-24">
       {/* Carousel */}
-      <div className="relative overflow-hidden rounded-2xl bg-card border border-border min-h-[380px]">
+      <div className="relative overflow-hidden rounded-2xl bg-card border border-border min-h-[380px] shadow-[0_4px_20px_-4px_rgba(76,29,149,0.12)]" style={{ background: 'linear-gradient(180deg, hsl(var(--card)) 0%, hsla(270, 30%, 96%, 0.5) 100%)' }}>
         <AnimatePresence mode="wait" custom={direction}>
           <motion.div
             key={feature.id}
