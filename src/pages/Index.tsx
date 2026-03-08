@@ -6,7 +6,7 @@ import { LikesYouScreen } from '@/components/hinge/LikesYouScreen';
 import { MessagingScreen } from '@/components/hinge/MessagingScreen';
 import { UserProfileScreen } from '@/components/hinge/UserProfileScreen';
 import { RefundPopup } from '@/components/hinge/RefundPopup';
-import { Heart } from 'lucide-react';
+import { Heart, SlidersHorizontal, ChevronDown } from 'lucide-react';
 
 const Index = () => {
   const state = useAppState();
@@ -16,10 +16,13 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background max-w-md mx-auto relative">
       {/* Top bar */}
-      <div className="sticky top-0 z-40 bg-background/80 backdrop-blur-md border-b border-border px-4 py-3">
-        <h1 className="font-hinge-serif text-xl font-bold text-foreground tracking-tight">
-          hinge
-        </h1>
+      <div className="sticky top-0 z-40 bg-background/80 backdrop-blur-md border-b border-border px-4 py-3 flex items-center gap-3">
+        <SlidersHorizontal size={20} className="text-foreground shrink-0" />
+        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
+          <FilterPill label="Age" filled />
+          <FilterPill label="Height" />
+          <FilterPill label="Dating Intentions" filled />
+        </div>
       </div>
 
       {/* Content */}
@@ -108,5 +111,18 @@ const Index = () => {
     </div>
   );
 };
+
+function FilterPill({ label, filled }: { label: string; filled?: boolean }) {
+  return (
+    <button className={`flex items-center gap-1 px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
+      filled 
+        ? 'bg-foreground text-background' 
+        : 'bg-transparent border border-border text-foreground'
+    }`}>
+      {label}
+      <ChevronDown size={14} />
+    </button>
+  );
+}
 
 export default Index;
