@@ -247,72 +247,48 @@ export function FeaturesWalkthrough({ isPaid, bandwidthVisible = false, bandwidt
         Shows how available someone is to chat — set yours and see others' at a glance.
       </p>
 
-      {/* Toggle */}
-      <div className="flex items-center justify-between w-full max-w-[260px] bg-muted rounded-xl px-4 py-3">
-        <span className="text-xs font-semibold text-foreground">Show on my profile</span>
-        <button
-          onClick={() => {
-            const newVisible = !bandwidthVisible;
-            onToggleBandwidthVisible?.(newVisible);
-            // If turning on and no status set, default to ready
-            if (newVisible && !bandwidthStatus) {
-              onUpdateBandwidth?.('ready');
-            }
-          }}
-          className={`w-10 h-6 rounded-full relative transition-colors ${
-            bandwidthVisible ? 'bg-primary' : 'bg-border'
-          }`}
-        >
+      {/* Example badges with tooltips — same style as Vibe Sync */}
+      <div className="flex flex-col items-center gap-4 w-full max-w-[280px]">
+        {[
+          { label: 'Ready to Connect', desc: 'Open & active today', side: 'right' as const },
+          { label: 'Focusing on Matches', desc: 'Busy with other chats', side: 'left' as const },
+          { label: 'Weekend Spark ✨', desc: 'More active on weekends', side: 'right' as const },
+          { label: 'Open to New Vibes', desc: 'New & ready to meet', side: 'left' as const },
+        ].map((badge, i) => (
           <motion.div
-            animate={{ x: bandwidthVisible ? 18 : 2 }}
-            transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-            className="absolute top-1 w-4 h-4 rounded-full bg-background shadow-sm"
-          />
-        </button>
+            key={badge.label}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.15 * i, type: 'spring' }}
+            className={`flex items-center gap-2 w-full ${badge.side === 'left' ? 'flex-row-reverse' : 'flex-row'}`}
+          >
+            {/* Badge pill */}
+            <div className="inline-flex items-center gap-1.5 bg-purple-900 rounded-full px-3 py-1.5 shadow-[0_2px_8px_-2px_rgba(76,29,149,0.4)] flex-shrink-0">
+              <svg width="14" height="12" viewBox="0 0 18 14" fill="none" className="shrink-0">
+                <circle cx="6" cy="5" r="2" fill="white" />
+                <path d="M3 11C3 8.8 4.3 7.5 6 7.5C7.7 7.5 9 8.8 9 11" stroke="white" strokeWidth="1.2" strokeLinecap="round" fill="none" />
+                <path d="M11 7C12 5.8 12 4.2 11 3" stroke="white" strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.5" />
+                <path d="M13.5 8.5C15 6.5 15 3.5 13.5 1.5" stroke="white" strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.35" />
+              </svg>
+              <span className="text-[10px] font-bold text-white whitespace-nowrap">{badge.label}</span>
+            </div>
+            {/* Tooltip box */}
+            <div className="relative bg-foreground rounded-lg px-2.5 py-1.5 shadow-sm">
+              <p className="text-[9px] font-medium text-background leading-tight">{badge.desc}</p>
+              <div className={`absolute top-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-foreground rotate-45 ${badge.side === 'right' ? '-left-0.5' : '-right-0.5'}`} />
+            </div>
+          </motion.div>
+        ))}
       </div>
 
-      {/* Status picker — shown when visible */}
-      <AnimatePresence>
-        {bandwidthVisible && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            className="flex flex-col items-center gap-2 w-full max-w-[280px] overflow-hidden"
-          >
-            <p className="text-[10px] text-muted-foreground">Select your status:</p>
-            {BANDWIDTH_OPTIONS.map((opt, i) => (
-              <motion.button
-                key={opt.value}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.08 * i, type: 'spring' }}
-                onClick={() => onUpdateBandwidth?.(opt.value)}
-                className={`w-full flex items-center gap-2 rounded-xl px-3 py-2.5 transition-all ${
-                  bandwidthStatus === opt.value
-                    ? 'bg-purple-900 shadow-[0_2px_8px_-2px_rgba(76,29,149,0.4)]'
-                    : 'bg-card border border-border hover:border-primary/30'
-                }`}
-              >
-                <svg width="14" height="12" viewBox="0 0 18 14" fill="none" className="shrink-0">
-                  <circle cx="6" cy="5" r="2" fill={bandwidthStatus === opt.value ? 'white' : 'currentColor'} />
-                  <path d="M3 11C3 8.8 4.3 7.5 6 7.5C7.7 7.5 9 8.8 9 11" stroke={bandwidthStatus === opt.value ? 'white' : 'currentColor'} strokeWidth="1.2" strokeLinecap="round" fill="none" />
-                  <path d="M11 7C12 5.8 12 4.2 11 3" stroke={bandwidthStatus === opt.value ? 'white' : 'currentColor'} strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.5" />
-                  <path d="M13.5 8.5C15 6.5 15 3.5 13.5 1.5" stroke={bandwidthStatus === opt.value ? 'white' : 'currentColor'} strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.35" />
-                </svg>
-                <div className="flex-1 text-left">
-                  <span className={`text-[11px] font-bold ${bandwidthStatus === opt.value ? 'text-white' : 'text-foreground'}`}>{opt.label}</span>
-                  <span className={`text-[9px] ml-1.5 ${bandwidthStatus === opt.value ? 'text-white/70' : 'text-muted-foreground'}`}>{opt.desc}</span>
-                </div>
-              </motion.button>
-            ))}
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Nudge to set in profile */}
+      <p className="text-[10px] text-muted-foreground text-center mt-1 italic">
+        Set your bandwidth status in your Profile tab.
+      </p>
 
       {/* Subscribe nudge */}
       {!isPaid && (
-        <p className="text-[10px] text-muted-foreground text-center mt-1 italic">
+        <p className="text-[10px] text-muted-foreground text-center italic">
           Subscribe to see others' bandwidth before swiping.
         </p>
       )}
