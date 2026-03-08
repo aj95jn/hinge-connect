@@ -20,7 +20,7 @@ export function BandwidthStatusPill({ status }: BandwidthStatusProps) {
     <div className="relative">
       <button
         onClick={() => setShowTooltip(!showTooltip)}
-        className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${config.color}`}
+        className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium ${config.color}`}
       >
         {config.label}
       </button>

@@ -25,13 +25,13 @@ export function VibeSync({ result }: VibeSyncProps) {
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         onClick={() => setShowTooltip(!showTooltip)}
-        className="inline-flex items-center gap-1.5 bg-secondary rounded-full px-3 py-1"
+        className="inline-flex items-center gap-1 bg-secondary rounded-full px-2 py-0.5"
       >
         <div className="flex items-center -space-x-1">
-          <div className="w-3.5 h-3.5 rounded-full border-2 border-primary bg-transparent" />
-          <div className="w-3.5 h-3.5 rounded-full border-2 border-hinge-rose bg-transparent" />
+          <div className="w-2.5 h-2.5 rounded-full border-[1.5px] border-primary bg-transparent" />
+          <div className="w-2.5 h-2.5 rounded-full border-[1.5px] border-hinge-rose bg-transparent" />
         </div>
-        <span className="text-xs font-medium text-secondary-foreground">{result.label}</span>
+        <span className="text-[10px] font-medium text-secondary-foreground">{result.label}</span>
         {result.detail && (
           <span className="text-[10px] text-muted-foreground">· {result.detail}</span>
         )}
