@@ -1,10 +1,11 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Heart, X, Sparkles } from 'lucide-react';
+import { useState, useRef } from 'react';
+import { motion, AnimatePresence, useDragControls } from 'framer-motion';
+import { Heart, X, Sparkles, Flame } from 'lucide-react';
 import { Profile, VibeSyncResult, GlowResult } from '@/types';
 import { VibeSync } from './VibeSync';
 import { BandwidthStatusPill } from './BandwidthStatus';
 import { LikePanel } from './LikePanel';
+import { toast } from 'sonner';
 
 interface ProfileCardProps {
   profile: Profile;
@@ -22,6 +23,12 @@ interface ProfileCardProps {
   onSkip: () => void;
 }
 
+// Track drop zone refs
+interface DropZone {
+  key: string;
+  ref: HTMLDivElement | null;
+}
+
 export function ProfileCard({
   profile,
   vibeSync,
@@ -35,8 +42,19 @@ export function ProfileCard({
     type: 'photo' | 'prompt';
     index: number;
   } | null>(null);
-  // glowOverride: if set, only this item glows (key = "prompt:id" or "photo:index")
   const [glowOverride, setGlowOverride] = useState<string | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const dropZonesRef = useRef<DropZone[]>([]);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const registerDropZone = (key: string, el: HTMLDivElement | null) => {
+    const existing = dropZonesRef.current.findIndex((z) => z.key === key);
+    if (existing >= 0) {
+      dropZonesRef.current[existing].ref = el;
+    } else if (el) {
+      dropZonesRef.current.push({ key, ref: el });
+    }
+  };
 
   const isPromptGlowing = (promptId: string) => {
     if (glowOverride !== null) return glowOverride === `prompt:${promptId}`;
@@ -46,10 +64,6 @@ export function ProfileCard({
   const isPhotoGlowing = (index: number) => {
     if (glowOverride !== null) return glowOverride === `photo:${index}`;
     return glowResults.photoGlows[index]?.glow ?? false;
-  };
-
-  const handleDragGlow = (key: string) => {
-    setGlowOverride(key);
   };
 
   const getGhostText = () => {
@@ -62,15 +76,43 @@ export function ProfileCard({
     return undefined;
   };
 
+  const handleDragEnd = (_: any, info: { point: { x: number; y: number } }) => {
+    setIsDragging(false);
+    const { x, y } = info.point;
+
+    for (const zone of dropZonesRef.current) {
+      if (!zone.ref) continue;
+      const rect = zone.ref.getBoundingClientRect();
+      if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
+        setGlowOverride(zone.key);
+        toast.success('🌹 Bridge Builder moved — AI is learning your preference');
+        return;
+      }
+    }
+  };
+
+  // Find current glow key
+  const currentGlowKey = (() => {
+    if (glowOverride) return glowOverride;
+    for (const prompt of profile.prompts) {
+      if (glowResults.promptGlows[prompt.id]?.glow) return `prompt:${prompt.id}`;
+    }
+    for (let i = 0; i < profile.photos.length; i++) {
+      if (glowResults.photoGlows[i]?.glow) return `photo:${i}`;
+    }
+    return null;
+  })();
+
   return (
     <AnimatePresence mode="wait">
       <motion.div
         key={profile.id}
+        ref={containerRef}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -20 }}
         transition={{ duration: 0.4, ease: 'easeOut' }}
-        className="pb-24"
+        className="pb-24 relative"
       >
         {/* Header */}
         <div className="px-4 pt-4 pb-2 flex items-center justify-between">
@@ -92,10 +134,9 @@ export function ProfileCard({
         <div className="space-y-3 px-4">
           {profile.photos.map((photo, i) => (
             <div key={`photo-${i}`}>
-              {/* Photo with optional glow — click to drag glow here */}
               <div
-                className={isPhotoGlowing(i) ? 'rose-glow-shimmer cursor-pointer' : 'cursor-pointer'}
-                onClick={() => handleDragGlow(`photo:${i}`)}
+                ref={(el) => registerDropZone(`photo:${i}`, el)}
+                className={`${isPhotoGlowing(i) ? 'rose-glow-shimmer' : ''} ${isDragging ? 'ring-2 ring-dashed ring-hinge-gold/30 rounded-2xl' : ''}`}
               >
                 <div className="relative rounded-2xl overflow-hidden">
                   <img
@@ -112,13 +153,11 @@ export function ProfileCard({
                       </span>
                     </div>
                   )}
-                  {!isPhotoGlowing(i) && (glowResults.photoGlows[i]?.sharedTags?.length ?? 0) > 0 && (
-                    <div className="absolute top-3 left-3 flex items-center gap-1 bg-card/60 backdrop-blur-sm rounded-full px-2.5 py-1 opacity-60">
-                      <span className="text-[10px] text-muted-foreground">Tap to move glow here</span>
-                    </div>
-                  )}
                   <button
-                    onClick={() => setSelectedTarget({ type: 'photo', index: i })}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedTarget({ type: 'photo', index: i });
+                    }}
                     className="absolute bottom-3 right-3 bg-card/90 backdrop-blur-sm rounded-full p-2.5 shadow-lg hover:bg-card transition-colors"
                   >
                     <Heart size={20} className="text-primary" />
@@ -134,11 +173,12 @@ export function ProfileCard({
                   sharedInterests={
                     glowResults.promptGlows[profile.prompts[Math.floor(i / 2)].id]?.sharedInterests || []
                   }
+                  isDragActive={isDragging}
                   onLike={() =>
                     setSelectedTarget({ type: 'prompt', index: Math.floor(i / 2) })
                   }
-                  onDragGlow={() =>
-                    handleDragGlow(`prompt:${profile.prompts[Math.floor(i / 2)].id}`)
+                  registerRef={(el) =>
+                    registerDropZone(`prompt:${profile.prompts[Math.floor(i / 2)].id}`, el)
                   }
                 />
               )}
@@ -154,8 +194,9 @@ export function ProfileCard({
                 prompt={prompt}
                 isGlowing={isPromptGlowing(prompt.id)}
                 sharedInterests={glowResults.promptGlows[prompt.id]?.sharedInterests || []}
+                isDragActive={isDragging}
                 onLike={() => setSelectedTarget({ type: 'prompt', index: actualIndex })}
-                onDragGlow={() => handleDragGlow(`prompt:${prompt.id}`)}
+                registerRef={(el) => registerDropZone(`prompt:${prompt.id}`, el)}
               />
             );
           })}
@@ -170,6 +211,41 @@ export function ProfileCard({
             <X size={24} className="text-muted-foreground" />
           </button>
         </div>
+
+        {/* Floating Bridge Builder Icon — Draggable */}
+        {currentGlowKey && (
+          <motion.div
+            drag
+            dragMomentum={false}
+            dragElastic={0.1}
+            onDragStart={() => setIsDragging(true)}
+            onDragEnd={handleDragEnd}
+            whileDrag={{ scale: 1.2, zIndex: 100 }}
+            className="fixed bottom-24 right-6 z-50 cursor-grab active:cursor-grabbing"
+            style={{ touchAction: 'none' }}
+          >
+            <div className="relative">
+              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-hinge-rose to-hinge-gold flex items-center justify-center shadow-xl">
+                <Flame size={24} className="text-primary-foreground" />
+              </div>
+              <motion.div
+                initial={{ opacity: 0, y: 5 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="absolute -top-8 left-1/2 -translate-x-1/2 bg-foreground text-background text-[9px] font-medium px-2 py-1 rounded-md whitespace-nowrap"
+              >
+                Drag to move glow
+              </motion.div>
+              {isDragging && (
+                <motion.div
+                  initial={{ scale: 1 }}
+                  animate={{ scale: [1, 1.4, 1] }}
+                  transition={{ repeat: Infinity, duration: 1 }}
+                  className="absolute inset-0 rounded-full bg-hinge-gold/20"
+                />
+              )}
+            </div>
+          </motion.div>
+        )}
 
         {/* Like Panel */}
         <AnimatePresence>
@@ -200,22 +276,20 @@ function PromptCard({
   prompt,
   isGlowing,
   sharedInterests,
+  isDragActive,
   onLike,
-  onDragGlow,
+  registerRef,
 }: {
   prompt: { id: string; question: string; answer: string };
   isGlowing: boolean;
   sharedInterests: string[];
+  isDragActive: boolean;
   onLike: () => void;
-  onDragGlow: () => void;
+  registerRef: (el: HTMLDivElement | null) => void;
 }) {
   return (
-    <motion.div
-      className="mt-3"
-      onClick={onDragGlow}
-      whileTap={{ scale: 0.98 }}
-    >
-      <div className={isGlowing ? 'rose-glow-shimmer' : ''}>
+    <div className="mt-3" ref={registerRef}>
+      <div className={`${isGlowing ? 'rose-glow-shimmer' : ''} ${isDragActive && !isGlowing ? 'ring-2 ring-dashed ring-hinge-gold/30 rounded-2xl' : ''}`}>
         <div className="bg-card rounded-2xl p-5 relative">
           {isGlowing && sharedInterests.length > 0 && (
             <div className="flex items-center gap-1.5 mb-3">
@@ -240,6 +314,6 @@ function PromptCard({
           </button>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
