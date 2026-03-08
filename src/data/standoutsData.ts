@@ -17,7 +17,7 @@ export const standoutProfiles: Profile[] = [
     verified: true,
     photos: [{ url: jessica2, tags: ['fashion', 'city'] }],
     prompts: [
-      { id: 'sn1', question: "We're the same type of weird if", answer: "You narrate your life in your head like it's a movie trailer.", interests: ['humor', 'creative'] },
+      { id: 'sn1', question: 'A perfect Sunday looks like', answer: "Farmers market at 10, cooking something new by noon, nap by 2. No negotiation on the nap.", interests: ['food', 'relaxation'] },
       { id: 'sn2', question: 'A perfect Sunday looks like', answer: "Farmers market at 10, cooking something new by noon, nap by 2. No negotiation on the nap.", interests: ['food', 'relaxation'] },
     ],
     preferences: ['fashion', 'art', 'coffee'],
@@ -32,7 +32,7 @@ export const standoutProfiles: Profile[] = [
     verified: false,
     photos: [{ url: olivia2, tags: ['travel', 'adventure'] }],
     prompts: [
-      { id: 'sp1', question: "We're the same type of weird if", answer: "You've ever Googled 'can you actually die from embarrassment' after a social event.", interests: ['humor', 'social'] },
+      { id: 'sp1', question: 'The key to my heart is', answer: "A spontaneous road trip with zero planning and a really good playlist.", interests: ['travel', 'music'] },
       { id: 'sp2', question: 'My comfort movie is', answer: "The Grand Budapest Hotel. I've seen it 14 times and I notice something new every single time.", interests: ['film', 'art'] },
     ],
     preferences: ['travel', 'film', 'yoga'],
@@ -47,7 +47,7 @@ export const standoutProfiles: Profile[] = [
     verified: true,
     photos: [{ url: sarah4, tags: ['music', 'creative'] }],
     prompts: [
-      { id: 'sz1', question: "We're the same type of weird if", answer: "You have a playlist for every possible mood including 'dramatic walk to the grocery store.'", interests: ['music', 'humor'] },
+      { id: 'sz1', question: 'I go crazy for', answer: "Hole-in-the-wall restaurants where the menu is handwritten and the portions are enormous.", interests: ['food', 'adventure'] },
       { id: 'sz2', question: 'I go crazy for', answer: "Hole-in-the-wall restaurants where the menu is handwritten and the portions are enormous.", interests: ['food', 'adventure'] },
     ],
     preferences: ['music', 'art', 'nightlife'],
@@ -62,7 +62,7 @@ export const standoutProfiles: Profile[] = [
     verified: true,
     photos: [{ url: maya3, tags: ['outdoors', 'wellness'] }],
     prompts: [
-      { id: 'sl1', question: "We're the same type of weird if", answer: "You've ever had a full conversation with a dog and felt like they truly understood you.", interests: ['pets', 'humor'] },
+      { id: 'sl1', question: 'My simple pleasures', answer: "Morning yoga with the windows open, a homemade latte, and absolutely zero notifications.", interests: ['wellness', 'mindfulness'] },
       { id: 'sl2', question: 'The way to win me over is', answer: "Remember something small I said three weeks ago. That's the real flex.", interests: ['romance', 'deep-conversations'] },
     ],
     preferences: ['wellness', 'hiking', 'pets'],
@@ -77,7 +77,7 @@ export const standoutProfiles: Profile[] = [
     verified: false,
     photos: [{ url: emma3, tags: ['fashion', 'social'] }],
     prompts: [
-      { id: 'si1', question: "We're the same type of weird if", answer: "You rehearse your coffee order in your head before reaching the counter.", interests: ['humor', 'coffee'] },
+      { id: 'si1', question: "I'll fall for you if", answer: "You remember my coffee order after hearing it once. That's basically a proposal.", interests: ['romance', 'coffee'] },
       { id: 'si2', question: 'My biggest green flag is', answer: "I'll drive 40 minutes for the right croissant. That's dedication, not obsession.", interests: ['food', 'adventure'] },
     ],
     preferences: ['fashion', 'coffee', 'travel'],
