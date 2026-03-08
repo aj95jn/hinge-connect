@@ -17,7 +17,7 @@ export const standoutProfiles: Profile[] = [
     verified: true,
     photos: [{ url: jessica2, tags: ['fashion', 'city'] }],
     prompts: [
-      { id: 'sn1', question: "We're the same type of weird if", answer: "You narrate your life in your head like it's a movie trailer.", interests: ['humor', 'creative'] },
+      { id: 'sn1', question: 'A perfect Sunday looks like', answer: "Farmers market at 10, cooking something new by noon, nap by 2. No negotiation on the nap.", interests: ['food', 'relaxation'] },
       { id: 'sn2', question: 'A perfect Sunday looks like', answer: "Farmers market at 10, cooking something new by noon, nap by 2. No negotiation on the nap.", interests: ['food', 'relaxation'] },
     ],
     preferences: ['fashion', 'art', 'coffee'],
