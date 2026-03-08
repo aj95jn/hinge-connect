@@ -84,7 +84,7 @@ export function UserProfileScreen({ profile, isPaid = false, onUpdateProfile, on
             Profile
           </button>
           <button
-            onClick={() => setActiveTab('features')}
+            onClick={() => { setActiveTab('features'); onViewWhatsNew?.(); }}
             className={`flex-1 py-2 rounded-lg text-xs font-semibold transition-all flex items-center justify-center gap-1.5 ${
               activeTab === 'features'
                 ? 'bg-background text-foreground shadow-sm'
