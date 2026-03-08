@@ -30,6 +30,20 @@ export function UserProfileScreen({ profile, isPaid = false, onUpdateProfile, on
   const [showInterestPicker, setShowInterestPicker] = useState(false);
   const [activeTab, setActiveTab] = useState<'profile' | 'features'>('profile');
   const [showBandwidthInfo, setShowBandwidthInfo] = useState(false);
+  const bandwidthInfoRef = useRef<HTMLDivElement>(null);
+
+  // Auto-dismiss after 8s and click-outside
+  useEffect(() => {
+    if (!showBandwidthInfo) return;
+    const timer = setTimeout(() => setShowBandwidthInfo(false), 8000);
+    const handleClickOutside = (e: MouseEvent) => {
+      if (bandwidthInfoRef.current && !bandwidthInfoRef.current.contains(e.target as Node)) {
+        setShowBandwidthInfo(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => { clearTimeout(timer); document.removeEventListener('mousedown', handleClickOutside); };
+  }, [showBandwidthInfo]);
 
   const handleSavePrompt = (promptId: string) => {
     const updatedPrompts = profile.prompts.map((p) =>
