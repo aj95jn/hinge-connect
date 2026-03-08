@@ -120,6 +120,7 @@ export const discoverProfiles: Profile[] = [
     ],
     preferences: ['wine', 'art', 'music', 'romance'],
     bandwidthStatus: 'ready', showVibeSync: true,
+    vitals: { age: 29, gender: 'Woman', orientation: 'Straight', religion: 'Spiritual', politics: 'Liberal' },
     vibeData: { avgMessageLength: 5, avgReplyTimeMinutes: 0.8 },
   },
   {
