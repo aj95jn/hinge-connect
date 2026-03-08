@@ -216,27 +216,46 @@ export const initialChatMessages: ChatMessage[] = [
 ];
 
 export function generateGhostText(sharedInterests: string[], promptAnswer: string): string {
-  const interestGhosts: Record<string, string[]> = {
-    travel: ['Ask about her favorite trip!', 'Where would she go next?', 'Share your travel bucket list!'],
-    philosophy: ['What philosophy resonates with her?', 'Share your favorite philosophical idea!'],
-    cooking: ['What\'s her signature dish?', 'Share your favorite recipe!'],
-    hiking: ['Ask about her favorite trail!', 'Where does she love hiking?'],
-    music: ['What music is she into?', 'Share your playlist!'],
-    'deep-conversations': ['What topic keeps her up at night?', 'Share a thought that changed your perspective!'],
-    food: ['Ask about her favorite restaurant!', 'What cuisine does she love?'],
-    humor: ['Tell her something funny!', 'Share a joke that always lands!'],
-    books: ['Ask what she\'s reading!', 'Share your favorite book!'],
-    art: ['What\'s her favorite art style?', 'Which gallery does she love?'],
-    fitness: ['What\'s her workout routine?', 'Ask about her climbing goals!'],
-    dancing: ['What style does she dance?', 'Ask about her favorite music to dance to!'],
-    wine: ['What\'s her favorite region?', 'Red or white — start a friendly debate!'],
-    pets: ['Tell her about your favorite animal!', 'Ask about her cat!'],
-    writing: ['Ask what she\'s working on!', 'Share a story idea!'],
-  };
+  const lower = promptAnswer.toLowerCase();
 
-  for (const interest of sharedInterests) {
-    const ghosts = interestGhosts[interest];
-    if (ghosts) return ghosts[Math.floor(Math.random() * ghosts.length)];
+  // Context-aware: match keywords in the prompt answer to generate relevant ghost text
+  const contextPatterns: { keywords: string[]; ghosts: string[] }[] = [
+    { keywords: ['silence', 'quiet', 'comfortable'], ghosts: ['What\'s your idea of a perfect quiet evening?', 'I love that — what else feels effortless to you?'] },
+    { keywords: ['travel', 'trip', 'lost', 'tokyo', 'abroad', 'explore'], ghosts: ['That sounds amazing — what\'s your next destination?', 'I have a similar story! Where else have you wandered?'] },
+    { keywords: ['cook', 'fridge', 'recipe', 'meal', 'kitchen', 'food'], ghosts: ['What\'s the best thing you\'ve ever made?', 'I do the same! What\'s your go-to fridge raid dish?'] },
+    { keywords: ['hike', 'trail', 'mountain', 'outdoor', 'nature'], ghosts: ['What\'s your favorite trail so far?', 'I love hiking too — sunrise or sunset hikes?'] },
+    { keywords: ['music', 'jukebox', 'playlist', 'song', 'dj', 'vinyl'], ghosts: ['What song is on repeat for you right now?', 'What genre gets you moving?'] },
+    { keywords: ['book', 'read', 'page', 'novel', 'war and peace'], ghosts: ['What are you reading right now?', 'What book changed how you think?'] },
+    { keywords: ['philosophy', 'deep', 'conversation', 'meaning', 'life', 'tick'], ghosts: ['What\'s a question you always come back to?', 'I love deep talks too — what\'s on your mind lately?'] },
+    { keywords: ['laugh', 'funny', 'humor', 'joke', 'dark'], ghosts: ['Ha! What\'s the funniest thing that happened to you recently?', 'Love the humor — what makes you laugh the hardest?'] },
+    { keywords: ['pizza', 'restaurant', 'bar', 'dive', 'tater'], ghosts: ['Ok I need your top 3 — share the list!', 'What\'s your #1 spot right now?'] },
+    { keywords: ['game', 'scrabble', 'winning', 'streak', 'board'], ghosts: ['Challenge accepted — when and where?', 'What other games are you unbeatable at?'] },
+    { keywords: ['spreadsheet', 'ranking', 'list', 'entries'], ghosts: ['I respect the dedication! What\'s #1 on the list?', 'Can I see this spreadsheet? For research purposes.'] },
+    { keywords: ['yoga', 'meditat', 'mindful', 'phone', 'boundary'], ghosts: ['I respect that! What helps you stay present?', 'That\'s a great boundary — what inspired it?'] },
+    { keywords: ['art', 'gallery', 'museum', 'paint'], ghosts: ['What artist are you into right now?', 'What\'s the last exhibit that moved you?'] },
+    { keywords: ['wine', 'drink', 'cocktail'], ghosts: ['Red or white — what\'s your go-to?', 'What\'s the best wine you\'ve had recently?'] },
+    { keywords: ['dog', 'cat', 'pet', 'animal'], ghosts: ['What kind of pet do you have?', 'Tell me everything about your pet!'] },
+    { keywords: ['voice note', 'text', 'type', 'autocorrect'], ghosts: ['Ha, I\'m the same! What\'s your worst autocorrect moment?', 'Voice notes are underrated — what do you rant about most?'] },
+    { keywords: ['supper club', 'dinner', 'theme', 'fusion'], ghosts: ['I\'d be a regular! What theme would you start with?', 'That sounds incredible — what cuisine inspires you most?'] },
+    { keywords: ['stranger', 'friend', 'social', 'people'], ghosts: ['That\'s a superpower! What\'s your secret?', 'I love that energy — where do your best convos happen?'] },
+    { keywords: ['last meal', 'choose', 'everything about'], ghosts: ['Ok — mine would be... actually, you first!', 'Great question! What would yours be?'] },
+    { keywords: ['hidden gem', 'tour guide', 'places', 'city'], ghosts: ['I\'m intrigued — what\'s one spot I need to try?', 'Show me your favorite hidden gem!'] },
+    { keywords: ['coping', 'therapist', 'mechanism'], ghosts: ['Honestly, same — what\'s your best comfort recipe?', 'That\'s the best kind of therapy! What did you make last?'] },
+    { keywords: ['croissant', 'bakery', 'pastry', 'maman'], ghosts: ['A fellow croissant connoisseur! What makes a perfect one?', 'I have opinions on this too — compare notes?'] },
+    { keywords: ['shower thought', 'screen time', 'pet'], ghosts: ['Ha! What other shower thoughts keep you up?', 'So true — what would your pet say about you?'] },
+    { keywords: ['remember', 'book i mentioned', 'key to my heart'], ghosts: ['Ok noted — what should I read first?', 'What book has stayed with you the longest?'] },
+    { keywords: ['funeral', 'too dark', 'life\'s too short'], ghosts: ['I appreciate the honesty! What\'s your go-to dark joke?', 'Life IS too short — what else do you not take seriously?'] },
+  ];
+
+  for (const pattern of contextPatterns) {
+    if (pattern.keywords.some((kw) => lower.includes(kw))) {
+      return pattern.ghosts[Math.floor(Math.random() * pattern.ghosts.length)];
+    }
+  }
+
+  // Fallback: use shared interests loosely
+  if (sharedInterests.length > 0) {
+    return `I\'m into ${sharedInterests[0]} too — tell me more!`;
   }
 
   return 'You have something in common — say hi!';
