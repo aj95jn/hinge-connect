@@ -229,6 +229,7 @@ const BANDWIDTH_OPTIONS: { value: BandwidthStatus; label: string; desc: string }
 export function FeaturesWalkthrough({ isPaid, bandwidthVisible = false, bandwidthStatus, onToggleBandwidthVisible, onUpdateBandwidth }: FeaturesWalkthroughProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
+  const [showUpgradeModal, setShowUpgradeModal] = useState(false);
   const feature = FEATURES[currentIndex];
 
   const goTo = (next: number) => {
