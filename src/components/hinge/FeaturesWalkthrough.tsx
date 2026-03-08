@@ -293,12 +293,6 @@ export function FeaturesWalkthrough({ isPaid, bandwidthVisible = false, bandwidt
         Set your bandwidth status in your Profile tab.
       </p>
 
-      {/* Subscribe nudge */}
-      {!isPaid && (
-        <p className="text-[10px] text-muted-foreground text-center italic">
-          Subscribe to see others' bandwidth before swiping.
-        </p>
-      )}
     </div>
   );
 
