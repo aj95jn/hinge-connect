@@ -50,9 +50,7 @@ export function UserProfileScreen({ profile, onUpdateProfile, onUpdateBandwidth 
     <div className="px-4 pt-4 pb-24">
       {/* Profile Header */}
       <div className="flex items-center gap-4 mb-6">
-        <div className="w-20 h-20 rounded-full bg-secondary flex items-center justify-center">
-          <User size={36} className="text-primary" />
-        </div>
+        <AnimatedAvatar name={profile.name} gender={profile.gender} size="lg" />
         <div>
           <h2 className="font-hinge-serif text-2xl font-semibold text-foreground">
             {profile.name}
