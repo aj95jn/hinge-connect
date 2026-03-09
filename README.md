@@ -1,4 +1,5 @@
-# Welcome to your Lovable project
+## Hinge Lovable App Demo
+https://id-preview--fd57d792-da9a-4ed8-9b6f-dc0f0c48822a.lovable.app/
 
 ## Project info
 
